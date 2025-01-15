@@ -1,0 +1,13 @@
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_lru.c
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_lru.h
+lcd\lv_lru.o: ..\lvgl\src\misc\../lv_conf_internal.h
+lcd\lv_lru.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+lcd\lv_lru.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+lcd\lv_lru.o: ../lvgl/examples/porting/../../lv_conf.h
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_types.h
+lcd\lv_lru.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_math.h
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_mem.h
+lcd\lv_lru.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_assert.h
+lcd\lv_lru.o: ..\lvgl\src\misc\lv_log.h

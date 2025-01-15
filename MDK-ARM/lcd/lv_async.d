@@ -1,0 +1,13 @@
+lcd\lv_async.o: ..\lvgl\src\misc\lv_async.c
+lcd\lv_async.o: ..\lvgl\src\misc\lv_async.h
+lcd\lv_async.o: ..\lvgl\src\misc\lv_types.h
+lcd\lv_async.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+lcd\lv_async.o: ..\lvgl\src\misc\lv_mem.h
+lcd\lv_async.o: ..\lvgl\src\misc\../lv_conf_internal.h
+lcd\lv_async.o: ..\lvgl\src\misc\../lv_conf_kconfig.h
+lcd\lv_async.o: ../lvgl/examples/porting/../../lv_conf.h
+lcd\lv_async.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+lcd\lv_async.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
+lcd\lv_async.o: ..\lvgl\src\misc\lv_timer.h
+lcd\lv_async.o: ..\lvgl\src\misc\../hal/lv_hal_tick.h
+lcd\lv_async.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
