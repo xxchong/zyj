@@ -166,8 +166,9 @@ lcd\main.o: ../lvgl/src/../src/extra/widgets/led/lv_led.h
 lcd\main.o: ../lvgl/src/../src/extra/widgets/imgbtn/lv_imgbtn.h
 lcd\main.o: ../lvgl/src/../src/extra/widgets/span/lv_span.h
 lcd\main.o: ../lvgl/examples/porting/lv_port_disp.h
+lcd\main.o: ../lvgl/examples/porting/lv_port_indev.h
 lcd\main.o: ../lvgl/demos/benchmark/lv_demo_benchmark.h
 lcd\main.o: ../lvgl/demos/benchmark/../lv_demos.h
 lcd\main.o: ../lvgl/demos/benchmark/../benchmark/lv_demo_benchmark.h
-lcd\main.o: ..\lvgl\generated\gui_guider.h
-lcd\main.o: ..\lvgl\generated\events_init.h
+lcd\main.o: ../lvgl/generated/gui_guider.h
+lcd\main.o: ../lvgl/generated/events_init.h

@@ -28,6 +28,7 @@
 #include "lcd.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
+#include "lv_port_indev.h"
 #include "lv_demo_benchmark.h"
 #include "gui_guider.h"
 #include "events_init.h"
@@ -67,7 +68,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim->Instance == TIM4)
 	{
 		static int i;
-		lv_tick_inc(1);//ÐÄÌø
+		lv_tick_inc(1);//ï¿½ï¿½ï¿½ï¿½
 		i++;
 		if( i == 100)
 		{
@@ -81,6 +82,31 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 lv_ui guider_ui;
+
+void demo(void)
+{
+	lv_obj_t *dis = lv_scr_act();
+	lv_obj_t *button = lv_btn_create(dis);
+	lv_obj_set_size(button,50,40);
+	lv_obj_center(button);
+	lv_obj_t *button1 = lv_btn_create(dis);
+	lv_obj_set_size(button1,50,40);
+	lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
+	lv_group_t *group = lv_group_create();
+	lv_group_set_default(group);
+	lv_group_add_obj(group,button);
+	lv_group_add_obj(group,button1);
+
+	
+	lv_indev_set_group(indev_encoder,group);
+	
+	lv_group_focus_obj(button);
+
+}
+
+
+
+
 
 /* USER CODE END 0 */
 
@@ -123,10 +149,11 @@ int main(void)
 	
 	lv_init();
 	lv_port_disp_init();
+	lv_port_indev_init();
 	
-	setup_ui(&guider_ui);
-  events_init(&guider_ui);
-
+//	setup_ui(&guider_ui);
+//   events_init(&guider_ui);
+	demo();
   /* USER CODE END 2 */
 
   /* Infinite loop */

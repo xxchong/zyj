@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../bsp;../lvgl/src;../lvgl/examples/porting;../lvgl;../lvgl/demos;../lvgl/demos/benchmark;..\lvgl\custom;..\lvgl\generated</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../bsp;../lvgl/src;../lvgl/examples/porting;../lvgl;../lvgl/demos;../lvgl/demos/benchmark;../lvgl/custom;../lvgl/generated</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -731,24 +731,14 @@
               <FilePath>..\bsp\commont.c</FilePath>
             </File>
             <File>
-              <FileName>commont.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\bsp\commont.h</FilePath>
-            </File>
-            <File>
               <FileName>lcd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\bsp\lcd.c</FilePath>
             </File>
             <File>
-              <FileName>lcd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\bsp\lcd.h</FilePath>
-            </File>
-            <File>
-              <FileName>lcdfont.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\bsp\lcdfont.h</FilePath>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\button.c</FilePath>
             </File>
           </Files>
         </Group>

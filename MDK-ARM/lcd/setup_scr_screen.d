@@ -133,4 +133,4 @@ lcd\setup_scr_screen.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 lcd\setup_scr_screen.o: ..\lvgl\generated\gui_guider.h
 lcd\setup_scr_screen.o: ..\lvgl\generated\events_init.h
 lcd\setup_scr_screen.o: ..\lvgl\generated\widgets_init.h
-lcd\setup_scr_screen.o: ..\lvgl\custom\custom.h
+lcd\setup_scr_screen.o: ../lvgl/custom/custom.h

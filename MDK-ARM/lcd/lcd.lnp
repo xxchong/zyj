@@ -26,6 +26,7 @@
 "lcd\system_stm32f4xx.o"
 "lcd\commont.o"
 "lcd\lcd.o"
+"lcd\button.o"
 "lcd\lv_port_disp.o"
 "lcd\lv_port_indev.o"
 "lcd\lv_disp.o"

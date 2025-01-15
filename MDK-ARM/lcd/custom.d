@@ -131,4 +131,4 @@ lcd\custom.o: ../lvgl/src/../src/extra/widgets/led/lv_led.h
 lcd\custom.o: ../lvgl/src/../src/extra/widgets/imgbtn/lv_imgbtn.h
 lcd\custom.o: ../lvgl/src/../src/extra/widgets/span/lv_span.h
 lcd\custom.o: ..\lvgl\custom\custom.h
-lcd\custom.o: ..\lvgl\generated\gui_guider.h
+lcd\custom.o: ../lvgl/generated/gui_guider.h
