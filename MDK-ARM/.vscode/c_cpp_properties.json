@@ -14,6 +14,8 @@
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos\\benchmark",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\custom",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\generated",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\MDK-ARM",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Core\\Src",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Drivers\\STM32F4xx_HAL_Driver\\Src",
@@ -70,7 +72,8 @@
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\src\\hal",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\src\\misc",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\src\\widgets",
-                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos\\benchmark\\assets"
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos\\benchmark\\assets",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\generated\\guider_fonts"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

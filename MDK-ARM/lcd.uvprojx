@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../bsp;../lvgl/src;../lvgl/examples/porting;../lvgl;../lvgl/demos;../lvgl/demos/benchmark</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../bsp;../lvgl/src;../lvgl/examples/porting;../lvgl;../lvgl/demos;../lvgl/demos/benchmark;..\lvgl\custom;..\lvgl\generated</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1789,6 +1789,46 @@
               <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lvgl_gui</GroupName>
+          <Files>
+            <File>
+              <FileName>custom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\custom\custom.c</FilePath>
+            </File>
+            <File>
+              <FileName>events_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\events_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_guider.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\gui_guider.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\setup_scr_screen.c</FilePath>
+            </File>
+            <File>
+              <FileName>widgets_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\widgets_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_SourceHanSerifSC_Regular_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_16.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -29,7 +29,8 @@
 #include "lvgl.h"
 #include "lv_port_disp.h"
 #include "lv_demo_benchmark.h"
-
+#include "gui_guider.h"
+#include "events_init.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -78,6 +79,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	
 	
 }
+
+lv_ui guider_ui;
+
 /* USER CODE END 0 */
 
 /**
@@ -120,7 +124,8 @@ int main(void)
 	lv_init();
 	lv_port_disp_init();
 	
-	lv_demo_benchmark();
+	setup_ui(&guider_ui);
+  events_init(&guider_ui);
 
   /* USER CODE END 2 */
 
