@@ -27,6 +27,7 @@
 "lcd\commont.o"
 "lcd\lcd.o"
 "lcd\button.o"
+"lcd\dht11.o"
 "lcd\lv_port_disp.o"
 "lcd\lv_port_indev.o"
 "lcd\lv_disp.o"

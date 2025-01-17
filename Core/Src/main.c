@@ -32,6 +32,7 @@
 #include "lv_demo_benchmark.h"
 #include "gui_guider.h"
 #include "events_init.h"
+#include "dht11.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -68,9 +69,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim->Instance == TIM4)
 	{
 		static int i;
-		lv_tick_inc(1);//锟斤拷锟斤拷
+		lv_tick_inc(1);//
 		i++;
-		if( i == 100)
+		if( i == 50)
 		{
 			i=0;
 			HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
@@ -82,25 +83,47 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 lv_ui guider_ui;
+DHT11_Data_TypeDef DHT11_Data;  //定义结构体变量
+
+void timer_callback(lv_timer_t *timer)
+{
+    lv_obj_t *label = timer->user_data;
+
+    if(DHT11_ReadData(&DHT11_Data))
+    {
+        lv_label_set_text_fmt(label, "T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
+    }else{
+        lv_label_set_text_fmt(label, "DHT11 ERROR");
+    }
+}
 
 void demo(void)
 {
-	lv_obj_t *dis = lv_scr_act();
-	lv_obj_t *button = lv_btn_create(dis);
-	lv_obj_set_size(button,50,40);
-	lv_obj_center(button);
-	lv_obj_t *button1 = lv_btn_create(dis);
-	lv_obj_set_size(button1,50,40);
-	lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
-	lv_group_t *group = lv_group_create();
-	lv_group_set_default(group);
-	lv_group_add_obj(group,button);
-	lv_group_add_obj(group,button1);
+    lv_obj_t *dis = lv_scr_act();
+    lv_obj_t *label = lv_label_create(dis);
+    lv_obj_center(label);
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
+    
+    
+    lv_timer_create(timer_callback, 1500, label);
+
+
+  
+	// lv_obj_t *button = lv_btn_create(dis);
+	// lv_obj_set_size(button,50,40);
+	// lv_obj_center(button);
+	// lv_obj_t *button1 = lv_btn_create(dis);
+	// lv_obj_set_size(button1,50,40);
+	// lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
+	// lv_group_t *group = lv_group_create();
+	// lv_group_set_default(group);
+	// lv_group_add_obj(group,button);
+	// lv_group_add_obj(group,button1);
 
 	
-	lv_indev_set_group(indev_encoder,group);
+	// lv_indev_set_group(indev_encoder,group);
 	
-	lv_group_focus_obj(button);
+	// lv_group_focus_obj(button);
 
 }
 
@@ -141,6 +164,7 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   MX_TIM4_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim4);
 
@@ -150,7 +174,8 @@ int main(void)
 	lv_init();
 	lv_port_disp_init();
 	lv_port_indev_init();
-	
+
+
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
 	demo();

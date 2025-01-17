@@ -16,6 +16,8 @@
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos\\benchmark",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\custom",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\generated",
+                "D:\\keil_v5\\ARM\\ARMCC\\include",
+                "D:\\keil_v5\\ARM\\ARMCC\\include\\rw",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\MDK-ARM",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Core\\Src",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Drivers\\STM32F4xx_HAL_Driver\\Src",

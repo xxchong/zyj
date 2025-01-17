@@ -172,3 +172,4 @@ lcd\main.o: ../lvgl/demos/benchmark/../lv_demos.h
 lcd\main.o: ../lvgl/demos/benchmark/../benchmark/lv_demo_benchmark.h
 lcd\main.o: ../lvgl/generated/gui_guider.h
 lcd\main.o: ../lvgl/generated/events_init.h
+lcd\main.o: ../bsp/dht11.h

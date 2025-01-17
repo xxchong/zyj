@@ -4,9 +4,9 @@
 
 #define BUTTON_PORT GPIOE
 
-#define BUTTON_RIGHT_PIN GPIO_PIN_11 // 使用GPIO0作为按钮引脚
-#define BUTTON_ENTER_PIN GPIO_PIN_10 // 使用GPIO0作为按钮引脚
-#define BUTTON_LEFT_PIN GPIO_PIN_9  // 使用GPIO0作为按钮引脚
+#define BUTTON_RIGHT_PIN GPIO_PIN_11 // 使锟斤拷GPIO0锟斤拷为锟斤拷钮锟斤拷锟斤拷
+#define BUTTON_ENTER_PIN GPIO_PIN_10 // 使锟斤拷GPIO0锟斤拷为锟斤拷钮锟斤拷锟斤拷
+#define BUTTON_LEFT_PIN GPIO_PIN_9  // 使锟斤拷GPIO0锟斤拷为锟斤拷钮锟斤拷锟斤拷
 
 static uint8_t last_button_state = 0;
 
@@ -27,7 +27,7 @@ uint8_t get_button(void)
         current_state = 3;
     }
 
-    if (current_state == 2) // 确认键特殊处理
+    if (current_state == 2) // 确锟较硷拷锟斤拷锟解处锟斤拷
     {
         return current_state;
     }
