@@ -33,6 +33,7 @@
 #include "gui_guider.h"
 #include "events_init.h"
 #include "dht11.h"
+#include "beep.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -71,7 +72,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		static int i;
 		lv_tick_inc(1);//
 		i++;
-		if( i == 50)
+		if( i == 1000)
 		{
 			i=0;
 			HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
@@ -83,29 +84,51 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 lv_ui guider_ui;
-DHT11_Data_TypeDef DHT11_Data;  //����ṹ�����
+DHT11_Data_TypeDef DHT11_Data;  
 
 void timer_callback(lv_timer_t *timer)
 {
     lv_obj_t *label = timer->user_data;
 
-    if(DHT11_ReadData(&DHT11_Data))
-    {
-        lv_label_set_text_fmt(label, "T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
-    }else{
-        lv_label_set_text_fmt(label, "DHT11 ERROR");
-    }
+//    if(DHT11_ReadData(&DHT11_Data))
+//    {
+//        lv_label_set_text_fmt(label, "T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
+//    }else{
+//        lv_label_set_text_fmt(label, "DHT11 ERROR");
+//    }
 }
 
+void beep_callback(lv_event_t *e)
+{
+    lv_obj_t *obj = lv_event_get_target(e);
+    // 获取switch的状态
+    bool state = lv_obj_has_state(obj, LV_STATE_CHECKED);
+    
+    if(state) {
+        // switch打开，蜂鸣器响
+        BEEP_ON;
+    } else {
+        // switch关闭，蜂鸣器停止
+        BEEP_OFF;
+    }
+}
 void demo(void)
 {
     lv_obj_t *dis = lv_scr_act();
     lv_obj_t *label = lv_label_create(dis);
     lv_obj_center(label);
     lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
-    
-    
     lv_timer_create(timer_callback, 1500, label);
+
+
+
+    lv_obj_t *beep = lv_switch_create(dis);
+    lv_obj_set_size(beep,70,40);
+    lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
+    lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_VALUE_CHANGED,NULL);
+
+
+
 
 
   
@@ -115,13 +138,13 @@ void demo(void)
 	// lv_obj_t *button1 = lv_btn_create(dis);
 	// lv_obj_set_size(button1,50,40);
 	// lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
-	// lv_group_t *group = lv_group_create();
-	// lv_group_set_default(group);
-	// lv_group_add_obj(group,button);
+	lv_group_t *group = lv_group_create();
+	lv_group_set_default(group);
+	lv_group_add_obj(group,beep);
 	// lv_group_add_obj(group,button1);
 
 	
-	// lv_indev_set_group(indev_encoder,group);
+	lv_indev_set_group(indev_encoder,group);
 	
 	// lv_group_focus_obj(button);
 
@@ -168,7 +191,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim4);
 
-	lcd_set_dir(LCD_CROSSWISE_180);
+	lcd_set_dir(LCD_CROSSWISE);
 	lcd_init();	
 	
 	lv_init();
