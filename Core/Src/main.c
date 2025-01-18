@@ -34,6 +34,8 @@
 #include "events_init.h"
 #include "dht11.h"
 #include "beep.h"
+#include "relay.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,15 +103,15 @@ void timer_callback(lv_timer_t *timer)
 void beep_callback(lv_event_t *e)
 {
     lv_obj_t *obj = lv_event_get_target(e);
-    // 获取switch的状态
+    // 获取switch的状�?
     bool state = lv_obj_has_state(obj, LV_STATE_CHECKED);
     
     if(state) {
-        // switch打开，蜂鸣器响
-        BEEP_ON;
+        // switch打开，蜂鸣器�?
+        RELAY_ON;
     } else {
         // switch关闭，蜂鸣器停止
-        BEEP_OFF;
+        RELAY_OFF;
     }
 }
 void demo(void)

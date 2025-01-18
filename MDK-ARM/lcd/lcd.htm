@@ -3,7 +3,7 @@
 <title>Static Call Graph - [lcd\lcd.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image lcd\lcd.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Jan 19 00:13:53 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Jan 19 00:23:58 2025
 <BR><P>
 <H3>Maximum Stack Usage =       1040 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -342,8 +342,8 @@ Function Pointers
 Global Symbols
 </H3>
 <P><STRONG><a name="[11a]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
-<BR><BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<BR><BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
 <P><STRONG><a name="[11b]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
@@ -1154,9 +1154,9 @@ Global Symbols
 <P><STRONG><a name="[150]"></a>HAL_SPI_MspInit</STRONG> (Thumb, 142 bytes, Stack size 40 bytes, spi.o(i.HAL_SPI_MspInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = HAL_SPI_MspInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Error_Handler
+<BR>[Calls]<UL><LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Error_Handler
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
+<LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Init
@@ -1300,11 +1300,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[16b]"></a>MX_GPIO_Init</STRONG> (Thumb, 198 bytes, Stack size 48 bytes, gpio.o(i.MX_GPIO_Init))
+<P><STRONG><a name="[16b]"></a>MX_GPIO_Init</STRONG> (Thumb, 210 bytes, Stack size 48 bytes, gpio.o(i.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = MX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<BR>[Calls]<UL><LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -2049,7 +2049,7 @@ Global Symbols
 <LI><a href="#[327]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_glyph_dsc_id
 </UL>
 
-<P><STRONG><a name="[82]"></a>beep_callback</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, main.o(i.beep_callback))
+<P><STRONG><a name="[82]"></a>beep_callback</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, main.o(i.beep_callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = beep_callback
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_has_state
@@ -2290,8 +2290,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[270]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_map
 </UL>
 <BR>[Address Reference Count : 3]<UL><LI> lv_theme_default.o(i.style_init)
-<LI> lv_style.o(i.lv_style_transition_dsc_init)
 <LI> lv_anim.o(i.lv_anim_init)
+<LI> lv_style.o(i.lv_style_transition_dsc_init)
 </UL>
 <P><STRONG><a name="[7b]"></a>lv_anim_path_step</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, lv_anim.o(i.lv_anim_path_step))
 <BR>[Address Reference Count : 2]<UL><LI> lv_textarea.o(i.start_cursor_blink)
@@ -4226,13 +4226,13 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_mem_free
 <LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_memset_00
 <LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_mem_alloc
-<LI><a href="#[413]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_cf_get_px_size
-<LI><a href="#[414]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_seek
 <LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
 <LI><a href="#[408]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_open
 <LI><a href="#[407]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_get_ext
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_close
 <LI><a href="#[416]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_color_make
+<LI><a href="#[413]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_cf_get_px_size
+<LI><a href="#[414]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_seek
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> lv_img_decoder.o(i._lv_img_decoder_init)
@@ -4240,11 +4240,11 @@ Global Symbols
 <P><STRONG><a name="[72]"></a>lv_img_decoder_built_in_read_line</STRONG> (Thumb, 186 bytes, Stack size 40 bytes, lv_img_decoder.o(i.lv_img_decoder_built_in_read_line))
 <BR><BR>[Stack]<UL><LI>Max Depth = 312<LI>Call Chain = lv_img_decoder_built_in_read_line &rArr; lv_img_decoder_built_in_line_alpha &rArr; lv_fs_read &rArr; lv_fs_read_cached &rArr; lv_mem_alloc &rArr; lv_tlsf_malloc &rArr; block_prepare_used &rArr; block_insert &rArr; mapping_insert
 </UL>
-<BR>[Calls]<UL><LI><a href="#[413]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_cf_get_px_size
-<LI><a href="#[414]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_seek
-<LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
+<BR>[Calls]<UL><LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
 <LI><a href="#[415]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_line_indexed
 <LI><a href="#[412]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_line_alpha
+<LI><a href="#[413]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_cf_get_px_size
+<LI><a href="#[414]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_seek
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> lv_img_decoder.o(i._lv_img_decoder_init)
 </UL>
@@ -10165,9 +10165,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_mem_buf_release
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_mem_buf_get
+<LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
 <LI><a href="#[413]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_cf_get_px_size
 <LI><a href="#[414]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_seek
-<LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_read_line
 </UL>
@@ -10177,9 +10177,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_mem_buf_release
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_mem_buf_get
+<LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
 <LI><a href="#[413]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_cf_get_px_size
 <LI><a href="#[414]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_seek
-<LI><a href="#[40a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_fs_read
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_read_line
 </UL>
@@ -12032,8 +12032,8 @@ Local Symbols
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_ll_remove
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_ll_get_next
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_ll_get_head
-<LI><a href="#[449]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_menu_back_btn_is_root
 <LI><a href="#[44a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_menu_set_page
+<LI><a href="#[449]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_menu_back_btn_is_root
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> lv_menu.o(i.lv_menu_constructor)
 </UL>

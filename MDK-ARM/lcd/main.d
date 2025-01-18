@@ -174,3 +174,4 @@ lcd\main.o: ../lvgl/generated/gui_guider.h
 lcd\main.o: ../lvgl/generated/events_init.h
 lcd\main.o: ../bsp/dht11.h
 lcd\main.o: ../bsp/beep.h
+lcd\main.o: ../bsp/relay.h
