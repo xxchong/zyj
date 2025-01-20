@@ -5,6 +5,7 @@
 "lcd\dma.o"
 "lcd\spi.o"
 "lcd\tim.o"
+"lcd\usart.o"
 "lcd\stm32f4xx_it.o"
 "lcd\stm32f4xx_hal_msp.o"
 "lcd\stm32f4xx_hal_spi.o"
@@ -23,12 +24,14 @@
 "lcd\stm32f4xx_hal_exti.o"
 "lcd\stm32f4xx_hal_tim.o"
 "lcd\stm32f4xx_hal_tim_ex.o"
+"lcd\stm32f4xx_hal_uart.o"
 "lcd\system_stm32f4xx.o"
 "lcd\commont.o"
 "lcd\lcd.o"
 "lcd\button.o"
 "lcd\dht11.o"
 "lcd\beep.o"
+"lcd\gy302.o"
 "lcd\lv_port_disp.o"
 "lcd\lv_port_indev.o"
 "lcd\lv_disp.o"
@@ -238,7 +241,7 @@
 "lcd\widgets_init.o"
 "lcd\lv_font_montserratmedium_16.o"
 "lcd\lv_font_sourcehanserifsc_regular_16.o"
---strict --scatter "lcd\lcd.sct"
+--library_type=microlib --strict --scatter "lcd\lcd.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "lcd.map" -o lcd\lcd.axf

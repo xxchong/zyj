@@ -21,6 +21,7 @@
 #include "dma.h"
 #include "spi.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -35,6 +36,9 @@
 #include "dht11.h"
 #include "beep.h"
 #include "relay.h"
+#include "gy302.h"
+#include "stdio.h"
+
 
 /* USER CODE END Includes */
 
@@ -88,9 +92,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 lv_ui guider_ui;
 DHT11_Data_TypeDef DHT11_Data;  
 
+static lv_obj_t *label;
+
+
 void timer_callback(lv_timer_t *timer)
 {
-    lv_obj_t *label = timer->user_data;
+    float light= GY302_ReadLight();
+    lv_label_set_text_fmt(label, "Light: %d lux", (int)light);
+    printf("Light: %d lux\n", (int)light);
+    lv_timer_del(timer);
 
 //    if(DHT11_ReadData(&DHT11_Data))
 //    {
@@ -103,31 +113,32 @@ void timer_callback(lv_timer_t *timer)
 void beep_callback(lv_event_t *e)
 {
     lv_obj_t *obj = lv_event_get_target(e);
-    // 获取switch的状�?
-    bool state = lv_obj_has_state(obj, LV_STATE_CHECKED);
-    
-    if(state) {
-        // switch打开，蜂鸣器�?
-        RELAY_ON;
-    } else {
-        // switch关闭，蜂鸣器停止
-        RELAY_OFF;
-    }
+    // bool state = lv_obj_has_state(obj, LV_STATE_CHECKED);
+
+    lv_timer_create(timer_callback, 10, NULL);
+
+
+    // if(state) {
+    //     // switch打开，蜂鸣器?
+    //     // RELAY_ON;
+    // } else {
+    //     // switch关闭，蜂鸣器停止
+    //     // RELAY_OFF;
+    // }
 }
 void demo(void)
 {
     lv_obj_t *dis = lv_scr_act();
-    lv_obj_t *label = lv_label_create(dis);
+    label = lv_label_create(dis);
     lv_obj_center(label);
     lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
-    lv_timer_create(timer_callback, 1500, label);
 
 
 
-    lv_obj_t *beep = lv_switch_create(dis);
+    lv_obj_t *beep = lv_btn_create(dis);
     lv_obj_set_size(beep,70,40);
     lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
-    lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_VALUE_CHANGED,NULL);
+    lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_CLICKED,NULL);
 
 
 
@@ -190,6 +201,7 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim4);
 
@@ -199,11 +211,14 @@ int main(void)
 	lv_init();
 	lv_port_disp_init();
 	lv_port_indev_init();
+  GY302_Init();
 
 
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
 	demo();
+	
+	printf("Hardware Init Ok\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -31,9 +31,11 @@ lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lcd\main.o: ../Core/Inc/dma.h
 lcd\main.o: ../Core/Inc/spi.h
 lcd\main.o: ../Core/Inc/tim.h
+lcd\main.o: ../Core/Inc/usart.h
 lcd\main.o: ../Core/Inc/gpio.h
 lcd\main.o: ../bsp/lcd.h
 lcd\main.o: ../bsp/commont.h
@@ -175,3 +177,5 @@ lcd\main.o: ../lvgl/generated/events_init.h
 lcd\main.o: ../bsp/dht11.h
 lcd\main.o: ../bsp/beep.h
 lcd\main.o: ../bsp/relay.h
+lcd\main.o: ../bsp/gy302.h
+lcd\main.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
