@@ -25,7 +25,7 @@
     #warning Please define or replace the macro MY_DISP_HOR_RES with the actual screen height, default value 240 is used for now.
     #define MY_DISP_VER_RES    240
 #endif
-#define COLOR_SIZE         (10*280)
+#define COLOR_SIZE         (20*280)
 
 /**********************
  *      TYPEDEFS
