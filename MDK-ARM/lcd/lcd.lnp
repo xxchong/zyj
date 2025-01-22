@@ -32,6 +32,7 @@
 "lcd\dht11.o"
 "lcd\beep.o"
 "lcd\gy302.o"
+"lcd\esp01s.o"
 "lcd\lv_port_disp.o"
 "lcd\lv_port_indev.o"
 "lcd\lv_disp.o"

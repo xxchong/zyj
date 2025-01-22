@@ -38,7 +38,7 @@
 #include "relay.h"
 #include "gy302.h"
 #include "stdio.h"
-
+#include "esp01s.h"
 
 /* USER CODE END Includes */
 
@@ -203,8 +203,8 @@ int main(void)
   MX_TIM5_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+	printf("Hardware Init Ok\n");
 	HAL_TIM_Base_Start_IT(&htim4);
-
 	lcd_set_dir(LCD_CROSSWISE);
 	lcd_init();	
 	
@@ -213,12 +213,10 @@ int main(void)
 	lv_port_indev_init();
   GY302_Init();
 
-
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
 	demo();
 	
-	printf("Hardware Init Ok\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */

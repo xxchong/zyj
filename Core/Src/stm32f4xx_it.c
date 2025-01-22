@@ -22,10 +22,12 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "esp01s.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
+void HAL_UART_IdleCallback(UART_HandleTypeDef *huart);
 
 /* USER CODE END TD */
 
@@ -228,5 +230,35 @@ void DMA2_Stream3_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+/* 串口2空闲中断回调函数 */
+//void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
+//{
+//    if(huart->Instance == USART2)
+//    {
+//       
+//        __HAL_UART_CLEAR_IDLEFLAG(huart);
+//        
+//        HAL_UART_DMAStop(huart);
+//        
+//        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);
+//        
+//        printf("Data Length:%d\r\n", rxLen);
+//        
+//        if(rxLen > 0)
+//        {
+//            Buffer[rxLen] = '\0';
+//            printf("String data: %s\r\n", Buffer);
+//        }
+//        
+//        if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)Buffer, ESP_RXBUFFER_SIZE) != HAL_OK)
+//        {
+//            Error_Handler();
+//        }
+//    }
+//}
+//if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) != RESET)
+//  {
+//    printf("IDLE\r\n");
+//    HAL_UART_IdleCallback(&huart2);
+//  }
 /* USER CODE END 1 */

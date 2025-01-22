@@ -13,7 +13,7 @@
 //               RES     PA0  复位脚
 //     接        DC      PA1
 //     口        CS      PA2
-//		 --			   BLC     PB3  控制背光
+//		 --			   BLC     PA3  控制背光
 //     ------------------------------------------------------
 //     触        INT     PA5  触摸中断
 //     摸        SCL     PA6  触摸IIC 时钟线
@@ -75,7 +75,7 @@ typedef enum
 #define LCD_RST_PIN       GPIO_PIN_0
 #define LCD_DC_PIN        GPIO_PIN_1
 #define LCD_CS_PIN        GPIO_PIN_2
-#define LCD_BL_PIN        GPIO_PIN_3 
+#define LCD_BL_PIN        GPIO_PIN_3
 #define LCD_SCLK_PIN      GPIO_PIN_5
 #define LCD_MOSI_PIN      GPIO_PIN_7
 
