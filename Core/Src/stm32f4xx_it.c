@@ -59,6 +59,8 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart);
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_spi1_tx;
 extern TIM_HandleTypeDef htim4;
+extern DMA_HandleTypeDef hdma_usart2_rx;
+extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -202,6 +204,20 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles DMA1 stream5 global interrupt.
+  */
+void DMA1_Stream5_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream5_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream5_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart2_rx);
+  /* USER CODE BEGIN DMA1_Stream5_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream5_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM4 global interrupt.
   */
 void TIM4_IRQHandler(void)
@@ -213,6 +229,24 @@ void TIM4_IRQHandler(void)
   /* USER CODE BEGIN TIM4_IRQn 1 */
 
   /* USER CODE END TIM4_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART2 global interrupt.
+  */
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+	if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) != RESET)
+  {
+    printf("IDLE\r\n");
+    HAL_UART_IdleCallback(&huart2);
+  }
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
+  /* USER CODE BEGIN USART2_IRQn 1 */
+
+  /* USER CODE END USART2_IRQn 1 */
 }
 
 /**
@@ -231,34 +265,30 @@ void DMA2_Stream3_IRQHandler(void)
 
 /* USER CODE BEGIN 1 */
 /* 串口2空闲中断回调函数 */
-//void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
-//{
-//    if(huart->Instance == USART2)
-//    {
-//       
-//        __HAL_UART_CLEAR_IDLEFLAG(huart);
-//        
-//        HAL_UART_DMAStop(huart);
-//        
-//        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);
-//        
-//        printf("Data Length:%d\r\n", rxLen);
-//        
-//        if(rxLen > 0)
-//        {
-//            Buffer[rxLen] = '\0';
-//            printf("String data: %s\r\n", Buffer);
-//        }
-//        
-//        if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)Buffer, ESP_RXBUFFER_SIZE) != HAL_OK)
-//        {
-//            Error_Handler();
-//        }
-//    }
-//}
-//if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) != RESET)
-//  {
-//    printf("IDLE\r\n");
-//    HAL_UART_IdleCallback(&huart2);
-//  }
+void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
+{
+    if(huart->Instance == USART2)
+    {
+       
+        __HAL_UART_CLEAR_IDLEFLAG(huart);
+        
+        HAL_UART_DMAStop(huart);
+        
+        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);
+        
+        printf("Data Length:%d\r\n", rxLen);
+        
+        if(rxLen > 0)
+        {
+            Buffer[rxLen] = '\0';
+            // printf("String data: %s\r\n", Buffer);
+        }
+        
+        // if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)Buffer, ESP_RXBUFFER_SIZE) != HAL_OK)
+        // {
+        //     Error_Handler();
+        // }
+    }
+}
+
 /* USER CODE END 1 */

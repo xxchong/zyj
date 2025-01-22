@@ -65,17 +65,17 @@ typedef enum
     RGB565_66CCFF   = (0x665F),
 }rgb565_color_enum;
 
-#define LCD_RST_PORT       GPIOA
-#define LCD_DC_PORT        GPIOA
-#define LCD_CS_PORT        GPIOA
-#define LCD_BL_PORT        GPIOA
+#define LCD_RST_PORT       GPIOB
+#define LCD_DC_PORT        GPIOB
+#define LCD_CS_PORT        GPIOB
+#define LCD_BL_PORT        GPIOB
 #define LCD_SCLK_PORT      GPIOA
 #define LCD_MOSI_PORT      GPIOA
 
-#define LCD_RST_PIN       GPIO_PIN_0
-#define LCD_DC_PIN        GPIO_PIN_1
-#define LCD_CS_PIN        GPIO_PIN_2
-#define LCD_BL_PIN        GPIO_PIN_3
+#define LCD_RST_PIN       GPIO_PIN_10
+#define LCD_DC_PIN        GPIO_PIN_11
+#define LCD_CS_PIN        GPIO_PIN_12
+#define LCD_BL_PIN        GPIO_PIN_13
 #define LCD_SCLK_PIN      GPIO_PIN_5
 #define LCD_MOSI_PIN      GPIO_PIN_7
 

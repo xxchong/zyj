@@ -76,13 +76,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim->Instance == TIM4)
 	{
 		static int i;
-		lv_tick_inc(1);//
 		i++;
 		if( i == 1000)
 		{
 			i=0;
 			HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
 		}
+
+     static uint8_t cnt = 0;
+        cnt++;
+        if(cnt >= 5)
+        {
+            lv_tick_inc(5);
+            cnt = 0;
+        }
 		
 	}
 	
@@ -202,16 +209,23 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM5_Init();
   MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-	printf("Hardware Init Ok\n");
-	HAL_TIM_Base_Start_IT(&htim4);
+	
+	ESP01S_Init();
+
 	lcd_set_dir(LCD_CROSSWISE);
 	lcd_init();	
 	
 	lv_init();
 	lv_port_disp_init();
 	lv_port_indev_init();
+	HAL_TIM_Base_Start_IT(&htim4);
+
   GY302_Init();
+	
+	
+	printf("Hardware Init Ok\n");
 
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
@@ -228,7 +242,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		lv_task_handler();
+  	lv_task_handler();
 		HAL_Delay(10);
   }
   /* USER CODE END 3 */

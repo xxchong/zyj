@@ -247,7 +247,8 @@ void lcd_init(void)
     lcd_set_dir(lcd_display_dir);
     lcd_set_color(lcd_pencolor, lcd_bgcolor);   
 
-    LCD_BL(1);
+    LCD_CS(1);
+		LCD_DC(1);
     LCD_RST(0);  
     HAL_Delay(5);
     LCD_RST(1);      
@@ -335,7 +336,7 @@ void lcd_init(void)
     lcd_write_command(0x21);
     
     lcd_write_command(0x29);
-		
+		LCD_BL(1);
     lcd_clear();                                                             // ³õÊ¼»¯Îª°×ÆÁ
 }
 
