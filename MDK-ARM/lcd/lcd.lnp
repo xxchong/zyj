@@ -245,4 +245,4 @@
 --library_type=microlib --strict --scatter "lcd\lcd.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
---list "lcd.map" -o lcd\lcd.axf
+--list "..\lcd.map" -o lcd\lcd.axf

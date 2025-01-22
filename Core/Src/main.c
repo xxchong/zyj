@@ -212,24 +212,25 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 	
-	ESP01S_Init();
+//	ESP01S_Init();
 
-	lcd_set_dir(LCD_CROSSWISE);
-	lcd_init();	
-	
-	lv_init();
-	lv_port_disp_init();
-	lv_port_indev_init();
+//	lcd_set_dir(LCD_CROSSWISE);
+//	lcd_init();	
+//	
+//	lv_init();
+//	lv_port_disp_init();
+//	lv_port_indev_init();
 	HAL_TIM_Base_Start_IT(&htim4);
 
-  GY302_Init();
-	
-	
-	printf("Hardware Init Ok\n");
+//  GY302_Init();
+//	
+//	
+//	printf("Hardware Init Ok\n");
 
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
-	demo();
+//	demo();
+	lv_demo_benchmark();
 	
   /* USER CODE END 2 */
 
