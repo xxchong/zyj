@@ -52,6 +52,6 @@ ESP_Status ESP01S_ConnectWiFi(const char* ssid, const char* password);
 ESP_Status ESP01S_DisconnectWiFi(void);
 ESP_Status ESP01S_SendATCmd(const char* cmd, const char* response, uint32_t timeout);
 
+ESP_Status ESP01S_UartSend(const char* data);
 
-extern uint8_t Buffer[ESP_RXBUFFER_SIZE];
 #endif

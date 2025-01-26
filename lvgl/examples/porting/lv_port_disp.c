@@ -25,7 +25,7 @@
     #warning Please define or replace the macro MY_DISP_HOR_RES with the actual screen height, default value 240 is used for now.
     #define MY_DISP_VER_RES    240
 #endif
-#define COLOR_SIZE         (20*280)
+#define COLOR_SIZE         (10*280)
 
 /**********************
  *      TYPEDEFS
@@ -198,7 +198,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
         uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
         
         // 准备数据缓冲区
-        static uint8_t lcd_buffer[COLOR_SIZE * 2];  // 确保足够大
+        static uint8_t lcd_buffer[COLOR_SIZE * 2];  // RGB565,占用2字节
         uint32_t index = 0;
         
         // 转换数据格式

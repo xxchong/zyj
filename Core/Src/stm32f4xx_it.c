@@ -264,30 +264,29 @@ void DMA2_Stream3_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-/* 涓插彛2绌洪棽涓柇鍥炶皟鍑芥暟 */
+//串口2空闲中断回调函数
 void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
 {
     if(huart->Instance == USART2)
     {
        
-        __HAL_UART_CLEAR_IDLEFLAG(huart);
+        __HAL_UART_CLEAR_IDLEFLAG(huart);   //清除空闲标志
         
-        HAL_UART_DMAStop(huart);
+        HAL_UART_DMAStop(huart);    //停止DMA
         
-        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);
-        
-        printf("Data Length:%d\r\n", rxLen);
-        
+        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);  //计算接收到的数据长度
+                
         if(rxLen > 0)
         {
-            Buffer[rxLen] = '\0';
-            // printf("String data: %s\r\n", Buffer);
+            esp01s.rxBuffer[rxLen] = '\0';
+            esp01s.rxLen = rxLen;
+            esp01s.dataReady = 1;
         }
         
-        // if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)Buffer, ESP_RXBUFFER_SIZE) != HAL_OK)
-        // {
-        //     Error_Handler();
-        // }
+        if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)esp01s.rxBuffer, ESP_RXBUFFER_SIZE) != HAL_OK)
+        {
+            Error_Handler();
+        }
     }
 }
 

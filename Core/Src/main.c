@@ -230,7 +230,7 @@ int main(void)
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
 //	demo();
-	lv_demo_benchmark();
+//	lv_demo_benchmark();
 	
   /* USER CODE END 2 */
 
