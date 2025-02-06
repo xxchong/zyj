@@ -12,6 +12,9 @@
 #include "lv_port_indev.h"
 #include "lvgl.h"
 #include "button.h"
+#include "cst816.h"
+#include "lcd.h"
+#include <stdio.h>
 
 /*********************
  *      DEFINES
@@ -82,7 +85,7 @@ void lv_port_indev_init(void)
      *  You should shape them according to your hardware
      */
 
-    static lv_indev_drv_t indev_drv;
+    // static lv_indev_drv_t indev_drv;
 
     /*------------------
      * Touchpad
@@ -96,6 +99,19 @@ void lv_port_indev_init(void)
 //    indev_drv.type = LV_INDEV_TYPE_POINTER;
 //    indev_drv.read_cb = touchpad_read;
 //    indev_touchpad = lv_indev_drv_register(&indev_drv);
+    touch_driver_init(280,240);
+    static lv_indev_drv_t indev_drv;
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER; // è§¦æ‘¸
+    indev_drv.read_cb = touchpad_read;
+    indev_touchpad = lv_indev_drv_register(&indev_drv);
+
+
+
+
+
+
+
 
     /*------------------
      * Mouse
@@ -114,6 +130,13 @@ void lv_port_indev_init(void)
 //    lv_obj_t * mouse_cursor = lv_img_create(lv_scr_act());
 //    lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
 //    lv_indev_set_cursor(indev_mouse, mouse_cursor);
+
+
+
+
+
+
+
 
     /*------------------
      * Keypad
@@ -137,14 +160,14 @@ void lv_port_indev_init(void)
      * Encoder
      * -----------------*/
 
-    /*Initialize your encoder if you have*/
-    encoder_init();
+    // /*Initialize your encoder if you have*/
+    // encoder_init();
 
-    /*Register a encoder input device*/
-    lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_ENCODER;
-    indev_drv.read_cb = encoder_read;
-    indev_encoder = lv_indev_drv_register(&indev_drv);
+    // /*Register a encoder input device*/
+    // lv_indev_drv_init(&indev_drv);
+    // indev_drv.type = LV_INDEV_TYPE_ENCODER;
+    // indev_drv.read_cb = encoder_read;
+    // indev_encoder = lv_indev_drv_register(&indev_drv);
 
     /*Later you should create group(s) with `lv_group_t * group = lv_group_create()`,
      *add objects to the group with `lv_group_add_obj(group, obj)`
@@ -189,19 +212,26 @@ static void touchpad_init(void)
 /*Will be called by the library to read the touchpad*/
 static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 {
-    static lv_coord_t last_x = 0;
-    static lv_coord_t last_y = 0;
+  
+    int16_t x, y;
+    int state;
+    static int16_t last_x = 0;
+    static int16_t last_y = 0;
+    cst816t_read(&x, &y, &state);
+    if (state)
+    {
+        // äº¤æ¢ x å’Œ y åæ ‡
+        last_x = 280-x;
+        last_y = y;
 
-    /*Save the pressed coordinates and the state*/
-    if(touchpad_is_pressed()) {
-        touchpad_get_xy(&last_x, &last_y);
+        printf("Touch: x=%d, y=%d\n", last_x, last_y);
         data->state = LV_INDEV_STATE_PR;
     }
-    else {
+    else
+    {
         data->state = LV_INDEV_STATE_REL;
     }
 
-    /*Set the last pressed coordinates*/
     data->point.x = last_x;
     data->point.y = last_y;
 }
@@ -342,17 +372,17 @@ static void encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     lv_indev_state_t encoder_act;
     int32_t encoder_diff = 0;
     uint32_t KEY_VAL = get_button();
-    if (KEY_VAL == 2)                    // ±àÂëÆ÷µÄ°´¼ü
-        encoder_act = LV_INDEV_STATE_PR; // °´ÏÂ
+    if (KEY_VAL == 2)                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä°ï¿½ï¿½ï¿½
+        encoder_act = LV_INDEV_STATE_PR; // ï¿½ï¿½ï¿½ï¿½
     else
-        encoder_act = LV_INDEV_STATE_REL; // ËÉ¿ª
+        encoder_act = LV_INDEV_STATE_REL; // ï¿½É¿ï¿½
 
-    if ((KEY_VAL == 3) && but_flag) // ±àÂëÆ÷×ó×ª
+    if ((KEY_VAL == 3) && but_flag) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
     {
         encoder_diff--;
         but_flag = false;
     }
-    else if ((KEY_VAL == 1) && but_flag) // ±àÂëÆ÷ÓÒ×ª
+    else if ((KEY_VAL == 1) && but_flag) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
     {
         encoder_diff++;
         but_flag = false;

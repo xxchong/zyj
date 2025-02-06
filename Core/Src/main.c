@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -158,13 +159,13 @@ void demo(void)
 	// lv_obj_t *button1 = lv_btn_create(dis);
 	// lv_obj_set_size(button1,50,40);
 	// lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
-	lv_group_t *group = lv_group_create();
-	lv_group_set_default(group);
-	lv_group_add_obj(group,beep);
-	// lv_group_add_obj(group,button1);
+//	lv_group_t *group = lv_group_create();
+//	lv_group_set_default(group);
+//	lv_group_add_obj(group,beep);
+//	// lv_group_add_obj(group,button1);
 
-	
-	lv_indev_set_group(indev_encoder,group);
+//	
+//	lv_indev_set_group(indev_encoder,group);
 	
 	// lv_group_focus_obj(button);
 
@@ -210,11 +211,12 @@ int main(void)
   MX_TIM5_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 	
-	ESP01S_Init();
+//	ESP01S_Init();
 
-	lcd_set_dir(LCD_CROSSWISE);
+	lcd_set_dir(LCD_CROSSWISE_180);
 	lcd_init();	
 	
 	lv_init();
@@ -222,14 +224,16 @@ int main(void)
 	lv_port_indev_init();
 	HAL_TIM_Base_Start_IT(&htim4);
 
+
+	printf("Hardware Init Ok\n");
+
 //  GY302_Init();
 //	
 //	
-//	printf("Hardware Init Ok\n");
 
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
-//	demo();
+	demo();
 //	lv_demo_benchmark();
 	
   /* USER CODE END 2 */
