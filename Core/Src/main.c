@@ -135,44 +135,87 @@ void beep_callback(lv_event_t *e)
     //     // RELAY_OFF;
     // }
 }
-void demo(void)
-{
-    lv_obj_t *dis = lv_scr_act();
-    label = lv_label_create(dis);
-    lv_obj_center(label);
-    lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
+// void demo(void)
+// {
+//     lv_obj_t *dis = lv_scr_act();
+//     label = lv_label_create(dis);
+//     lv_obj_center(label);
+//     lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
 
 
 
-    lv_obj_t *beep = lv_btn_create(dis);
-    lv_obj_set_size(beep,70,40);
-    lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
-    lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_CLICKED,NULL);
+//     lv_obj_t *beep = lv_btn_create(dis);
+//     lv_obj_set_size(beep,70,40);
+//     lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
+//     lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_CLICKED,NULL);
 
 
 
 
 
   
-	// lv_obj_t *button = lv_btn_create(dis);
-	// lv_obj_set_size(button,50,40);
-	// lv_obj_center(button);
-	// lv_obj_t *button1 = lv_btn_create(dis);
-	// lv_obj_set_size(button1,50,40);
-	// lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
-//	lv_group_t *group = lv_group_create();
-//	lv_group_set_default(group);
-//	lv_group_add_obj(group,beep);
-//	// lv_group_add_obj(group,button1);
+// 	// lv_obj_t *button = lv_btn_create(dis);
+// 	// lv_obj_set_size(button,50,40);
+// 	// lv_obj_center(button);
+// 	// lv_obj_t *button1 = lv_btn_create(dis);
+// 	// lv_obj_set_size(button1,50,40);
+// 	// lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
+// //	lv_group_t *group = lv_group_create();
+// //	lv_group_set_default(group);
+// //	lv_group_add_obj(group,beep);
+// //	// lv_group_add_obj(group,button1);
 
-//	
-//	lv_indev_set_group(indev_encoder,group);
+// //	
+// //	lv_indev_set_group(indev_encoder,group);
 	
-	// lv_group_focus_obj(button);
+// 	// lv_group_focus_obj(button);
 
+// }
+
+
+
+void slider_event_cb(lv_event_t * e)
+{
+    lv_obj_t * slider = lv_event_get_target(e);
+    int32_t value = lv_slider_get_value(slider);
+    // 将滑动条的值(0-100)转换为PWM值(0-999)
+    uint16_t brightness = (value * 999) / 100;
+    LCD_SetBrightness(brightness);
+    
+    // 更新标签显示
+    lv_obj_t * label = lv_event_get_user_data(e);
+    lv_label_set_text_fmt(label, "Light : %d%%", (int)value);
 }
 
 
+void demo(void)
+{
+    lv_obj_t *dis = lv_scr_act();
+    
+    // 创建标签
+    lv_obj_t *label = lv_label_create(dis);
+    lv_label_set_text(label, "Light: 50%");
+    lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 20);
+    lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
+
+    // 创建滑动条
+    lv_obj_t *slider = lv_slider_create(dis);
+    lv_obj_set_size(slider, 200, 10);                    // 设置滑动条大小
+    lv_obj_align_to(slider, label, LV_ALIGN_OUT_BOTTOM_MID, 0, 20); // 放在标签下方
+    lv_slider_set_range(slider, 0, 100);                 // 设置范围0-100
+    lv_slider_set_value(slider, 50, LV_ANIM_OFF);       // 设置初始值50%
+    
+    // 设置滑动条样式
+    lv_obj_set_style_bg_color(slider, lv_color_hex(0x808080), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_INDICATOR);
+    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_KNOB);
+    
+    // 添加事件回调
+    lv_obj_add_event_cb(slider, slider_event_cb, LV_EVENT_VALUE_CHANGED, label);
+    
+    // 设置初始亮度为50%
+    LCD_SetBrightness(499);
+}
 
 
 
@@ -214,6 +257,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   MX_ADC1_Init();
+  MX_TIM1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	
 //	ESP01S_Init();
@@ -225,7 +270,8 @@ int main(void)
 	lv_port_disp_init();
 	lv_port_indev_init();
 	HAL_TIM_Base_Start_IT(&htim4);
-
+	
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
 
 	printf("Hardware Init Ok\n");
 
@@ -236,8 +282,8 @@ int main(void)
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
 	demo();
-  static uint32_t mq2_adc_value;
-  static float mq2_percent;
+//  static uint32_t mq2_adc_value;
+//  static float mq2_percent;
 
 
 //	lv_demo_benchmark();
@@ -254,14 +300,14 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     
-    static uint32_t time_cnt = 0;
-    time_cnt++;
-    if(time_cnt >= 200)
-    {
-      time_cnt = 0;
-      Get_Mq2(&mq2_adc_value,&mq2_percent);
-      printf("mq2_adc_value: %d, mq2_percent: %.2f\n", mq2_adc_value, mq2_percent);
-    }
+//    static uint32_t time_cnt = 0;
+//    time_cnt++;
+//    if(time_cnt >= 200)
+//    {
+//      time_cnt = 0;
+//      Get_Mq2(&mq2_adc_value,&mq2_percent);
+//      printf("mq2_adc_value: %d, mq2_percent: %.2f\n", mq2_adc_value, mq2_percent);
+//    }
 
   	lv_task_handler();
 		HAL_Delay(10);

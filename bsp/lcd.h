@@ -10,14 +10,14 @@
 //     显        VCC     3.3v电源
 //               SCK     PA5  SPI时钟信号
 //     示        SDA     PA7  SPI数据信号
-//               RES     PA0  复位脚
-//     接        DC      PA1
-//     口        CS      PA2
-//		 --			   BLC     PA3  控制背光
+//               RES     PB13  复位脚
+//     接        DC      PB11
+//     口        CS      PB12
+//		 --			   BLC     PB10  控制背光
 //     ------------------------------------------------------
 //     触        INT     PA5  触摸中断
-//     摸        SCL     PA6  触摸IIC 时钟线
-//     接        SDA     PA7  触摸IIC 数据线
+//     摸        SCL     PB6  触摸IIC 时钟线
+//     接        SDA     PB7  触摸IIC 数据线
 //     口        RST     PA8  触摸复位脚
 // ----------------------------------------------------------------
 //******************************************************************************/
@@ -68,14 +68,14 @@ typedef enum
 #define LCD_RST_PORT       GPIOB
 #define LCD_DC_PORT        GPIOB
 #define LCD_CS_PORT        GPIOB
-#define LCD_BL_PORT        GPIOB
+//#define LCD_BL_PORT        GPIOB
 #define LCD_SCLK_PORT      GPIOA
 #define LCD_MOSI_PORT      GPIOA
 
-#define LCD_RST_PIN       GPIO_PIN_10
+#define LCD_RST_PIN       GPIO_PIN_13
 #define LCD_DC_PIN        GPIO_PIN_11
 #define LCD_CS_PIN        GPIO_PIN_12
-#define LCD_BL_PIN        GPIO_PIN_13
+//#define LCD_BL_PIN        GPIO_PIN_10
 #define LCD_SCLK_PIN      GPIO_PIN_5
 #define LCD_MOSI_PIN      GPIO_PIN_7
 
@@ -84,7 +84,7 @@ typedef enum
 #define LCD_CS(x)      ((x) ? (HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN,GPIO_PIN_SET)) : (HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN,GPIO_PIN_RESET)))
 #define LCD_RST(x)     ((x) ? (HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN,GPIO_PIN_SET)) : (HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN,GPIO_PIN_RESET)))
 #define LCD_DC(x)      ((x) ? (HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN,GPIO_PIN_SET)) : (HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN,GPIO_PIN_RESET)))
-#define LCD_BL(x)      ((x) ? (HAL_GPIO_WritePin(LCD_BL_PORT, LCD_BL_PIN,GPIO_PIN_SET)) : (HAL_GPIO_WritePin(LCD_BL_PORT, LCD_BL_PIN,GPIO_PIN_RESET)))
+//#define LCD_BL(x)      ((x) ? (HAL_GPIO_WritePin(LCD_BL_PORT, LCD_BL_PIN,GPIO_PIN_SET)) : (HAL_GPIO_WritePin(LCD_BL_PORT, LCD_BL_PIN,GPIO_PIN_RESET)))
 
 void lcd_soft_spi_write_data(uint8_t dat);
 void lcd_hardware_spi_write_data(uint8_t data);

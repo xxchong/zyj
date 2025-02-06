@@ -336,7 +336,7 @@ void lcd_init(void)
     lcd_write_command(0x21);
     
     lcd_write_command(0x29);
-		LCD_BL(1);
+//		LCD_BL(1);
     lcd_clear();                                                             // ³õÊ¼»¯Îª°×ÆÁ
 }
 

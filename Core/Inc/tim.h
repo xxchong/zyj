@@ -32,6 +32,10 @@ extern "C" {
 
 /* USER CODE END Includes */
 
+extern TIM_HandleTypeDef htim1;
+
+extern TIM_HandleTypeDef htim2;
+
 extern TIM_HandleTypeDef htim4;
 
 extern TIM_HandleTypeDef htim5;
@@ -40,13 +44,17 @@ extern TIM_HandleTypeDef htim5;
 
 /* USER CODE END Private defines */
 
+void MX_TIM1_Init(void);
+void MX_TIM2_Init(void);
 void MX_TIM4_Init(void);
 void MX_TIM5_Init(void);
+
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* USER CODE BEGIN Prototypes */
 void my_delay_us(uint32_t us);
 void my_delay_us(uint32_t us);
-
+void LCD_SetBrightness(uint16_t brightness);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
