@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "dma.h"
 #include "i2c.h"
 #include "spi.h"
@@ -40,7 +41,7 @@
 #include "gy302.h"
 #include "stdio.h"
 #include "esp01s.h"
-
+#include "mq2.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -212,6 +213,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 	
 //	ESP01S_Init();
@@ -234,6 +236,10 @@ int main(void)
 //	setup_ui(&guider_ui);
 //   events_init(&guider_ui);
 	demo();
+  static uint32_t mq2_adc_value;
+  static float mq2_percent;
+
+
 //	lv_demo_benchmark();
 	
   /* USER CODE END 2 */
@@ -247,8 +253,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    
+    static uint32_t time_cnt = 0;
+    time_cnt++;
+    if(time_cnt >= 200)
+    {
+      time_cnt = 0;
+      Get_Mq2(&mq2_adc_value,&mq2_percent);
+      printf("mq2_adc_value: %d, mq2_percent: %.2f\n", mq2_adc_value, mq2_percent);
+    }
+
   	lv_task_handler();
 		HAL_Delay(10);
+
   }
   /* USER CODE END 3 */
 }
