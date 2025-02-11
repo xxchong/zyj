@@ -42,3 +42,4 @@ lcd\stm32f4xx_it.o: ../bsp/esp01s.h
 lcd\stm32f4xx_it.o: ../Core/Inc/usart.h
 lcd\stm32f4xx_it.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
 lcd\stm32f4xx_it.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+lcd\stm32f4xx_it.o: ../bsp/mqtt.h

@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "esp01s.h"
+#include "mqtt.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -282,7 +283,6 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
 {
     if(huart->Instance == USART2)
     {
-       
         __HAL_UART_CLEAR_IDLEFLAG(huart);   //清除空闲标志
         
         HAL_UART_DMAStop(huart);    //停止DMA
@@ -291,18 +291,30 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
                 
         if(rxLen > 0)
         {
-            esp01s.rxBuffer[rxLen] = '\0';
-            esp01s.rxLen = rxLen;
-            esp01s.dataReady = 1;
+            esp01s.rxBuffer[rxLen] = '\0';  // 添加字符串结束符
+            
+            // 如果是MQTT订阅消息，直接处理
+            if(strstr((char*)esp01s.rxBuffer, "+MQTTSUBRECV"))
+            {
+                printf("MQTT Message: %s\n", esp01s.rxBuffer);
+                // TODO: 添加MQTT消息处理逻辑
+            }
+            else 
+            {
+                // 其他数据（如AT命令响应）设置标志位
+                // printf("空闲中断接收到的数据: %s\n", esp01s.rxBuffer);
+                esp01s.rxLen = rxLen;
+                esp01s.dataReady = 1;
+            }
         }
         
+        // 重新启动DMA接收
         if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)esp01s.rxBuffer, ESP_RXBUFFER_SIZE) != HAL_OK)
         {
             Error_Handler();
         }
     }
 }
-
 
 /**
   * 函数功能: 火焰传感器外部中断回调函数

@@ -42,6 +42,7 @@
 "lcd\esp01s.o"
 "lcd\cst816.o"
 "lcd\mq2.o"
+"lcd\mqtt.o"
 "lcd\lv_port_disp.o"
 "lcd\lv_port_indev.o"
 "lcd\lv_disp.o"

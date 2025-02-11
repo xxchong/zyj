@@ -1265,6 +1265,11 @@
               <FileType>1</FileType>
               <FilePath>..\bsp\mq2.c</FilePath>
             </File>
+            <File>
+              <FileName>mqtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\mqtt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

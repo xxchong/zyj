@@ -2,6 +2,8 @@
     "files.associations": {
         "lcd.h": "c",
         "relay.h": "c",
-        "cst816.h": "c"
+        "cst816.h": "c",
+        "esp01s.h": "c",
+        "mqtt_config.h": "c"
     }
 }

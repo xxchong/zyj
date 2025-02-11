@@ -42,6 +42,8 @@
 #include "stdio.h"
 #include "esp01s.h"
 #include "mq2.h"
+#include "mqtt.h"
+#include "mqtt_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,17 +108,19 @@ static lv_obj_t *label;
 
 void timer_callback(lv_timer_t *timer)
 {
-    float light= GY302_ReadLight();
-    lv_label_set_text_fmt(label, "Light: %d lux", (int)light);
-    printf("Light: %d lux\n", (int)light);
-    lv_timer_del(timer);
+//    float light= GY302_ReadLight();
+//    lv_label_set_text_fmt(label, "Light: %d lux", (int)light);
+//    printf("Light: %d lux\n", (int)light);
 
-//    if(DHT11_ReadData(&DHT11_Data))
-//    {
-//        lv_label_set_text_fmt(label, "T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
-//    }else{
-//        lv_label_set_text_fmt(label, "DHT11 ERROR");
-//    }
+    if(DHT11_ReadData(&DHT11_Data))
+    {
+        printf("T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
+    }else{
+        printf("DHT11 ERROR");
+    }
+		
+		    lv_timer_del(timer);
+
 }
 
 void beep_callback(lv_event_t *e)
@@ -135,19 +139,19 @@ void beep_callback(lv_event_t *e)
     //     // RELAY_OFF;
     // }
 }
-// void demo(void)
-// {
-//     lv_obj_t *dis = lv_scr_act();
-//     label = lv_label_create(dis);
-//     lv_obj_center(label);
-//     lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
+ void demo(void)
+ {
+     lv_obj_t *dis = lv_scr_act();
+     label = lv_label_create(dis);
+     lv_obj_center(label);
+     lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
 
 
 
-//     lv_obj_t *beep = lv_btn_create(dis);
-//     lv_obj_set_size(beep,70,40);
-//     lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
-//     lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_CLICKED,NULL);
+     lv_obj_t *beep = lv_btn_create(dis);
+     lv_obj_set_size(beep,70,40);
+     lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
+     lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_CLICKED,NULL);
 
 
 
@@ -170,7 +174,7 @@ void beep_callback(lv_event_t *e)
 	
 // 	// lv_group_focus_obj(button);
 
-// }
+ }
 
 
 
@@ -188,34 +192,33 @@ void slider_event_cb(lv_event_t * e)
 }
 
 
-void demo(void)
-{
-    lv_obj_t *dis = lv_scr_act();
-    
-    // 创建标签
-    lv_obj_t *label = lv_label_create(dis);
-    lv_label_set_text(label, "Light: 50%");
-    lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 20);
-    lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
+//void demo(void)
+//{
+//    lv_obj_t *dis = lv_scr_act();
+//    
+//    // 创建标签
+//    lv_obj_t *label = lv_label_create(dis);
+//    lv_label_set_text(label, "Light: 50%");
+//    lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 20);
+//    lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
 
-    // 创建滑动条
-    lv_obj_t *slider = lv_slider_create(dis);
-    lv_obj_set_size(slider, 200, 10);                    // 设置滑动条大小
-    lv_obj_align_to(slider, label, LV_ALIGN_OUT_BOTTOM_MID, 0, 20); // 放在标签下方
-    lv_slider_set_range(slider, 0, 100);                 // 设置范围0-100
-    lv_slider_set_value(slider, 50, LV_ANIM_OFF);       // 设置初始值50%
-    
-    // 设置滑动条样式
-    lv_obj_set_style_bg_color(slider, lv_color_hex(0x808080), LV_PART_MAIN);
-    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_INDICATOR);
-    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_KNOB);
-    
-    // 添加事件回调
-    lv_obj_add_event_cb(slider, slider_event_cb, LV_EVENT_VALUE_CHANGED, label);
-    
-    // 设置初始亮度为50%
-    LCD_SetBrightness(499);
-}
+//    // 创建滑动条
+//    lv_obj_t *slider = lv_slider_create(dis);
+//    lv_obj_set_size(slider, 200, 10);                    // 设置滑动条大小
+//    lv_obj_align_to(slider, label, LV_ALIGN_OUT_BOTTOM_MID, 0, 20); // 放在标签下方
+//    lv_slider_set_range(slider, 0, 100);                 // 设置范围0-100
+//    lv_slider_set_value(slider, 50, LV_ANIM_OFF);       // 设置初始值50%
+//    
+//    // 设置滑动条样式
+//    lv_obj_set_style_bg_color(slider, lv_color_hex(0x808080), LV_PART_MAIN);
+//    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_INDICATOR);
+//    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_KNOB);
+//    
+//    // 添加事件回调
+//    lv_obj_add_event_cb(slider, slider_event_cb, LV_EVENT_VALUE_CHANGED, label);
+//    
+//    // 设置初始亮度为50%
+//}
 
 
 
@@ -261,31 +264,42 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	
-//	ESP01S_Init();
+	ESP01S_Init();
 
-	lcd_set_dir(LCD_CROSSWISE_180);
-	lcd_init();	
+  MQTT_Init();
+   
+
+  MQTT_Subscribe(MQTT_USER_TOPIC);
+  MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
+
+   // 发布消息
+  //  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
+   
+
+	// lcd_set_dir(LCD_CROSSWISE_180);
+	// lcd_init();	
 	
-	lv_init();
-	lv_port_disp_init();
-	lv_port_indev_init();
-	HAL_TIM_Base_Start_IT(&htim4);
-	
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
+	// lv_init();
+	// lv_port_disp_init();
+	// lv_port_indev_init();
+	// HAL_TIM_Base_Start_IT(&htim4);
+	// GY302_Init();
 
-	printf("Hardware Init Ok\n");
+	// HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
+  // LCD_SetBrightness(499);
 
-//  GY302_Init();
+	// printf("Hardware Init Ok\n");
+
 //	
 //	
 
 //	setup_ui(&guider_ui);
-//   events_init(&guider_ui);
-	demo();
-//  static uint32_t mq2_adc_value;
-//  static float mq2_percent;
+//  events_init(&guider_ui);
+	// demo();
+  // static uint32_t mq2_adc_value;
+  // static float mq2_percent;
 
-
+	static char MQTT_Message[256];
 //	lv_demo_benchmark();
 	
   /* USER CODE END 2 */
@@ -299,18 +313,35 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    
-//    static uint32_t time_cnt = 0;
-//    time_cnt++;
-//    if(time_cnt >= 200)
-//    {
-//      time_cnt = 0;
-//      Get_Mq2(&mq2_adc_value,&mq2_percent);
-//      printf("mq2_adc_value: %d, mq2_percent: %.2f\n", mq2_adc_value, mq2_percent);
-//    }
 
-  	lv_task_handler();
-		HAL_Delay(10);
+     if(DHT11_ReadData(&DHT11_Data))
+     {
+          printf("T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
+      }else{
+          printf("DHT11 ERROR");
+      }
+      
+    sprintf(MQTT_Message,"{\\\"params\\\":{\\\"Humidity\\\":%d.%d\\,\\\"temperature\\\":%d.%d}}",DHT11_Data.humi_int,DHT11_Data.humi_dec,DHT11_Data.temp_int,DHT11_Data.temp_dec);
+	
+
+
+  // {\\\"params\\\":{\\\"Humi\\\":%d.%d\\,\\\"Temp\\\":%d.%d}}
+      MQTT_Publish(MQTT_PARAM_TOPIC, MQTT_Message);
+//     static uint32_t time_cnt = 0;
+//     time_cnt++;
+//     if(time_cnt >= 200)
+//     {
+//       time_cnt = 0;
+// 			 float light= GY302_ReadLight();
+// 			lv_label_set_text_fmt(label, "Light: %d lux", (int)light);
+// 			printf("Light: %d lux\n", (int)light);
+
+// //      Get_Mq2(&mq2_adc_value,&mq2_percent);
+// //      printf("mq2_adc_value: %d, mq2_percent: %.2f\n", mq2_adc_value, mq2_percent);
+//     }
+
+//   	lv_task_handler();
+		HAL_Delay(5000);
 
   }
   /* USER CODE END 3 */

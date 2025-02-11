@@ -224,7 +224,7 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
         last_x = 280-x;
         last_y = y;
 
-        printf("Touch: x=%d, y=%d\n", last_x, last_y);
+//        printf("Touch: x=%d, y=%d\n", last_x, last_y);
         data->state = LV_INDEV_STATE_PR;
     }
     else
