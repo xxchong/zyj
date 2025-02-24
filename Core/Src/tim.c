@@ -381,4 +381,5 @@ void LCD_SetBrightness(uint16_t brightness)
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, brightness);
 }
 
+
 /* USER CODE END 1 */

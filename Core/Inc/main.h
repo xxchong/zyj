@@ -60,6 +60,9 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
+
+extern uint16_t brightness_pwm;
+extern uint16_t brightness_percentage;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

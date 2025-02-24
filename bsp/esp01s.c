@@ -1,7 +1,7 @@
 #include "esp01s.h"
 
-#define ESP_SSID "ABCD3"
-#define ESP_PASSWORD "abc13423866701"
+#define ESP_SSID "XXCHONG"
+#define ESP_PASSWORD "abc18813491718"
 
 //ESP01S½á¹¹Ìå
 ESP01S_HandleTypeDef esp01s;

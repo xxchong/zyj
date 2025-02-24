@@ -2331,9 +2331,19 @@
               <FilePath>..\lvgl\generated\gui_guider.c</FilePath>
             </File>
             <File>
-              <FileName>setup_scr_screen.c</FileName>
+              <FileName>setup_scr_brightness_screen.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\generated\setup_scr_screen.c</FilePath>
+              <FilePath>..\lvgl\generated\setup_scr_brightness_screen.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_main_screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\setup_scr_main_screen.c</FilePath>
+            </File>
+            <File>
+              <FileName>setup_scr_mqtt_param_screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\setup_scr_mqtt_param_screen.c</FilePath>
             </File>
             <File>
               <FileName>widgets_init.c</FileName>
@@ -2341,14 +2351,44 @@
               <FilePath>..\lvgl\generated\widgets_init.c</FilePath>
             </File>
             <File>
+              <FileName>lv_font_MiSansNormal_13.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_13.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_MiSansNormal_15.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_15.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_MiSansNormal_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_MiSansNormal_18.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_18.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_montserratMedium_12.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserratMedium_13.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_montserratMedium_13.c</FilePath>
+            </File>
+            <File>
               <FileName>lv_font_montserratMedium_16.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\generated\guider_fonts\lv_font_montserratMedium_16.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_16.c</FileName>
+              <FileName>lv_font_montserratMedium_20.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_16.c</FilePath>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_montserratMedium_20.c</FilePath>
             </File>
           </Files>
         </Group>

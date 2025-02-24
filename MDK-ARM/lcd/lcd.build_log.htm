@@ -22,11 +22,17 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 D:\Desktop\STM32\stm32f407vet6\stm32f407_hal\lcdÓ²¼þspi\MDK-ARM\lcd.uvprojx
-Project File Date:  02/11/2025
+Project File Date:  02/24/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil_v5\ARM\ARMCC\Bin'
 Build target 'lcd'
+compiling i2c.c...
+compiling adc.c...
+compiling tim.c...
+compiling spi.c...
+compiling gpio.c...
+compiling dma.c...
 compiling main.c...
 ../bsp/gy302.h(21): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -37,10 +43,93 @@ compiling main.c...
 ../bsp/mqtt_config.h(21): warning:  #1-D: last line of file ends without a newline
   #endif // MQTT_CONFIG_H
 ../Core/Src/main.c: 4 warnings, 0 errors
+compiling stm32f4xx_it.c...
+../bsp/esp01s.h(57): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/mqtt.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/stm32f4xx_it.c: 2 warnings, 0 errors
+compiling usart.c...
+compiling gy302.c...
+..\bsp\gy302.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\bsp\gy302.c(175): warning:  #1-D: last line of file ends without a newline
+  }
+..\bsp\gy302.c: 2 warnings, 0 errors
+compiling stm32f4xx_hal_msp.c...
+compiling esp01s.c...
+..\bsp\esp01s.h(57): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\bsp\esp01s.c(113): warning:  #940-D: missing return statement at end of non-void function "ESP01S_UartSend" 
+  }
+..\bsp\esp01s.c(148): warning:  #1-D: last line of file ends without a newline
+  }
+..\bsp\esp01s.c: 3 warnings, 0 errors
+compiling lcd.c...
+compiling dht11.c...
+..\bsp\dht11.c(70): warning:  #223-D: function "my_delay_ms" declared implicitly
+  	my_delay_ms(18);				// å»¶æ—¶ 18 ms
+..\bsp\dht11.c: 1 warning, 0 errors
+compiling cst816.c...
+..\bsp\cst816.c(74): warning:  #1-D: last line of file ends without a newline
+  }
+..\bsp\cst816.c: 1 warning, 0 errors
+compiling mq2.c...
+..\bsp\mq2.c(10): warning:  #1-D: last line of file ends without a newline
+  }
+..\bsp\mq2.c: 1 warning, 0 errors
+compiling mqtt.c...
+..\bsp\esp01s.h(57): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\bsp\mqtt.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\bsp\mqtt_config.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif // MQTT_CONFIG_H
+..\bsp\mqtt.c(164): warning:  #1-D: last line of file ends without a newline
+  }
+..\bsp\mqtt.c: 4 warnings, 0 errors
+compiling lv_port_indev.c...
+..\lvgl\examples\porting\lv_port_indev.c(207): warning:  #177-D: function "touchpad_init"  was declared but never referenced
+  static void touchpad_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(240): warning:  #177-D: function "touchpad_is_pressed"  was declared but never referenced
+  static bool touchpad_is_pressed(void)
+..\lvgl\examples\porting\lv_port_indev.c(248): warning:  #177-D: function "touchpad_get_xy"  was declared but never referenced
+  static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
+..\lvgl\examples\porting\lv_port_indev.c(261): warning:  #177-D: function "mouse_init"  was declared but never referenced
+  static void mouse_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(267): warning:  #177-D: function "mouse_read"  was declared but never referenced
+  static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(303): warning:  #177-D: function "keypad_init"  was declared but never referenced
+  static void keypad_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(309): warning:  #177-D: function "keypad_read"  was declared but never referenced
+  static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(362): warning:  #177-D: function "encoder_init"  was declared but never referenced
+  static void encoder_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(368): warning:  #177-D: function "encoder_read"  was declared but never referenced
+  static void encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(402): warning:  #177-D: function "encoder_handler"  was declared but never referenced
+  static void encoder_handler(void)
+..\lvgl\examples\porting\lv_port_indev.c(415): warning:  #177-D: function "button_init"  was declared but never referenced
+  static void button_init(void)
+..\lvgl\examples\porting\lv_port_indev.c(421): warning:  #177-D: function "button_read"  was declared but never referenced
+  static void button_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+..\lvgl\examples\porting\lv_port_indev.c(64): warning:  #550-D: variable "encoder_state"  was set but never used
+  static lv_indev_state_t encoder_state;
+..\lvgl\examples\porting\lv_port_indev.c: 13 warnings, 0 errors
+compiling custom.c...
+compiling gui_guider.c...
+compiling events_init.c...
+compiling setup_scr_brightness_screen.c...
+compiling setup_scr_mqtt_param_screen.c...
+compiling widgets_init.c...
+compiling setup_scr_main_screen.c...
+..\lvgl\generated\setup_scr_main_screen.c(161): warning:  #870-D: invalid multibyte character sequence
+      lv_label_set_text(ui->main_screen_label_7, "å¼ æœ‰é‡? 202110264127");
+..\lvgl\generated\setup_scr_main_screen.c: 1 warning, 0 errors
 linking...
-Program Size: Code=14620 RO-data=928 RW-data=60 ZI-data=5732  
+Program Size: Code=175362 RO-data=130234 RW-data=696 ZI-data=53248  
 FromELF: creating hex file...
-"lcd\lcd.axf" - 0 Error(s), 4 Warning(s).
+"lcd\lcd.axf" - 0 Error(s), 32 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,7 +152,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:32
 </pre>
 </body>
 </html>

@@ -14,15 +14,61 @@ extern "C" {
 #endif
 
 #include "lvgl.h"
+#include "tim.h"
 
 typedef struct
 {
   
-	lv_obj_t *screen;
-	bool screen_del;
-	lv_obj_t *screen_sw_1;
-	lv_obj_t *screen_label_1;
-	lv_obj_t *screen_bar_1;
+	lv_obj_t *main_screen;
+	bool main_screen_del;
+	lv_obj_t *main_screen_tabview_main;
+	lv_obj_t *main_screen_tabview_main_tab_1;
+	lv_obj_t *main_screen_tabview_main_tab_2;
+	lv_obj_t *main_screen_tabview_main_tab_3;
+	lv_obj_t *main_screen_label_info;
+	lv_obj_t *main_screen_label_6;
+	lv_obj_t *main_screen_label_5;
+	lv_obj_t *main_screen_label_7;
+	lv_obj_t *main_screen_label_humi_percentage;
+	lv_obj_t *main_screen_bar_humi;
+	lv_obj_t *main_screen_arc_fumes;
+	lv_obj_t *main_screen_arc_light;
+	lv_obj_t *main_screen_label_light_percentage;
+	lv_obj_t *main_screen_label_temp_percentage;
+	lv_obj_t *main_screen_label_vibration_percentage;
+	lv_obj_t *main_screen_bar_temp;
+	lv_obj_t *main_screen_arc_vibration;
+	lv_obj_t *main_screen_label_light;
+	lv_obj_t *main_screen_label_fumes_percentage;
+	lv_obj_t *main_screen_label_fumes;
+	lv_obj_t *main_screen_label_vibration;
+	lv_obj_t *main_screen_label_temp;
+	lv_obj_t *main_screen_label_humi;
+	lv_obj_t *main_screen_sw_1;
+	lv_obj_t *main_screen_label_2;
+	lv_obj_t *main_screen_label_3;
+	lv_obj_t *main_screen_led_1;
+	lv_obj_t *main_screen_btn_main_brightness;
+	lv_obj_t *main_screen_btn_main_brightness_label;
+	lv_obj_t *main_screen_btn_main_net;
+	lv_obj_t *main_screen_btn_main_net_label;
+	lv_obj_t *main_screen_btn_main_mqtt;
+	lv_obj_t *main_screen_btn_main_mqtt_label;
+	lv_obj_t *brightness_screen;
+	bool brightness_screen_del;
+	lv_obj_t *brightness_screen_slider_brightness;
+	lv_obj_t *brightness_screen_label_brightness;
+	lv_obj_t *brightness_screen_btn_brightness_return;
+	lv_obj_t *brightness_screen_btn_brightness_return_label;
+	lv_obj_t *brightness_screen_label_percentage;
+	lv_obj_t *mqtt_param_screen;
+	bool mqtt_param_screen_del;
+	lv_obj_t *mqtt_param_screen_label_mqtt;
+	lv_obj_t *mqtt_param_screen_ddlist_mqtt;
+	lv_obj_t *mqtt_param_screen_btn_mqtt_return;
+	lv_obj_t *mqtt_param_screen_btn_mqtt_return_label;
+	lv_obj_t *mqtt_param_screen_btn_mqtt_enter;
+	lv_obj_t *mqtt_param_screen_btn_mqtt_enter_label;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -45,10 +91,17 @@ void setup_ui(lv_ui *ui);
 extern lv_ui guider_ui;
 
 
-void setup_scr_screen(lv_ui *ui);
+void setup_scr_main_screen(lv_ui *ui);
+void setup_scr_brightness_screen(lv_ui *ui);
+void setup_scr_mqtt_param_screen(lv_ui *ui);
 
-LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_16)
+LV_FONT_DECLARE(lv_font_MiSansNormal_15)
+LV_FONT_DECLARE(lv_font_MiSansNormal_18)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)
+LV_FONT_DECLARE(lv_font_montserratMedium_20)
+LV_FONT_DECLARE(lv_font_MiSansNormal_16)
+LV_FONT_DECLARE(lv_font_MiSansNormal_13)
+LV_FONT_DECLARE(lv_font_montserratMedium_12)
 
 
 #ifdef __cplusplus

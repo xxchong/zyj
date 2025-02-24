@@ -70,6 +70,41 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+// 定义任务状态
+typedef enum {
+    TASK_IDLE,   //空闲状态
+    TASK_SENSOR_READ, //传感器读取状态
+    TASK_MQTT_PUBLISH, //MQTT发布状态
+    TASK_MQTT_RECONNECT //MQTT重连状态
+} SystemState;
+
+
+// 定义系统数据结构
+typedef struct {
+    // 传感器数据
+    DHT11_Data_TypeDef dht11_data;
+    uint32_t mq2_adc_value;
+    float mq2_percent;
+    float light_value;
+    
+    // 时间管理
+    uint32_t last_sensor_time;
+    uint32_t last_mqtt_time;
+    uint32_t last_display_time;
+    
+    // 系统状态
+    SystemState state;
+    uint8_t alarm_flag;
+    char mqtt_message[512];
+} System_HandleTypeDef;
+
+System_HandleTypeDef sys = {0};
+
+
+
+uint16_t brightness_pwm = 499;
+uint16_t brightness_percentage = 50;
+
 
 /* USER CODE END PFP */
 
@@ -96,129 +131,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         }
 		
 	}
-	
-	
+
 }
 
 lv_ui guider_ui;
 DHT11_Data_TypeDef DHT11_Data;  
-
-static lv_obj_t *label;
-
-
-void timer_callback(lv_timer_t *timer)
-{
-//    float light= GY302_ReadLight();
-//    lv_label_set_text_fmt(label, "Light: %d lux", (int)light);
-//    printf("Light: %d lux\n", (int)light);
-
-    if(DHT11_ReadData(&DHT11_Data))
-    {
-        printf("T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
-    }else{
-        printf("DHT11 ERROR");
-    }
-		
-		    lv_timer_del(timer);
-
-}
-
-void beep_callback(lv_event_t *e)
-{
-    lv_obj_t *obj = lv_event_get_target(e);
-    // bool state = lv_obj_has_state(obj, LV_STATE_CHECKED);
-
-    lv_timer_create(timer_callback, 10, NULL);
-
-
-    // if(state) {
-    //     // switch打开，蜂鸣器?
-    //     // RELAY_ON;
-    // } else {
-    //     // switch关闭，蜂鸣器停止
-    //     // RELAY_OFF;
-    // }
-}
- void demo(void)
- {
-     lv_obj_t *dis = lv_scr_act();
-     label = lv_label_create(dis);
-     lv_obj_center(label);
-     lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
-
-
-
-     lv_obj_t *beep = lv_btn_create(dis);
-     lv_obj_set_size(beep,70,40);
-     lv_obj_align_to(beep,label,LV_ALIGN_OUT_BOTTOM_MID,0,20);
-     lv_obj_add_event_cb(beep,beep_callback,LV_EVENT_CLICKED,NULL);
-
-
-
-
-
-  
-// 	// lv_obj_t *button = lv_btn_create(dis);
-// 	// lv_obj_set_size(button,50,40);
-// 	// lv_obj_center(button);
-// 	// lv_obj_t *button1 = lv_btn_create(dis);
-// 	// lv_obj_set_size(button1,50,40);
-// 	// lv_obj_align_to(button1,button,LV_ALIGN_OUT_RIGHT_MID,20,0);
-// //	lv_group_t *group = lv_group_create();
-// //	lv_group_set_default(group);
-// //	lv_group_add_obj(group,beep);
-// //	// lv_group_add_obj(group,button1);
-
-// //	
-// //	lv_indev_set_group(indev_encoder,group);
-	
-// 	// lv_group_focus_obj(button);
-
- }
-
-
-
-void slider_event_cb(lv_event_t * e)
-{
-    lv_obj_t * slider = lv_event_get_target(e);
-    int32_t value = lv_slider_get_value(slider);
-    // 将滑动条的值(0-100)转换为PWM值(0-999)
-    uint16_t brightness = (value * 999) / 100;
-    LCD_SetBrightness(brightness);
-    
-    // 更新标签显示
-    lv_obj_t * label = lv_event_get_user_data(e);
-    lv_label_set_text_fmt(label, "Light : %d%%", (int)value);
-}
-
-
-//void demo(void)
-//{
-//    lv_obj_t *dis = lv_scr_act();
-//    
-//    // 创建标签
-//    lv_obj_t *label = lv_label_create(dis);
-//    lv_label_set_text(label, "Light: 50%");
-//    lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 20);
-//    lv_obj_set_style_text_font(label, &lv_font_montserrat_20, 0);
-
-//    // 创建滑动条
-//    lv_obj_t *slider = lv_slider_create(dis);
-//    lv_obj_set_size(slider, 200, 10);                    // 设置滑动条大小
-//    lv_obj_align_to(slider, label, LV_ALIGN_OUT_BOTTOM_MID, 0, 20); // 放在标签下方
-//    lv_slider_set_range(slider, 0, 100);                 // 设置范围0-100
-//    lv_slider_set_value(slider, 50, LV_ANIM_OFF);       // 设置初始值50%
-//    
-//    // 设置滑动条样式
-//    lv_obj_set_style_bg_color(slider, lv_color_hex(0x808080), LV_PART_MAIN);
-//    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_INDICATOR);
-//    lv_obj_set_style_bg_color(slider, lv_color_hex(0x00FF00), LV_PART_KNOB);
-//    
-//    // 添加事件回调
-//    lv_obj_add_event_cb(slider, slider_event_cb, LV_EVENT_VALUE_CHANGED, label);
-//    
-//    // 设置初始亮度为50%
-//}
 
 
 
@@ -264,43 +181,45 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	
-	ESP01S_Init();
 
-  MQTT_Init();
-   
+ // 初始化报警状态
+  BEEP_OFF;
+  sys.alarm_flag = 0;
 
-  MQTT_Subscribe(MQTT_USER_TOPIC);
-  MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
 
-   // 发布消息
-  //  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
-   
+  //WIFI初始化
+//	ESP01S_Init();
+//  //MQTT初始化
+//  MQTT_Init();
+//  //订阅消息
+//  MQTT_Subscribe(MQTT_USER_TOPIC);
+//  MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
 
-	// lcd_set_dir(LCD_CROSSWISE_180);
-	// lcd_init();	
-	
-	// lv_init();
-	// lv_port_disp_init();
-	// lv_port_indev_init();
-	// HAL_TIM_Base_Start_IT(&htim4);
-	// GY302_Init();
+//  //发布测试消息
+//  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
+//   
 
-	// HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
-  // LCD_SetBrightness(499);
+   /*LCD屏幕和LVGL初始化*/
+	lcd_set_dir(LCD_CROSSWISE_180);
+	lcd_init();	
+  lv_init();
+ 	lv_port_disp_init();
+  lv_port_indev_init();
+	HAL_TIM_Base_Start_IT(&htim4);
+  //LCD背光通过cubemx配置pwm
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
+  //打开背光
+  LCD_SetBrightness(brightness_pwm);
 
-	// printf("Hardware Init Ok\n");
-
-//	
-//	
-
-//	setup_ui(&guider_ui);
-//  events_init(&guider_ui);
-	// demo();
-  // static uint32_t mq2_adc_value;
-  // static float mq2_percent;
-
-	static char MQTT_Message[256];
-//	lv_demo_benchmark();
+  /*传感器硬件初始化*/
+  //DHT11通过cubemx配置引脚   GPIOE8
+  //MQ2通过cubemx配置adc      GPIOA4
+  //蜂鸣器通过cubemx配置引脚   GPIOE7
+  //火焰传感器通过外部中断配置  GPIOB14
+  //继电器通过cubemx配置引脚   GPIOB8
+  GY302_Init(); //使用软件i2c
+	setup_ui(&guider_ui);
+  events_init(&guider_ui);
 	
   /* USER CODE END 2 */
 
@@ -313,35 +232,111 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		lv_task_handler();
+		HAL_Delay(10);
 
-     if(DHT11_ReadData(&DHT11_Data))
-     {
-          printf("T:%d H:%d", DHT11_Data.temp_int, DHT11_Data.humi_int);
-      }else{
-          printf("DHT11 ERROR");
-      }
-      
-    sprintf(MQTT_Message,"{\\\"params\\\":{\\\"Humidity\\\":%d.%d\\,\\\"temperature\\\":%d.%d}}",DHT11_Data.humi_int,DHT11_Data.humi_dec,DHT11_Data.temp_int,DHT11_Data.temp_dec);
-	
+//    uint32_t current_time = HAL_GetTick();
+//        
+//        // 1. LVGL显示刷新（20ms）
+//        if(current_time - sys.last_display_time >= 20) {
+//            lv_task_handler();
+//            sys.last_display_time = current_time;
+//        }
+//        
+//        // 2. 状态机处理
+//        switch(sys.state) {
+//            case TASK_IDLE:
+//                // 检查传感器读取时间（2秒间隔）
+//                if(current_time - sys.last_sensor_time >= 2000) {
+//                    sys.state = TASK_SENSOR_READ;
+//                }
+//                // 检查MQTT发送时间（5秒间隔）
+//                if(current_time - sys.last_mqtt_time >= 5000) {
+//                    sys.state = TASK_MQTT_PUBLISH;
+//                }
+//                break;
+//                
+//            case TASK_SENSOR_READ:
+//                // 读取DHT11
+//                if(DHT11_ReadData(&sys.dht11_data)) {
+//                    // 更新温湿度显示
+//                    // lv_label_set_text_fmt(guider_ui.label_temp, "温度: %d.%d℃", 
+//                    //     sys.dht11_data.temp_int, sys.dht11_data.temp_dec);
+//                    // lv_label_set_text_fmt(guider_ui.label_humi, "湿度: %d.%d%%",
+//                    //     sys.dht11_data.humi_int, sys.dht11_data.humi_dec);
+//                }
+//                
+//                // 读取MQ2
+//                Get_Mq2(&sys.mq2_adc_value, &sys.mq2_percent);
+//                // lv_label_set_text_fmt(guider_ui.label_mq2, "气体: %.1f%%",
+//                //     sys.mq2_percent);
+
+//                      // 读取光照
+//                sys.light_value = GY302_ReadLight();
+//                // lv_label_set_text_fmt(guider_ui.label_light, "光照: %.1f lux",
+//                //     sys.light_value);
+//                
+//                // 报警检测
+//                if(sys.mq2_percent > 60.0f || sys.dht11_data.temp_int > 35) {
+//                    if(!sys.alarm_flag) {
+//                        BEEP_ON;
+//                        sys.alarm_flag = 1;
+//                    }
+//                } else if(sys.alarm_flag) {
+//                    BEEP_OFF;
+//                    sys.alarm_flag = 0;
+//                }
+//                
+//                sys.last_sensor_time = current_time;
+//                sys.state = TASK_IDLE;
+//                break;
+//                
+//            case TASK_MQTT_PUBLISH:
+//                // 格式化MQTT消息
+//                sprintf(sys.mqtt_message, 
+//                    "{\\\"params\\\":{"
+//                    "\\\"Temperature\\\":%d.%d,"
+//                    "\\\"Humidity\\\":%d.%d,"
+//                    "\\\"Gas\\\":%.1f,"
+//                    "\\\"Light\\\":%.1f,"
+//                    "\\\"Alarm\\\":%d"
+//                    "}}",
+//                    sys.dht11_data.temp_int, sys.dht11_data.temp_dec,
+//                    sys.dht11_data.humi_int, sys.dht11_data.humi_dec,
+//                    sys.mq2_percent,
+//                    sys.light_value,
+//                    sys.alarm_flag);
+//                
+//                // 发送MQTT消息
+//                if(MQTT_Publish(MQTT_PARAM_TOPIC, sys.mqtt_message) != MQTT_OK) {
+//                    sys.state = TASK_MQTT_RECONNECT;
+//                    break;
+//                }
+//                
+//                sys.last_mqtt_time = current_time;
+//                sys.state = TASK_IDLE;
+//                break;
+//                
+//            case TASK_MQTT_RECONNECT:
+//                // 重新初始化ESP8266和MQTT
+//                if(ESP01S_Init() == ESP_OK && MQTT_Init() == MQTT_OK) {
+//                    MQTT_Subscribe(MQTT_USER_TOPIC);
+//                    MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
+//                    sys.state = TASK_IDLE;
+//                } else {
+//                    HAL_Delay(5000); // 等待5秒后重试
+//                }
+//                break;
+//        }
+//        
+//        // 3. ESP8266接收数据处理
+//        if(esp01s.dataReady) {
+//            // 处理MQTT接收数据
+//            // 可以添加对接收命令的处理
+//            esp01s.dataReady = 0;
+//        }
 
 
-  // {\\\"params\\\":{\\\"Humi\\\":%d.%d\\,\\\"Temp\\\":%d.%d}}
-      MQTT_Publish(MQTT_PARAM_TOPIC, MQTT_Message);
-//     static uint32_t time_cnt = 0;
-//     time_cnt++;
-//     if(time_cnt >= 200)
-//     {
-//       time_cnt = 0;
-// 			 float light= GY302_ReadLight();
-// 			lv_label_set_text_fmt(label, "Light: %d lux", (int)light);
-// 			printf("Light: %d lux\n", (int)light);
-
-// //      Get_Mq2(&mq2_adc_value,&mq2_percent);
-// //      printf("mq2_adc_value: %d, mq2_percent: %.2f\n", mq2_adc_value, mq2_percent);
-//     }
-
-//   	lv_task_handler();
-		HAL_Delay(5000);
 
   }
   /* USER CODE END 3 */
