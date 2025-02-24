@@ -14,10 +14,11 @@
 // 延时函数
 static void GY302_Delay(void)
 {
-    uint16_t i = 150;  // 根据实际时钟频率调整
-    while(i--);
+    for(uint8_t i = 0; i < 10; i++)
+    {
+        __NOP();
+    }
 }
-
 // 起始信号
 static void GY302_Start(void)
 {
@@ -40,9 +41,10 @@ static void GY302_Stop(void)
 }
 
 // 等待应答
+
 static uint8_t GY302_WaitAck(void)
 {
-    uint8_t timeout = 0;
+    uint16_t timeout = 1000;
     
     GY302_SDA_H();
     GY302_Delay();
@@ -51,18 +53,18 @@ static uint8_t GY302_WaitAck(void)
     
     while(GY302_SDA_READ())
     {
-        timeout++;
-        if(timeout > 250)
+        timeout--;
+        if(timeout == 0)
         {
             GY302_Stop();
             return 1;
         }
+        __NOP();
     }
     
     GY302_SCL_L();
     return 0;
 }
-
 // 发送一个字节
 static void GY302_SendByte(uint8_t data)
 {
@@ -143,16 +145,25 @@ void GY302_Init(void)
     GY302_SCL_H();
     GY302_SDA_H();
     
-    HAL_Delay(100);  // 上电稳定时间
+  // 替换HAL_Delay
+    uint32_t startTime = HAL_GetTick();
+    while(HAL_GetTick() - startTime < 100);  // 等待100ms
     
-    BH1750_WriteByte(BH1750_POWER_OFF);  // 断电
-    HAL_Delay(10);
-    BH1750_WriteByte(BH1750_POWER_ON);   // 通电
-    HAL_Delay(10);
-    BH1750_WriteByte(BH1750_RESET);      // 重置
-    HAL_Delay(10);
-    BH1750_WriteByte(BH1750_CONTINUE_H2); // 设置为高精度模式2
-    HAL_Delay(180);  // 等待首次转换完成
+    BH1750_WriteByte(BH1750_POWER_OFF);
+    startTime = HAL_GetTick();
+    while(HAL_GetTick() - startTime < 10);   // 等待10ms
+    
+    BH1750_WriteByte(BH1750_POWER_ON);
+    startTime = HAL_GetTick();
+    while(HAL_GetTick() - startTime < 10);   // 等待10ms
+    
+    BH1750_WriteByte(BH1750_RESET);
+    startTime = HAL_GetTick();
+    while(HAL_GetTick() - startTime < 10);   // 等待10ms
+    
+    BH1750_WriteByte(BH1750_CONTINUE_H2);
+    startTime = HAL_GetTick();
+    while(HAL_GetTick() - startTime < 180);  // 等待180ms
 }
 
 // 读取光照强度值

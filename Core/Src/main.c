@@ -70,35 +70,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-// 定义任务状态
-typedef enum {
-    TASK_IDLE,   //空闲状态
-    TASK_SENSOR_READ, //传感器读取状态
-    TASK_MQTT_PUBLISH, //MQTT发布状态
-    TASK_MQTT_RECONNECT //MQTT重连状态
-} SystemState;
 
-
-// 定义系统数据结构
-typedef struct {
-    // 传感器数据
-    DHT11_Data_TypeDef dht11_data;
-    uint32_t mq2_adc_value;
-    float mq2_percent;
-    float light_value;
-    
-    // 时间管理
-    uint32_t last_sensor_time;
-    uint32_t last_mqtt_time;
-    uint32_t last_display_time;
-    
-    // 系统状态
-    SystemState state;
-    uint8_t alarm_flag;
-    char mqtt_message[512];
-} System_HandleTypeDef;
-
-System_HandleTypeDef sys = {0};
 
 
 
@@ -114,7 +86,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM4)
 	{
-		static int i;
+		static uint32_t i;
+    static uint32_t cnt = 0;
 		i++;
 		if( i == 1000)
 		{
@@ -122,13 +95,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
 		}
 
-     static uint8_t cnt = 0;
-        cnt++;
-        if(cnt >= 5)
-        {
-            lv_tick_inc(5);
-            cnt = 0;
-        }
+    cnt++;
+    if(cnt >= 5)
+    {
+        lv_tick_inc(5);
+        cnt = 0;
+    }
 		
 	}
 
@@ -136,6 +108,46 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 lv_ui guider_ui;
 DHT11_Data_TypeDef DHT11_Data;  
+
+static lv_timer_t *sensor_timer = NULL;
+static lv_timer_t *mqtt_timer = NULL;
+
+static uint32_t mq2_adc_value ;
+static	float mq2_percent,light_value;
+
+static void sensor_timer_callback(lv_timer_t *timer)
+{
+
+    static uint8_t update_state = 0;
+    
+    // 只更新UI显示，不直接读取传感器
+    switch(update_state) {
+        case 0:  // 更新温湿度显示
+            lv_label_set_text_fmt(guider_ui.main_screen_label_temp_percentage, "%d%%", DHT11_Data.temp_int);
+            lv_label_set_text_fmt(guider_ui.main_screen_label_humi_percentage, "%d%%", DHT11_Data.humi_int);
+            lv_bar_set_value(guider_ui.main_screen_bar_temp, DHT11_Data.temp_int, LV_ANIM_OFF);
+            lv_bar_set_value(guider_ui.main_screen_bar_humi, DHT11_Data.humi_int, LV_ANIM_OFF);
+            break;
+            
+        case 1:  // 更新烟雾显示
+            lv_label_set_text_fmt(guider_ui.main_screen_label_fumes_percentage, "%d%%", (int)mq2_percent);
+            lv_arc_set_value(guider_ui.main_screen_arc_fumes, mq2_percent);
+            break;
+            
+        case 2:  // 更新光照显示
+//            lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)light_value);
+//            lv_arc_set_value(guider_ui.main_screen_arc_light, light_value);
+            break;
+    }
+    
+    update_state = (update_state + 1) % 3;
+}
+
+
+static void mqtt_timer_callback(lv_timer_t *timer)
+{
+
+}
 
 
 
@@ -184,10 +196,17 @@ int main(void)
 
  // 初始化报警状态
   BEEP_OFF;
-  sys.alarm_flag = 0;
+  /*传感器硬件初始化*/
+  //DHT11通过cubemx配置引脚   GPIOE8
+  //MQ2通过cubemx配置adc      GPIOA4
+  //蜂鸣器通过cubemx配置引脚   GPIOE7
+  //火焰传感器通过外部中断配置  GPIOB14
+  //继电器通过cubemx配置引脚   GPIOB8
+  GY302_Init(); //使用软件i2c
+//  sys.alarm_flag = 0;
 
 
-  //WIFI初始化
+//  //WIFI初始化
 //	ESP01S_Init();
 //  //MQTT初始化
 //  MQTT_Init();
@@ -197,7 +216,7 @@ int main(void)
 
 //  //发布测试消息
 //  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
-//   
+//    
 
    /*LCD屏幕和LVGL初始化*/
 	lcd_set_dir(LCD_CROSSWISE_180);
@@ -211,16 +230,17 @@ int main(void)
   //打开背光
   LCD_SetBrightness(brightness_pwm);
 
-  /*传感器硬件初始化*/
-  //DHT11通过cubemx配置引脚   GPIOE8
-  //MQ2通过cubemx配置adc      GPIOA4
-  //蜂鸣器通过cubemx配置引脚   GPIOE7
-  //火焰传感器通过外部中断配置  GPIOB14
-  //继电器通过cubemx配置引脚   GPIOB8
-  GY302_Init(); //使用软件i2c
+  
 	setup_ui(&guider_ui);
   events_init(&guider_ui);
-	
+  sensor_timer = lv_timer_create(sensor_timer_callback,2000, NULL);
+//  mqtt_timer = lv_timer_create(mqtt_timer_callback, 5000, NULL);
+  static uint32_t last_dht11_time = 0;
+  static uint32_t last_gy302_time = 0;
+  static uint32_t last_mq2_time = 0;
+  static uint32_t last_lvgl_time = 0;
+  static uint32_t current_time = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -232,113 +252,38 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		lv_task_handler();
-		HAL_Delay(10);
+      current_time = HAL_GetTick();
+      // LVGL任务处理，确保每5ms执行一次
+      if(current_time - last_lvgl_time >= 5)
+      {
+          last_lvgl_time = current_time;
+          lv_task_handler();
+      }
 
-//    uint32_t current_time = HAL_GetTick();
-//        
-//        // 1. LVGL显示刷新（20ms）
-//        if(current_time - sys.last_display_time >= 20) {
-//            lv_task_handler();
-//            sys.last_display_time = current_time;
-//        }
-//        
-//        // 2. 状态机处理
-//        switch(sys.state) {
-//            case TASK_IDLE:
-//                // 检查传感器读取时间（2秒间隔）
-//                if(current_time - sys.last_sensor_time >= 2000) {
-//                    sys.state = TASK_SENSOR_READ;
-//                }
-//                // 检查MQTT发送时间（5秒间隔）
-//                if(current_time - sys.last_mqtt_time >= 5000) {
-//                    sys.state = TASK_MQTT_PUBLISH;
-//                }
-//                break;
-//                
-//            case TASK_SENSOR_READ:
-//                // 读取DHT11
-//                if(DHT11_ReadData(&sys.dht11_data)) {
-//                    // 更新温湿度显示
-//                    // lv_label_set_text_fmt(guider_ui.label_temp, "温度: %d.%d℃", 
-//                    //     sys.dht11_data.temp_int, sys.dht11_data.temp_dec);
-//                    // lv_label_set_text_fmt(guider_ui.label_humi, "湿度: %d.%d%%",
-//                    //     sys.dht11_data.humi_int, sys.dht11_data.humi_dec);
-//                }
-//                
-//                // 读取MQ2
-//                Get_Mq2(&sys.mq2_adc_value, &sys.mq2_percent);
-//                // lv_label_set_text_fmt(guider_ui.label_mq2, "气体: %.1f%%",
-//                //     sys.mq2_percent);
-
-//                      // 读取光照
-//                sys.light_value = GY302_ReadLight();
-//                // lv_label_set_text_fmt(guider_ui.label_light, "光照: %.1f lux",
-//                //     sys.light_value);
-//                
-//                // 报警检测
-//                if(sys.mq2_percent > 60.0f || sys.dht11_data.temp_int > 35) {
-//                    if(!sys.alarm_flag) {
-//                        BEEP_ON;
-//                        sys.alarm_flag = 1;
-//                    }
-//                } else if(sys.alarm_flag) {
-//                    BEEP_OFF;
-//                    sys.alarm_flag = 0;
-//                }
-//                
-//                sys.last_sensor_time = current_time;
-//                sys.state = TASK_IDLE;
-//                break;
-//                
-//            case TASK_MQTT_PUBLISH:
-//                // 格式化MQTT消息
-//                sprintf(sys.mqtt_message, 
-//                    "{\\\"params\\\":{"
-//                    "\\\"Temperature\\\":%d.%d,"
-//                    "\\\"Humidity\\\":%d.%d,"
-//                    "\\\"Gas\\\":%.1f,"
-//                    "\\\"Light\\\":%.1f,"
-//                    "\\\"Alarm\\\":%d"
-//                    "}}",
-//                    sys.dht11_data.temp_int, sys.dht11_data.temp_dec,
-//                    sys.dht11_data.humi_int, sys.dht11_data.humi_dec,
-//                    sys.mq2_percent,
-//                    sys.light_value,
-//                    sys.alarm_flag);
-//                
-//                // 发送MQTT消息
-//                if(MQTT_Publish(MQTT_PARAM_TOPIC, sys.mqtt_message) != MQTT_OK) {
-//                    sys.state = TASK_MQTT_RECONNECT;
-//                    break;
-//                }
-//                
-//                sys.last_mqtt_time = current_time;
-//                sys.state = TASK_IDLE;
-//                break;
-//                
-//            case TASK_MQTT_RECONNECT:
-//                // 重新初始化ESP8266和MQTT
-//                if(ESP01S_Init() == ESP_OK && MQTT_Init() == MQTT_OK) {
-//                    MQTT_Subscribe(MQTT_USER_TOPIC);
-//                    MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
-//                    sys.state = TASK_IDLE;
-//                } else {
-//                    HAL_Delay(5000); // 等待5秒后重试
-//                }
-//                break;
-//        }
-//        
-//        // 3. ESP8266接收数据处理
-//        if(esp01s.dataReady) {
-//            // 处理MQTT接收数据
-//            // 可以添加对接收命令的处理
-//            esp01s.dataReady = 0;
-//        }
-
-
-
+      // DHT11读取（每2秒一次）
+      if(current_time - last_dht11_time >= 2000)
+      {
+          last_dht11_time = current_time;
+          DHT11_ReadData(&DHT11_Data);
+      }
+      
+      // GY302读取（每1秒一次）
+//      if(current_time - last_gy302_time >= 1000)
+//      {
+//          last_gy302_time = current_time;
+//          light_value = GY302_ReadLight();
+//      }
+      
+      // MQ2读取（每100ms一次）
+      if(current_time - last_mq2_time >= 100)
+      {
+          last_mq2_time = current_time;
+          Get_Mq2(&mq2_adc_value, &mq2_percent);
+      }
+  
   }
+
+
   /* USER CODE END 3 */
 }
 
