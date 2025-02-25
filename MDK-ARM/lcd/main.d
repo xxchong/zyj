@@ -37,6 +37,17 @@ lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+lcd\main.o: ../Core/Inc/FreeRTOSConfig.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 lcd\main.o: ../Core/Inc/adc.h
 lcd\main.o: ../Core/Inc/dma.h
 lcd\main.o: ../Core/Inc/i2c.h

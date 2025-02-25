@@ -1,5 +1,6 @@
 lcd\dht11.o: ..\bsp\dht11.c
 lcd\dht11.o: ..\bsp\dht11.h
+lcd\dht11.o: ../Core/Inc/main.h
 lcd\dht11.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 lcd\dht11.o: ../Core/Inc/stm32f4xx_hal_conf.h
 lcd\dht11.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
@@ -38,4 +39,12 @@ lcd\dht11.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\dht11.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lcd\dht11.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lcd\dht11.o: ../Core/Inc/tim.h
-lcd\dht11.o: ../Core/Inc/main.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+lcd\dht11.o: ../Core/Inc/FreeRTOSConfig.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h

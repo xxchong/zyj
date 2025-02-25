@@ -1,164 +1,141 @@
-
 #include "dht11.h"
 #include "tim.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
-/*
-DHT11配置为推挽输出模式
- */
-static void DHT11_PP_OUT(void)
+static uint8_t dht11_data[5] = {0};  // 存储读取的温湿度信息
+
+static void DHT11_Mode_OUT(void)
 {
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = DHT11_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;	
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	HAL_GPIO_Init(DHT11_PORT, &GPIO_InitStruct);
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = DHT11_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(DHT11_PORT, &GPIO_InitStruct);
 }
 
-/*
- 将DHT11配置为上拉输入模式
- */
-static void DHT11_UP_IN(void)
+static void DHT11_Mode_IN(void)
 {
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = DHT11_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;	//上拉
-	HAL_GPIO_Init(DHT11_PORT, &GPIO_InitStruct);
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = DHT11_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(DHT11_PORT, &GPIO_InitStruct);
 }
 
-/*
-  读取字节
- */
-uint8_t DHT11_ReadByte(void)
+static uint8_t DHT11_ReadByte(void)
 {
-    uint8_t i, temp = 0;
-    uint32_t timeout;
-
-    for (i = 0; i < 8; i++)
+    uint8_t i;
+    uint8_t data = 0;
+    uint8_t retry = 0;
+    
+    for(i = 0; i < 8; i++)
     {
-        timeout = 1000;  // 设置合适的超时值
-        while (DHT11_ReadPin == 0)
+        // 等待变为高电平
+        while(DHT11_ReadPin == 0 && retry < 100)
         {
-            if(--timeout == 0) return 0;  // 超时退出
+            my_delay_us(1);
+            retry++;
         }
+        retry = 0;
         
+        // 延时40us
         my_delay_us(40);
         
-        timeout = 1000;
-        if (DHT11_ReadPin == 1)
+        // 判断数据位
+        data <<= 1;
+        if(DHT11_ReadPin == 1)
         {
-            while (DHT11_ReadPin == 1)
-            {
-                if(--timeout == 0) return 0;  // 超时退出
-            }
-            temp |= (uint8_t)(0X01 << (7 - i));
+            data |= 1;
         }
+        
+        // 等待高电平结束
+        while(DHT11_ReadPin == 1 && retry < 100)
+        {
+            my_delay_us(1);
+            retry++;
+        }
+        retry = 0;
     }
-    return temp;
+    
+    return data;
 }
 
-/**
- * ************************************************************************
- * @brief 读取一次数据
- * @param[in] DHT11_Data  定义的结构体变量
- * @return 0或1（数据校验是否成功）
- * @note 它首先向DHT11发送启动信号，然后等待DHT11的应答。如果DHT11正确应答，
- * 		 则继续读取湿度整数、湿度小数、温度整数、温度小数和校验和数据，
- * 		 并计算校验和以进行数据校验
- * ************************************************************************
- */
-// uint8_t DHT11_ReadData(DHT11_Data_TypeDef *DHT11_Data)
-// {
-// 	DHT11_PP_OUT();			// 主机输出，主机拉低
-// 	DHT11_PULL_0;	
-// 	my_delay_ms(18);				// 延时 18 ms
-	
-// 	DHT11_PULL_1;					// 主机拉高，延时 30 us
-// 	my_delay_us(30);	
-
-// 	DHT11_UP_IN();				// 主机输入，获取 DHT11 数据
-	
-// 	if (DHT11_ReadPin == 0)				// 收到从机应答
-// 	{
-// 		while (DHT11_ReadPin == 0);		// 等待从机应答的低电平结束
-		
-// 		while (DHT11_ReadPin == 1);		// 等待从机应答的高电平结束
-		
-// 		/*开始接收数据*/   
-// 		DHT11_Data->humi_int  = DHT11_ReadByte();
-// 		DHT11_Data->humi_dec = DHT11_ReadByte();
-// 		DHT11_Data->temp_int  = DHT11_ReadByte();
-// 		DHT11_Data->temp_dec = DHT11_ReadByte();
-// 		DHT11_Data->check_sum = DHT11_ReadByte();
-		
-// 		DHT11_PP_OUT();		// 读取结束，主机拉高
-// 		DHT11_PULL_1;	
-		
-// 		// 数据校验
-// 		if (DHT11_Data->check_sum == DHT11_Data->humi_int + DHT11_Data->humi_dec + DHT11_Data->temp_int + DHT11_Data->temp_dec)	
-// 		{
-// 			return 1;
-// 		}		
-// 		else
-// 		{
-// 			return 0;
-// 		}
-// 	}
-// 	else		// 未收到从机应答
-// 	{
-// 		return 0;
-// 	}
-// }
+void DHT11_Init(void)
+{
+    DHT11_Mode_OUT();
+    DHT11_PULL_1;
+    HAL_Delay(1000);  // 上电等待1s
+    printf("DHT11 initialized\r\n");
+}
 
 uint8_t DHT11_ReadData(DHT11_Data_TypeDef *DHT11_Data)
 {
-    uint32_t timeout;
+    uint8_t retry = 0;
+    uint8_t i;
     
-    DHT11_PP_OUT();         // 主机输出，主机拉低
-    DHT11_PULL_0;    
-    my_delay_ms(18);       // 延时 18 ms
     
-    DHT11_PULL_1;          // 主机拉高，延时 30 us
-    my_delay_us(30);    
-
-    DHT11_UP_IN();         // 主机输入，获取 DHT11 数据
+    // 主机发送开始信号
+    DHT11_Mode_OUT();
+    DHT11_PULL_0;
+    HAL_Delay(18);  // 至少18ms
+    DHT11_PULL_1;
+    my_delay_us(20);  // 20-40us
     
-    if (DHT11_ReadPin == 0)        // 收到从机应答
+    // 切换为输入模式
+    DHT11_Mode_IN();
+    my_delay_us(20);
+    
+    // 等待DHT11响应
+    if(DHT11_ReadPin == 0)  // DHT11会拉低40-80us
     {
-        timeout = 1000;
-        while (DHT11_ReadPin == 0)  // 等待从机应答的低电平结束
-        { 
-            if(--timeout == 0) return 0;
+        // 等待低电平结束
+        while(DHT11_ReadPin == 0 && retry < 100)
+        {
+            my_delay_us(1);
+            retry++;
+        }
+        retry = 0;
+        
+        // 等待高电平结束
+        while(DHT11_ReadPin == 1 && retry < 100)
+        {
+            my_delay_us(1);
+            retry++;
+        }
+        retry = 0;
+        
+        // 读取40位数据
+        for(i = 0; i < 5; i++)
+        {
+            dht11_data[i] = DHT11_ReadByte();
         }
         
-        timeout = 1000;
-        while (DHT11_ReadPin == 1)  // 等待从机应答的高电平结束
+        taskEXIT_CRITICAL();
+        
+        // 校验数据
+        if(dht11_data[4] == (dht11_data[0] + dht11_data[1] + 
+                            dht11_data[2] + dht11_data[3]))
         {
-            if(--timeout == 0) return 0;
-        }
-        
-        /*开始接收数据*/   
-        DHT11_Data->humi_int  = DHT11_ReadByte();
-        DHT11_Data->humi_dec  = DHT11_ReadByte();
-        DHT11_Data->temp_int  = DHT11_ReadByte();
-        DHT11_Data->temp_dec  = DHT11_ReadByte();
-        DHT11_Data->check_sum = DHT11_ReadByte();
-        
-        DHT11_PP_OUT();     // 读取结束，主机拉高
-        DHT11_PULL_1;    
-        
-        // 数据校验
-        if (DHT11_Data->check_sum == DHT11_Data->humi_int + DHT11_Data->humi_dec + DHT11_Data->temp_int + DHT11_Data->temp_dec)    
-        {
+            DHT11_Data->humi_int = dht11_data[0];
+            DHT11_Data->humi_dec = dht11_data[1];
+            DHT11_Data->temp_int = dht11_data[2];
+            DHT11_Data->temp_dec = dht11_data[3];
+            DHT11_Data->check_sum = dht11_data[4];
             return 1;
-        }        
-        else
-        {
-            return 0;
         }
     }
-    else        // 未收到从机应答
-    {
-        return 0;
-    }
+    
+    return 0;
+}
+
+float DHT11_GetTemperature(DHT11_Data_TypeDef *DHT11_Data)
+{
+    return (float)DHT11_Data->temp_int + (float)DHT11_Data->temp_dec / 10.0f;
+}
+
+float DHT11_GetHumidity(DHT11_Data_TypeDef *DHT11_Data)
+{
+    return (float)DHT11_Data->humi_int + (float)DHT11_Data->humi_dec / 10.0f;
 }

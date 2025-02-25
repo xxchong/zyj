@@ -16,6 +16,9 @@
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos\\benchmark",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\custom",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\generated",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Middlewares\\Third_Party\\FreeRTOS\\Source\\include",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Middlewares\\Third_Party\\FreeRTOS\\Source\\CMSIS_RTOS_V2",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\RVDS\\ARM_CM4F",
                 "D:\\keil_v5\\ARM\\ARMCC\\include",
                 "D:\\keil_v5\\ARM\\ARMCC\\include\\rw",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\MDK-ARM",
@@ -75,7 +78,9 @@
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\src\\misc",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\src\\widgets",
                 "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\demos\\benchmark\\assets",
-                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\generated\\guider_fonts"
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\lvgl\\generated\\guider_fonts",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Middlewares\\Third_Party\\FreeRTOS\\Source",
+                "d:\\Desktop\\STM32\\stm32f407vet6\\stm32f407_hal\\lcd硬件spi\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

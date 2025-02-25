@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "adc.h"
 #include "dma.h"
 #include "i2c.h"
@@ -69,6 +70,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 
@@ -82,72 +84,60 @@ uint16_t brightness_percentage = 50;
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	if(htim->Instance == TIM4)
-	{
-		static uint32_t i;
-    static uint32_t cnt = 0;
-		i++;
-		if( i == 1000)
-		{
-			i=0;
-			HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_2);
-		}
-
-    cnt++;
-    if(cnt >= 5)
-    {
-        lv_tick_inc(5);
-        cnt = 0;
-    }
-		
-	}
-
-}
-
-lv_ui guider_ui;
-DHT11_Data_TypeDef DHT11_Data;  
-
-static lv_timer_t *sensor_timer = NULL;
-static lv_timer_t *mqtt_timer = NULL;
-
-static uint32_t mq2_adc_value ;
-static	float mq2_percent,light_value;
-
-static void sensor_timer_callback(lv_timer_t *timer)
-{
-
-    static uint8_t update_state = 0;
-    
-    // 只更新UI显示，不直接读取传感器
-    switch(update_state) {
-        case 0:  // 更新温湿度显示
-            lv_label_set_text_fmt(guider_ui.main_screen_label_temp_percentage, "%d%%", DHT11_Data.temp_int);
-            lv_label_set_text_fmt(guider_ui.main_screen_label_humi_percentage, "%d%%", DHT11_Data.humi_int);
-            lv_bar_set_value(guider_ui.main_screen_bar_temp, DHT11_Data.temp_int, LV_ANIM_OFF);
-            lv_bar_set_value(guider_ui.main_screen_bar_humi, DHT11_Data.humi_int, LV_ANIM_OFF);
-            break;
-            
-        case 1:  // 更新烟雾显示
-            lv_label_set_text_fmt(guider_ui.main_screen_label_fumes_percentage, "%d%%", (int)mq2_percent);
-            lv_arc_set_value(guider_ui.main_screen_arc_fumes, mq2_percent);
-            break;
-            
-        case 2:  // 更新光照显示
-//            lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)light_value);
-//            lv_arc_set_value(guider_ui.main_screen_arc_light, light_value);
-            break;
-    }
-    
-    update_state = (update_state + 1) % 3;
-}
+  
 
 
-static void mqtt_timer_callback(lv_timer_t *timer)
-{
+lv_ui guider_ui;//UI结构�???
+// DHT11_Data_TypeDef DHT11_Data;//DHT11数据结构�???
 
-}
+//static lv_timer_t *sensor_timer = NULL;
+//static lv_timer_t *mqtt_timer = NULL;
+
+//static uint32_t mq2_adc_value ;
+//static	float mq2_percent,light_value;
+//static char temp_str[20];
+//static char humi_str[20];
+//static char light_str[20];
+//static char fumes_str[20];
+
+
+//static void sensor_timer_callback(lv_timer_t *timer)
+//{
+
+//    static uint8_t update_state = 0;
+//    
+//    switch(update_state) {
+//        case 0:  
+//            snprintf(temp_str,sizeof(temp_str), "%d%%", DHT11_Data.temp_int);
+//            snprintf(humi_str,sizeof(humi_str), "%d%%", DHT11_Data.humi_int);
+//            lv_label_set_text(guider_ui.main_screen_label_temp_percentage, temp_str);
+//            lv_label_set_text(guider_ui.main_screen_label_humi_percentage, humi_str);
+//            lv_bar_set_value(guider_ui.main_screen_bar_temp, DHT11_Data.temp_int, LV_ANIM_OFF);
+//            lv_bar_set_value(guider_ui.main_screen_bar_humi, DHT11_Data.humi_int, LV_ANIM_OFF);
+//            break;
+//            
+//        case 1:  // 更新烟雾显示
+//            snprintf(fumes_str,sizeof(fumes_str), "%d%%", (int)mq2_percent);
+//            lv_label_set_text(guider_ui.main_screen_label_fumes_percentage, fumes_str);
+//            lv_arc_set_value(guider_ui.main_screen_arc_fumes, mq2_percent);
+//            break;
+//            
+//        case 2:  // 更新光照显示
+////            lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)light_value);
+////            lv_arc_set_value(guider_ui.main_screen_arc_light, light_value);
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    update_state = (update_state + 1) % 3;
+//}
+
+
+//static void mqtt_timer_callback(lv_timer_t *timer)
+//{
+
+//}
 
 
 
@@ -183,32 +173,29 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_SPI1_Init();
-  MX_TIM4_Init();
-  MX_TIM5_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   MX_ADC1_Init();
-  MX_TIM1_Init();
   MX_TIM2_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 	
 
- // 初始化报警状态
+ // 初始化报警状�???
   BEEP_OFF;
   /*传感器硬件初始化*/
   //DHT11通过cubemx配置引脚   GPIOE8
   //MQ2通过cubemx配置adc      GPIOA4
-  //蜂鸣器通过cubemx配置引脚   GPIOE7
-  //火焰传感器通过外部中断配置  GPIOB14
-  //继电器通过cubemx配置引脚   GPIOB8
+  //蜂鸣器过cubemx配置引脚   GPIOE7
+  //火焰传感器过外部中断配置  GPIOB14
+  //继电器过cubemx配置引脚   GPIOB8
   GY302_Init(); //使用软件i2c
-//  sys.alarm_flag = 0;
 
 
-//  //WIFI初始化
+//  //WIFI初始
 //	ESP01S_Init();
-//  //MQTT初始化
+//  //MQTT初始
 //  MQTT_Init();
 //  //订阅消息
 //  MQTT_Subscribe(MQTT_USER_TOPIC);
@@ -218,31 +205,18 @@ int main(void)
 //  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
 //    
 
-   /*LCD屏幕和LVGL初始化*/
-	lcd_set_dir(LCD_CROSSWISE_180);
-	lcd_init();	
-  lv_init();
- 	lv_port_disp_init();
-  lv_port_indev_init();
-	HAL_TIM_Base_Start_IT(&htim4);
-  //LCD背光通过cubemx配置pwm
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
-  //打开背光
-  LCD_SetBrightness(brightness_pwm);
 
-  
-	setup_ui(&guider_ui);
-  events_init(&guider_ui);
-  sensor_timer = lv_timer_create(sensor_timer_callback,2000, NULL);
-//  mqtt_timer = lv_timer_create(mqtt_timer_callback, 5000, NULL);
-  static uint32_t last_dht11_time = 0;
-  static uint32_t last_gy302_time = 0;
-  static uint32_t last_mq2_time = 0;
-  static uint32_t last_lvgl_time = 0;
-  static uint32_t current_time = 0;
 
   /* USER CODE END 2 */
 
+  /* Init scheduler */
+  osKernelInitialize();  /* Call init function for freertos objects (in freertos.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -252,34 +226,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      current_time = HAL_GetTick();
-      // LVGL任务处理，确保每5ms执行一次
-      if(current_time - last_lvgl_time >= 5)
-      {
-          last_lvgl_time = current_time;
-          lv_task_handler();
-      }
 
-      // DHT11读取（每2秒一次）
-      if(current_time - last_dht11_time >= 2000)
-      {
-          last_dht11_time = current_time;
-          DHT11_ReadData(&DHT11_Data);
-      }
-      
-      // GY302读取（每1秒一次）
-//      if(current_time - last_gy302_time >= 1000)
-//      {
-//          last_gy302_time = current_time;
-//          light_value = GY302_ReadLight();
-//      }
-      
-      // MQ2读取（每100ms一次）
-      if(current_time - last_mq2_time >= 100)
-      {
-          last_mq2_time = current_time;
-          Get_Mq2(&mq2_adc_value, &mq2_percent);
-      }
   
   }
 
@@ -335,6 +282,27 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM1 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM1) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

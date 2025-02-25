@@ -1,46 +1,34 @@
-/**
- * ************************************************************************
- * 
- * @file My_DHT11.h
- * @author zxr
- * @brief 
- * 
- * ************************************************************************
- * @copyright Copyright (c) 2024 zxr 
- * ************************************************************************
- */
+
 #ifndef __DHT11_H
 #define __DHT11_H
 
-#include "stm32f4xx_hal.h"
+#ifndef __DHT11_H__
+#define __DHT11_H__
 
-#define DHT11_PORT			GPIOE
-#define DHT11_PIN			GPIO_PIN_8
+#include "main.h"
 
-#define DHT11_PULL_1		HAL_GPIO_WritePin(DHT11_PORT, DHT11_PIN, GPIO_PIN_SET)
-#define DHT11_PULL_0		HAL_GPIO_WritePin(DHT11_PORT, DHT11_PIN, GPIO_PIN_RESET)
+// DHT11引脚定义
+#define DHT11_PORT    GPIOE
+#define DHT11_PIN     GPIO_PIN_8
+#define DHT11_PULL_1  HAL_GPIO_WritePin(DHT11_PORT, DHT11_PIN, GPIO_PIN_SET)
+#define DHT11_PULL_0  HAL_GPIO_WritePin(DHT11_PORT, DHT11_PIN, GPIO_PIN_RESET)
+#define DHT11_ReadPin HAL_GPIO_ReadPin(DHT11_PORT, DHT11_PIN)
 
-#define DHT11_ReadPin		HAL_GPIO_ReadPin(DHT11_PORT, DHT11_PIN)
-
-/**
- * ************************************************************************
- * @brief �洢���������ݵĽṹ��
- * 
- * 
- * ************************************************************************
- */
 typedef struct
 {
-	uint8_t humi_int;			// ʪ�ȵ���������
-	uint8_t humi_dec;	 		// ʪ�ȵ�С������
-	uint8_t temp_int;	 		// �¶ȵ���������
-	uint8_t temp_dec;	 		// �¶ȵ�С������
-	uint8_t check_sum;	 		// У���
-
+    uint8_t humi_int;    // 湿度整数部分
+    uint8_t humi_dec;    // 湿度小数部分
+    uint8_t temp_int;    // 温度整数部分
+    uint8_t temp_dec;    // 温度小数部分
+    uint8_t check_sum;   // 校验和
 } DHT11_Data_TypeDef;
 
+void DHT11_Init(void);
+uint8_t DHT11_ReadData(DHT11_Data_TypeDef *DHT11_Data);
+float DHT11_GetTemperature(DHT11_Data_TypeDef *DHT11_Data);
+float DHT11_GetHumidity(DHT11_Data_TypeDef *DHT11_Data);
 
-uint8_t DHT11_ReadData(DHT11_Data_TypeDef* DHT11_Data);
+#endif
 
 #endif
 

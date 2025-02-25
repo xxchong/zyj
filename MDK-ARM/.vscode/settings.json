@@ -5,6 +5,8 @@
         "cst816.h": "c",
         "esp01s.h": "c",
         "mqtt_config.h": "c",
-        "events_init.h": "c"
+        "events_init.h": "c",
+        "tim.h": "c",
+        "freertos.h": "c"
     }
 }
