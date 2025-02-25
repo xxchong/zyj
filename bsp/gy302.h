@@ -16,6 +16,6 @@
 #define BH1750_CONTINUE_L    0x13    // 连续低分辨率模式 (4lx)
 
 void GY302_Init(void);
-float GY302_ReadLight(void);
+uint16_t GY302_ReadLight(void);
 
 #endif

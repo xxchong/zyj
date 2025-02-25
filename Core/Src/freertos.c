@@ -71,26 +71,47 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
+
+
+
+#define SENSOR_TASK_STACK_SIZE 3 * 1024
+#define DISPLAY_TASK_STACK_SIZE 2 * 1024
+
+#define SENSOR_TASK_PRIORITY osPriorityNormal2
+#define DISPLAY_TASK_PRIORITY osPriorityNormal
+
+
+
+
+
+
+
+
 void displayTask(void *argument);
 void sensorTask(void *argument);
 osThreadId_t sensorTaskHandle;
 const osThreadAttr_t sensorTask_attributes = {
   .name = "sensorTask",
-  .stack_size = 3 * 1024,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = SENSOR_TASK_STACK_SIZE,
+  .priority = (osPriority_t) SENSOR_TASK_PRIORITY,
 };
 
 
 osThreadId_t displayTaskHandle;
 const osThreadAttr_t displayTask_attributes = {
   .name = "displayTask",
-  .stack_size = 2*1024,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = DISPLAY_TASK_STACK_SIZE,
+  .priority = (osPriority_t) DISPLAY_TASK_PRIORITY,
 };
 
 osMutexId_t lvgl_MutexHandle;
 const osMutexAttr_t lvgl_Mutex_attributes = {
   .name = "lvgl_Mutex"
+};
+
+osMutexId_t sensor_data_MutexHandle;
+const osMutexAttr_t sensor_data_Mutex_attributes = {
+  .name = "sensor_data_Mutex"
 };
 
 /* USER CODE END FunctionPrototypes */
@@ -105,7 +126,7 @@ void vApplicationTickHook(void);
 /* USER CODE BEGIN 3 */
 void vApplicationTickHook( void )
 {
-	// lv_tick_inc(1);
+	lv_tick_inc(1);
    /* This function will be called by each tick interrupt if
    configUSE_TICK_HOOK is set to 1 in FreeRTOSConfig.h. User code can be
    added here, but the tick hook is called from an interrupt context, so
@@ -115,11 +136,7 @@ void vApplicationTickHook( void )
 
 static lv_timer_t *sensor_timer = NULL;
 
-static DHT11_Data_TypeDef DHT11_Data;
-static uint32_t mq2_adc_value;
 
-static float mq2_percent;
-static float light_value;
 
 static char light_str[10];  
 static char temp_str[20];
@@ -127,20 +144,41 @@ static char humi_str[20];
 static char fumes_str[10];
 
 
+
+// 将传感器数据结构体改为静态变量
+static struct {
+    DHT11_Data_TypeDef dht11;
+    uint8_t mq2_percent;
+    uint32_t mq2_adc_value;
+    uint16_t light_value;
+} sensor_data;
+
+
 static void sensor_timer_callback(lv_timer_t *timer)
 {
+    // 获取互斥量
+    if(osMutexAcquire(sensor_data_MutexHandle, 10) == osOK) {
+        snprintf(temp_str, sizeof(temp_str), "%d°C", sensor_data.dht11.temp_int);
+        lv_label_set_text(guider_ui.main_screen_label_temp_percentage, temp_str);
+        lv_bar_set_value(guider_ui.main_screen_bar_temp, sensor_data.dht11.temp_int, LV_ANIM_OFF);
 
-    
+        snprintf(humi_str, sizeof(humi_str), "%d%%", sensor_data.dht11.humi_int);
+        lv_label_set_text(guider_ui.main_screen_label_humi_percentage, humi_str);
+        lv_bar_set_value(guider_ui.main_screen_bar_humi, sensor_data.dht11.humi_int, LV_ANIM_OFF);
      
-		snprintf(fumes_str,sizeof(fumes_str), "%d%%", (int)mq2_percent);
-		lv_label_set_text(guider_ui.main_screen_label_fumes_percentage, fumes_str);
-		lv_arc_set_value(guider_ui.main_screen_arc_fumes, mq2_percent);
-		
+        snprintf(fumes_str, sizeof(fumes_str), "%d%%", (int)sensor_data.mq2_percent);
+        lv_label_set_text(guider_ui.main_screen_label_fumes_percentage, fumes_str);
+        lv_arc_set_value(guider_ui.main_screen_arc_fumes, sensor_data.mq2_percent);
 
-	 lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)light_value);
-	 lv_arc_set_value(guider_ui.main_screen_arc_light, light_value);
-
-    
+        lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)sensor_data.light_value);
+        lv_arc_set_value(guider_ui.main_screen_arc_light, sensor_data.light_value);
+        
+        // 释放互斥量
+        osMutexRelease(sensor_data_MutexHandle);
+    }else
+		{
+			return;
+		}
 }
 /* USER CODE END 3 */
 
@@ -152,6 +190,8 @@ static void sensor_timer_callback(lv_timer_t *timer)
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 	lvgl_MutexHandle = osMutexNew(&lvgl_Mutex_attributes);
+  sensor_data_MutexHandle = osMutexNew(&sensor_data_Mutex_attributes);
+
 
   /* USER CODE END Init */
 
@@ -176,7 +216,7 @@ void MX_FREERTOS_Init(void) {
 //  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-//  displayTaskHandle = osThreadNew(displayTask, NULL, &displayTask_attributes);
+  displayTaskHandle = osThreadNew(displayTask, NULL, &displayTask_attributes);
   sensorTaskHandle = osThreadNew(sensorTask, NULL, &sensorTask_attributes);
   /* USER CODE END RTOS_THREADS */
 
@@ -220,36 +260,43 @@ void displayTask(void *argument)
   LCD_SetBrightness(brightness_pwm);
 	setup_ui(&guider_ui);
   events_init(&guider_ui);
-//  sensor_timer = lv_timer_create(sensor_timer_callback, 2000, NULL);
+  sensor_timer = lv_timer_create(sensor_timer_callback, 4000, NULL);
 	
 	for(;;)
 	{
 		osMutexAcquire(lvgl_MutexHandle, portMAX_DELAY);	
 		lv_task_handler();
 		osMutexRelease(lvgl_MutexHandle);
-		osDelay(10);
+		osDelay(30);
 	}
   
 }
 
 
 void sensorTask(void *argument)
-{
-    DHT11_Init();
-    DHT11_Data_TypeDef dht11_data;
-    
+{    
     for(;;)
     {
-        printf("\r\n--- Reading DHT11 ---\r\n");
-        if(DHT11_ReadData(&dht11_data))
-        {
-            // printf("Success! Temperature: %.1f°C, Humidity: %.1f%%\r\n",
-            //        DHT11_GetTemperature(&dht11_data),
-            //        DHT11_GetHumidity(&dht11_data));
-        }
-        else
-        {
-            printf("DHT11 read failed!\r\n");
+        
+        // 获取互斥量
+        if(osMutexAcquire(sensor_data_MutexHandle, portMAX_DELAY) == osOK) {
+            // 读取MQ2传感器数据
+            Get_Mq2(&sensor_data.mq2_adc_value, &sensor_data.mq2_percent);
+//            printf("MQ2: %d, %d%%\r\n", sensor_data.mq2_adc_value, sensor_data.mq2_percent);
+            
+            // 读取GY302传感器数据
+            sensor_data.light_value = GY302_ReadLight();
+            printf("GY302: %d\r\n", sensor_data.light_value);
+            
+           if(DHT11_ReadData(&sensor_data.dht11))
+           {
+               printf("Temp: %d,Humi: %d\r\n", 
+                      sensor_data.dht11.temp_int, 
+                      sensor_data.dht11.humi_int);
+           }
+            
+            // 释放互斥量
+            osMutexRelease(sensor_data_MutexHandle);
         }
         
         vTaskDelay(pdMS_TO_TICKS(3000));

@@ -87,58 +87,7 @@ uint16_t brightness_percentage = 50;
   
 
 
-lv_ui guider_ui;//UI结构�???
-// DHT11_Data_TypeDef DHT11_Data;//DHT11数据结构�???
-
-//static lv_timer_t *sensor_timer = NULL;
-//static lv_timer_t *mqtt_timer = NULL;
-
-//static uint32_t mq2_adc_value ;
-//static	float mq2_percent,light_value;
-//static char temp_str[20];
-//static char humi_str[20];
-//static char light_str[20];
-//static char fumes_str[20];
-
-
-//static void sensor_timer_callback(lv_timer_t *timer)
-//{
-
-//    static uint8_t update_state = 0;
-//    
-//    switch(update_state) {
-//        case 0:  
-//            snprintf(temp_str,sizeof(temp_str), "%d%%", DHT11_Data.temp_int);
-//            snprintf(humi_str,sizeof(humi_str), "%d%%", DHT11_Data.humi_int);
-//            lv_label_set_text(guider_ui.main_screen_label_temp_percentage, temp_str);
-//            lv_label_set_text(guider_ui.main_screen_label_humi_percentage, humi_str);
-//            lv_bar_set_value(guider_ui.main_screen_bar_temp, DHT11_Data.temp_int, LV_ANIM_OFF);
-//            lv_bar_set_value(guider_ui.main_screen_bar_humi, DHT11_Data.humi_int, LV_ANIM_OFF);
-//            break;
-//            
-//        case 1:  // 更新烟雾显示
-//            snprintf(fumes_str,sizeof(fumes_str), "%d%%", (int)mq2_percent);
-//            lv_label_set_text(guider_ui.main_screen_label_fumes_percentage, fumes_str);
-//            lv_arc_set_value(guider_ui.main_screen_arc_fumes, mq2_percent);
-//            break;
-//            
-//        case 2:  // 更新光照显示
-////            lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)light_value);
-////            lv_arc_set_value(guider_ui.main_screen_arc_light, light_value);
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//    update_state = (update_state + 1) % 3;
-//}
-
-
-//static void mqtt_timer_callback(lv_timer_t *timer)
-//{
-
-//}
-
+lv_ui guider_ui;
 
 
 /* USER CODE END 0 */
@@ -194,16 +143,16 @@ int main(void)
 
 
 //  //WIFI初始
-//	ESP01S_Init();
-//  //MQTT初始
-//  MQTT_Init();
-//  //订阅消息
-//  MQTT_Subscribe(MQTT_USER_TOPIC);
-//  MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
+	ESP01S_Init();
+ //MQTT初始
+  MQTT_Init();
+  //订阅消息
+  MQTT_Subscribe(MQTT_USER_TOPIC);
+  MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
 
-//  //发布测试消息
-//  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
-//    
+  //发布测试消息
+  MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
+    
 
 
 

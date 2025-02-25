@@ -1,5 +1,8 @@
 #include "gy302.h"
-
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
 #define GY302_PORT		GPIOE
 #define GY302_SCL		GPIO_PIN_14
 #define GY302_SDA		GPIO_PIN_15
@@ -167,7 +170,7 @@ void GY302_Init(void)
 }
 
 // 读取光照强度值
-float GY302_ReadLight(void)
+uint16_t GY302_ReadLight(void)
 {
     uint16_t value;
     uint8_t msb, lsb;
@@ -182,5 +185,5 @@ float GY302_ReadLight(void)
     GY302_Stop();
     
     value = (msb << 8) | lsb;
-    return (float)value / 1.2f;  // 转换为实际光照值(lx)
+    return value;  // 转换为实际光照值(lx)
 }

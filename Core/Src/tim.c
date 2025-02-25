@@ -96,7 +96,7 @@ void MX_TIM5_Init(void)
 
   /* USER CODE END TIM5_Init 1 */
   htim5.Instance = TIM5;
-  htim5.Init.Prescaler = 168-1;
+  htim5.Init.Prescaler = 84-1;
   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim5.Init.Period = 4294967295;
   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -211,10 +211,8 @@ void my_delay_us(uint32_t us)
     
     // 启动定时器
     HAL_TIM_Base_Start(&htim5);
-    printf("delay_us start: %d\r\n", us);
     // 等待计数器达到指定值
-    while(__HAL_TIM_GET_COUNTER(&htim5) < us);
-    printf("delay_us: %d\r\n", __HAL_TIM_GET_COUNTER(&htim5));
+    while(__HAL_TIM_GET_COUNTER(&htim5) != us);
     // 停止定时器
     HAL_TIM_Base_Stop(&htim5);
 }

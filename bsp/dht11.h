@@ -23,11 +23,7 @@ typedef struct
     uint8_t check_sum;   // 校验和
 } DHT11_Data_TypeDef;
 
-void DHT11_Init(void);
 uint8_t DHT11_ReadData(DHT11_Data_TypeDef *DHT11_Data);
-float DHT11_GetTemperature(DHT11_Data_TypeDef *DHT11_Data);
-float DHT11_GetHumidity(DHT11_Data_TypeDef *DHT11_Data);
-
 #endif
 
 #endif

@@ -3,6 +3,6 @@
 
 #include "stm32f4xx_hal.h"
 #include "adc.h"
-void Get_Mq2(uint32_t *mq2_adc_value ,float *mq2_percent);
+void Get_Mq2(uint32_t *mq2_adc_value ,uint8_t *mq2_percent);
 
 #endif

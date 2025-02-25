@@ -48,3 +48,5 @@ lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/p
 lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+lcd\dht11.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
