@@ -124,7 +124,7 @@ void setup_scr_mqtt_param_screen(lv_ui *ui)
     lv_obj_align(ui->mqtt_param_screen_btn_mqtt_return_label, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_pad_all(ui->mqtt_param_screen_btn_mqtt_return, 0, LV_STATE_DEFAULT);
     lv_obj_set_width(ui->mqtt_param_screen_btn_mqtt_return_label, LV_PCT(100));
-    lv_obj_set_pos(ui->mqtt_param_screen_btn_mqtt_return, 9, 8);
+    lv_obj_set_pos(ui->mqtt_param_screen_btn_mqtt_return, 9, 7);
     lv_obj_set_size(ui->mqtt_param_screen_btn_mqtt_return, 50, 50);
 
     //Write style for mqtt_param_screen_btn_mqtt_return, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.

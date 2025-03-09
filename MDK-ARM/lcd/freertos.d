@@ -42,10 +42,13 @@ lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
+lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lcd\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+lcd\freertos.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 lcd\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 lcd\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 lcd\freertos.o: ../lvgl/src/lvgl.h
@@ -57,7 +60,6 @@ lcd\freertos.o: ../lvgl/examples/porting/../../lv_conf.h
 lcd\freertos.o: ../lvgl/src/../src/misc/lv_types.h
 lcd\freertos.o: ../lvgl/src/../src/misc/lv_timer.h
 lcd\freertos.o: ../lvgl/src/../src/misc/../hal/lv_hal_tick.h
-lcd\freertos.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 lcd\freertos.o: ../lvgl/src/../src/misc/lv_math.h
 lcd\freertos.o: ../lvgl/src/../src/misc/lv_mem.h
 lcd\freertos.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
@@ -194,3 +196,5 @@ lcd\freertos.o: ../bsp/mq2.h
 lcd\freertos.o: ../Core/Inc/adc.h
 lcd\freertos.o: ../bsp/mqtt.h
 lcd\freertos.o: ../bsp/mqtt_config.h
+lcd\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+lcd\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h

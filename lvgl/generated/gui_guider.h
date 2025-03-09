@@ -14,8 +14,8 @@ extern "C" {
 #endif
 
 #include "lvgl.h"
-#include "tim.h"
-
+#include "tim.h"  //亮度调节头文件
+#include "main.h"
 typedef struct
 {
   
@@ -69,6 +69,27 @@ typedef struct
 	lv_obj_t *mqtt_param_screen_btn_mqtt_return_label;
 	lv_obj_t *mqtt_param_screen_btn_mqtt_enter;
 	lv_obj_t *mqtt_param_screen_btn_mqtt_enter_label;
+	lv_obj_t *threshold_screen;
+	bool threshold_screen_del;
+	lv_obj_t *threshold_screen_slider_humi;
+	lv_obj_t *threshold_screen_slider_temp;
+	lv_obj_t *threshold_screen_slider_mq2;
+	lv_obj_t *threshold_screen_slider_light;
+	lv_obj_t *threshold_screen_btn_1;
+	lv_obj_t *threshold_screen_btn_1_label;
+	lv_obj_t *threshold_screen_label_1;
+	lv_obj_t *threshold_screen_label_2;
+	lv_obj_t *threshold_screen_label_3;
+	lv_obj_t *threshold_screen_label_4;
+	lv_obj_t *threshold_screen_label_5;
+	lv_obj_t *threshold_screen_label_6;
+	lv_obj_t *threshold_screen_label_7;
+	lv_obj_t *threshold_screen_label_8;
+	lv_obj_t *threshold_screen_label_9;
+	
+	
+	lv_timer_t *sensor_timer;
+
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -90,10 +111,12 @@ void setup_ui(lv_ui *ui);
 
 extern lv_ui guider_ui;
 
+void sensor_timer_callback(lv_timer_t *timer);
 
 void setup_scr_main_screen(lv_ui *ui);
 void setup_scr_brightness_screen(lv_ui *ui);
 void setup_scr_mqtt_param_screen(lv_ui *ui);
+void setup_scr_threshold_screen(lv_ui *ui);
 
 LV_FONT_DECLARE(lv_font_MiSansNormal_15)
 LV_FONT_DECLARE(lv_font_MiSansNormal_18)
@@ -102,6 +125,7 @@ LV_FONT_DECLARE(lv_font_montserratMedium_20)
 LV_FONT_DECLARE(lv_font_MiSansNormal_16)
 LV_FONT_DECLARE(lv_font_MiSansNormal_13)
 LV_FONT_DECLARE(lv_font_montserratMedium_12)
+LV_FONT_DECLARE(lv_font_montserratMedium_14)
 
 
 #ifdef __cplusplus

@@ -40,6 +40,10 @@
 #include "mq2.h"
 #include "mqtt.h"
 #include "mqtt_config.h"
+#include "queue.h"
+#include "timers.h"
+#include "tim.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -71,22 +75,38 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
+/* 定义传感器数据结构体 */
+typedef struct {
+    DHT11_Data_TypeDef dht11;
+    uint8_t mq2_percent;
+    uint32_t mq2_adc_value;
+    uint16_t light_value;
+} SensorData_t;
 
 
 
 #define SENSOR_TASK_STACK_SIZE 3 * 1024
 #define DISPLAY_TASK_STACK_SIZE 2 * 1024
+#define MQTT_TASK_STACK_SIZE 2*1024
 
-#define SENSOR_TASK_PRIORITY osPriorityNormal2
+#define SENSOR_TASK_PRIORITY osPriorityNormal1
 #define DISPLAY_TASK_PRIORITY osPriorityNormal
+#define MQTT_TASK_PRIORITY osPriorityNormal
+
+/* 定义队列句柄 */
+static QueueHandle_t sensorDataQueue;
+#define QUEUE_LENGTH    5
+#define QUEUE_ITEM_SIZE sizeof(SensorData_t)
+
+TimerHandle_t flame_timer = NULL;
+
+static void flame_timer_callback(TimerHandle_t xTimer)
+{
+  flame_status = false;
+}
 
 
-
-
-
-
-
-
+void mqttTask(void *argument);
 void displayTask(void *argument);
 void sensorTask(void *argument);
 osThreadId_t sensorTaskHandle;
@@ -104,15 +124,24 @@ const osThreadAttr_t displayTask_attributes = {
   .priority = (osPriority_t) DISPLAY_TASK_PRIORITY,
 };
 
+osThreadId_t mqttTaskHandle;
+const osThreadAttr_t mqttTask_attributes = {
+  .name = "mqttTask",
+  .stack_size = MQTT_TASK_STACK_SIZE,
+  .priority = (osPriority_t) MQTT_TASK_PRIORITY,
+};
 osMutexId_t lvgl_MutexHandle;
 const osMutexAttr_t lvgl_Mutex_attributes = {
   .name = "lvgl_Mutex"
 };
 
-osMutexId_t sensor_data_MutexHandle;
-const osMutexAttr_t sensor_data_Mutex_attributes = {
-  .name = "sensor_data_Mutex"
+osThreadId_t ledTaskHandle;
+const osThreadAttr_t ledTask_attributes = {
+  .name = "ledTask",
+  .stack_size = 512,
+  .priority = (osPriority_t) osPriorityNormal,
 };
+
 
 /* USER CODE END FunctionPrototypes */
 
@@ -134,52 +163,74 @@ void vApplicationTickHook( void )
    functions can be used (those that end in FromISR()). */
 }
 
-static lv_timer_t *sensor_timer = NULL;
 
 
-
-static char light_str[10];  
-static char temp_str[20];
-static char humi_str[20];
-static char fumes_str[10];
-
-
-
-// 将传感器数据结构体改为静态变量
-static struct {
-    DHT11_Data_TypeDef dht11;
-    uint8_t mq2_percent;
-    uint32_t mq2_adc_value;
-    uint16_t light_value;
-} sensor_data;
-
-
-static void sensor_timer_callback(lv_timer_t *timer)
+void ledTask(void *argument)
 {
-    // 获取互斥量
-    if(osMutexAcquire(sensor_data_MutexHandle, 10) == osOK) {
-        snprintf(temp_str, sizeof(temp_str), "%d°C", sensor_data.dht11.temp_int);
-        lv_label_set_text(guider_ui.main_screen_label_temp_percentage, temp_str);
-        lv_bar_set_value(guider_ui.main_screen_bar_temp, sensor_data.dht11.temp_int, LV_ANIM_OFF);
-
-        snprintf(humi_str, sizeof(humi_str), "%d%%", sensor_data.dht11.humi_int);
-        lv_label_set_text(guider_ui.main_screen_label_humi_percentage, humi_str);
-        lv_bar_set_value(guider_ui.main_screen_bar_humi, sensor_data.dht11.humi_int, LV_ANIM_OFF);
-     
-        snprintf(fumes_str, sizeof(fumes_str), "%d%%", (int)sensor_data.mq2_percent);
-        lv_label_set_text(guider_ui.main_screen_label_fumes_percentage, fumes_str);
-        lv_arc_set_value(guider_ui.main_screen_arc_fumes, sensor_data.mq2_percent);
-
-        lv_label_set_text_fmt(guider_ui.main_screen_label_light_percentage, "%d%%", (int)sensor_data.light_value);
-        lv_arc_set_value(guider_ui.main_screen_arc_light, sensor_data.light_value);
-        
-        // 释放互斥量
-        osMutexRelease(sensor_data_MutexHandle);
-    }else
-		{
-			return;
-		}
+    for(;;)
+    {
+        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_2);
+        osDelay(pdMS_TO_TICKS(1000));
+    }
 }
+
+/* 修改LVGL定时器回调函�?? */
+void sensor_timer_callback(lv_timer_t *timer)
+{
+    static SensorData_t receivedData;
+    
+    // 从队列接收数据，设置超时时间�??10ms
+    if(xQueueReceive(sensorDataQueue, &receivedData, 0) == pdPASS)
+    {
+        char light_str[10];  
+        char temp_str[10];
+        char humi_str[10];
+        char fumes_str[10];
+
+        if(receivedData.dht11.temp_int > 0 && receivedData.dht11.temp_int < 100)
+        {
+            snprintf(temp_str, sizeof(temp_str), "%d°C", receivedData.dht11.temp_int);
+            lv_label_set_text(guider_ui.main_screen_label_temp_percentage, temp_str);
+            lv_bar_set_value(guider_ui.main_screen_bar_temp, receivedData.dht11.temp_int, LV_ANIM_OFF);
+        }
+
+        if(receivedData.dht11.humi_int > 0 && receivedData.dht11.humi_int <= 100)
+        {
+            snprintf(humi_str, sizeof(humi_str), "%d%%", receivedData.dht11.humi_int);
+            lv_label_set_text(guider_ui.main_screen_label_humi_percentage, humi_str);
+            lv_bar_set_value(guider_ui.main_screen_bar_humi, receivedData.dht11.humi_int, LV_ANIM_OFF);
+        }
+        
+       
+        if(receivedData.mq2_percent <= 100)
+        {
+            snprintf(fumes_str, sizeof(fumes_str), "%d%%", receivedData.mq2_percent);
+            lv_label_set_text(guider_ui.main_screen_label_fumes_percentage, fumes_str);
+            lv_arc_set_value(guider_ui.main_screen_arc_fumes, receivedData.mq2_percent);
+        }
+        
+        if(receivedData.light_value > 0)
+        {
+            snprintf(light_str, sizeof(light_str), "%d%%", receivedData.light_value);
+            lv_label_set_text(guider_ui.main_screen_label_light_percentage, light_str);
+            lv_arc_set_value(guider_ui.main_screen_arc_light, receivedData.light_value);
+        }
+        if(flame_status)
+        {
+            lv_led_set_color(guider_ui.main_screen_led_1, lv_color_hex(0xFF3030));
+        }
+        else
+        {
+            lv_led_set_color(guider_ui.main_screen_led_1, lv_color_hex(0xFFFFFF));
+        }
+
+    }
+}
+
+
+
+
+
 /* USER CODE END 3 */
 
 /**
@@ -189,8 +240,21 @@ static void sensor_timer_callback(lv_timer_t *timer)
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-	lvgl_MutexHandle = osMutexNew(&lvgl_Mutex_attributes);
-  sensor_data_MutexHandle = osMutexNew(&sensor_data_Mutex_attributes);
+	  lvgl_MutexHandle = osMutexNew(&lvgl_Mutex_attributes);
+    // 创建队列
+    sensorDataQueue = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
+    if(sensorDataQueue == NULL)
+    {
+        printf("Queue creation failed!\r\n");
+        Error_Handler();
+    }
+    // 创建火焰定时器,单次触发
+    flame_timer = xTimerCreate("flame_timer", pdMS_TO_TICKS(10000), pdFALSE, NULL, flame_timer_callback);
+    if(flame_timer == NULL)
+    {
+        printf("Timer creation failed!\r\n");
+        Error_Handler();
+    }
 
 
   /* USER CODE END Init */
@@ -213,11 +277,13 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* creation of defaultTask */
-//  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  // defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   displayTaskHandle = osThreadNew(displayTask, NULL, &displayTask_attributes);
   sensorTaskHandle = osThreadNew(sensorTask, NULL, &sensorTask_attributes);
+  // ledTaskHandle = osThreadNew(ledTask, NULL, &ledTask_attributes);
+  mqttTaskHandle = osThreadNew(mqttTask, NULL, &mqttTask_attributes);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -251,56 +317,100 @@ void StartDefaultTask(void *argument)
 /* USER CODE BEGIN Application */
 void displayTask(void *argument)
 {
-	lcd_set_dir(LCD_CROSSWISE_180);
-	lcd_init();	
-  lv_init();
- 	lv_port_disp_init();
-  lv_port_indev_init();
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
-  LCD_SetBrightness(brightness_pwm);
-	setup_ui(&guider_ui);
-  events_init(&guider_ui);
-  sensor_timer = lv_timer_create(sensor_timer_callback, 4000, NULL);
-	
-	for(;;)
-	{
-		osMutexAcquire(lvgl_MutexHandle, portMAX_DELAY);	
-		lv_task_handler();
-		osMutexRelease(lvgl_MutexHandle);
-		osDelay(30);
-	}
-  
-}
 
+    TickType_t xLastWakeTime;
 
-void sensorTask(void *argument)
-{    
+    lcd_set_dir(LCD_CROSSWISE_180);
+    lcd_init();	
+    lv_init();
+    lv_port_disp_init();
+    lv_port_indev_init();
+    HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
+    LCD_SetBrightness(brightness_pwm);
+    setup_ui(&guider_ui);
+    events_init(&guider_ui);
+    
+
     for(;;)
     {
         
-        // 获取互斥量
-        if(osMutexAcquire(sensor_data_MutexHandle, portMAX_DELAY) == osOK) {
-            // 读取MQ2传感器数据
-            Get_Mq2(&sensor_data.mq2_adc_value, &sensor_data.mq2_percent);
-//            printf("MQ2: %d, %d%%\r\n", sensor_data.mq2_adc_value, sensor_data.mq2_percent);
-            
-            // 读取GY302传感器数据
-            sensor_data.light_value = GY302_ReadLight();
-            printf("GY302: %d\r\n", sensor_data.light_value);
-            
-           if(DHT11_ReadData(&sensor_data.dht11))
-           {
-               printf("Temp: %d,Humi: %d\r\n", 
-                      sensor_data.dht11.temp_int, 
-                      sensor_data.dht11.humi_int);
-           }
-            
-            // 释放互斥量
-            osMutexRelease(sensor_data_MutexHandle);
-        }
+        osMutexAcquire(lvgl_MutexHandle, 0);
+        lv_task_handler();
+        osMutexRelease(lvgl_MutexHandle);
         
-        vTaskDelay(pdMS_TO_TICKS(3000));
+        vTaskDelay(pdMS_TO_TICKS(5));
+    
     }
 }
+
+
+/* 修改传感器任�?? */
+void sensorTask(void *argument)
+{    
+    TickType_t xLastWakeTime;
+    SensorData_t sensorData;
+    uint8_t retry_count;
+    
+    xLastWakeTime = xTaskGetTickCount();
+    
+    for(;;)
+    {
+        
+      
+         DHT11_ReadData((DHT11_Data_TypeDef*)&sensorData.dht11);
+          
+        
+        // 读取其他传感器数
+        
+         Get_Mq2(&sensorData.mq2_adc_value, &sensorData.mq2_percent);
+        
+         sensorData.light_value = GY302_ReadLight();
+       
+        
+        if(xQueueSend(sensorDataQueue, &sensorData, 0) != pdPASS)
+        {
+            printf("Queue send failed!\r\n");
+        }else{
+            // printf("Queue send success!\r\n");
+        }
+        
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(3500));
+
+    }
+}
+
+void mqttTask(void *argument)
+{
+    TickType_t xLastWakeTime;
+    SensorData_t sensorData;
+    char mqtt_msg[256];
+    
+    osDelay(pdMS_TO_TICKS(2000));
+    xLastWakeTime = xTaskGetTickCount();
+    
+    for(;;)
+    {
+        if(xQueuePeek(sensorDataQueue, &sensorData, pdMS_TO_TICKS(100)) == pdPASS)
+        {
+            sprintf(mqtt_msg, "{\\\"params\\\":{\\\"temperature\\\":%d.%d\\,\\\"Humidity\\\":%d.%d\\,\\\"LightLux\\\":%d\\,\\\"SmokeConcentration\\\":%.1f\\,\\\"Flame_State\\\":%d}}",
+                    sensorData.dht11.temp_int, 
+                    sensorData.dht11.temp_dec,
+                    sensorData.dht11.humi_int, 
+                    sensorData.dht11.humi_dec,
+                    sensorData.light_value,
+                    (float)sensorData.mq2_percent,
+                    flame_status);
+                    
+            MQTT_Publish(MQTT_PARAM_TOPIC, mqtt_msg);
+        }
+        
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(5000));
+    }
+}
+
 /* USER CODE END Application */
+
+
+
+
 

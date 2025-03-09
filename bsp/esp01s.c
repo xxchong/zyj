@@ -3,29 +3,29 @@
 #define ESP_SSID "XXCHONG"
 #define ESP_PASSWORD "abc18813491718"
 
-//ESP01S½á¹¹Ìå
+//ESP01Sï¿½á¹¹ï¿½ï¿½
 ESP01S_HandleTypeDef esp01s;
 
 static char *TAG = "ESP01S";
 
-// ³õÊ¼»¯ESP01S
+// ï¿½ï¿½Ê¼ï¿½ï¿½ESP01S
 ESP_Status ESP01S_Init(void)
 {
-    // ³õÊ¼»¯ESP01S½á¹¹Ìå
+    // ï¿½ï¿½Ê¼ï¿½ï¿½ESP01Sï¿½á¹¹ï¿½ï¿½
 	memset(&esp01s, 0, sizeof(ESP01S_HandleTypeDef));
 	
-    // Ê¹ÄÜ´®¿Ú2¿ÕÏÐÖÐ¶Ï
-    __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE); //Ê¹ÄÜ´®¿Ú2¿ÕÏÐÖÐ¶Ï
-    __HAL_UART_CLEAR_IDLEFLAG(&huart2); //Çå³ý´®¿Ú2¿ÕÏÐ±êÖ¾
+    // Ê¹ï¿½Ü´ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+    __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE); //Ê¹ï¿½Ü´ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+    __HAL_UART_CLEAR_IDLEFLAG(&huart2); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½Ð±ï¿½Ö¾
     if (HAL_UART_Receive_DMA(&huart2, (uint8_t *)esp01s.rxBuffer, ESP_RXBUFFER_SIZE) != HAL_OK)
     {
         Error_Handler();
     }
 
-    // ÑÓÊ±500ms
+    // ï¿½ï¿½Ê±500ms
     HAL_Delay(500);
 
-    // ·¢ËÍAT+RSTÃüÁîÖØÆôESP01S
+    // ï¿½ï¿½ï¿½ï¿½AT+RSTï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ESP01S
     while(ESP01S_SendATCmd("AT+RST\r\n", "OK", 2000) != ESP_OK)
     {
         printf("%s: AT+RST failed\r\n", TAG);
@@ -33,7 +33,7 @@ ESP_Status ESP01S_Init(void)
     }
     printf("%s: AT+RST success\r\n", TAG);
     
-    // ·¢ËÍATÃüÁî²âÊÔ
+    // ï¿½ï¿½ï¿½ï¿½ATï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //    while(ESP01S_SendATCmd("AT\r\n", "OK", AT_TIMEOUT) != ESP_OK)
 //    {
 //        printf("%s: AT test failed\r\n", TAG);
@@ -41,7 +41,7 @@ ESP_Status ESP01S_Init(void)
 //    }
 //    printf("%s: AT test success\r\n", TAG);
     
-    // ¹Ø±Õ»ØÏÔ
+    // ï¿½Ø±Õ»ï¿½ï¿½ï¿½
     while(ESP01S_SendATCmd("ATE0\r\n", "OK", AT_TIMEOUT) != ESP_OK) {
         printf("%s: ATE0 failed\r\n", TAG);
         HAL_Delay(100);
@@ -66,7 +66,7 @@ ESP_Status ESP01S_Init(void)
 
 
 
-// ÉèÖÃÄ£Ê½
+// ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 ESP_Status ESP01S_SetMode(ESP_Mode mode)
 {
     char cmd[20];
@@ -74,7 +74,7 @@ ESP_Status ESP01S_SetMode(ESP_Mode mode)
     return ESP01S_SendATCmd(cmd, "OK", AT_TIMEOUT);
 }
 
-// Á¬½ÓWiFi
+// ï¿½ï¿½ï¿½ï¿½WiFi
 ESP_Status ESP01S_ConnectWiFi(const char* ssid, const char* password)
 {
     char cmd[100];
@@ -92,7 +92,7 @@ ESP_Status ESP01S_ConnectWiFi(const char* ssid, const char* password)
 }
 
 
-// ¶Ï¿ªWiFi
+// ï¿½Ï¿ï¿½WiFi
 ESP_Status ESP01S_DisconnectWiFi(void)
 {
     ESP_Status status = ESP01S_SendATCmd("AT+CWQAP\r\n", "OK", AT_TIMEOUT);
@@ -106,26 +106,26 @@ ESP_Status ESP01S_DisconnectWiFi(void)
 
 
 
-// ·¢ËÍÊý¾Ý
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ESP_Status ESP01S_UartSend(const char* data)
 {
     HAL_UART_Transmit(&huart2, (uint8_t*)data, strlen(data), 100);
 }
 
 
-// ·¢ËÍATÃüÁî
+// ï¿½ï¿½ï¿½ï¿½ATï¿½ï¿½ï¿½ï¿½
 ESP_Status ESP01S_SendATCmd(const char* cmd, const char* response, uint32_t timeout)
 {
     uint32_t tickstart = HAL_GetTick();
     
-    // Çå¿Õ½ÓÊÕ»º³åÇø
+    // ï¿½ï¿½Õ½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½
     memset(esp01s.rxBuffer, 0, ESP_RXBUFFER_SIZE);  // esp01s.rxBuffer
-    // ´òÓ¡·¢ËÍµÄÃüÁî
-    printf("%s: %s", TAG, cmd);
+    // ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
+    // printf("%s: %s", TAG, cmd);
 
     ESP01S_UartSend(cmd);
     
-    // µÈ´ýÏìÓ¦
+    // ï¿½È´ï¿½ï¿½ï¿½Ó¦
     while((HAL_GetTick() - tickstart) < timeout)
     {
         if(esp01s.dataReady)

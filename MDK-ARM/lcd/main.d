@@ -33,10 +33,13 @@ lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
+lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lcd\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+lcd\main.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 lcd\main.o: ../Core/Inc/FreeRTOSConfig.h
@@ -51,6 +54,7 @@ lcd\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 lcd\main.o: ../Core/Inc/adc.h
 lcd\main.o: ../Core/Inc/dma.h
 lcd\main.o: ../Core/Inc/i2c.h
+lcd\main.o: ../Core/Inc/rtc.h
 lcd\main.o: ../Core/Inc/spi.h
 lcd\main.o: ../Core/Inc/tim.h
 lcd\main.o: ../Core/Inc/usart.h
@@ -66,7 +70,6 @@ lcd\main.o: ../lvgl/examples/porting/../../lv_conf.h
 lcd\main.o: ../lvgl/src/../src/misc/lv_types.h
 lcd\main.o: ../lvgl/src/../src/misc/lv_timer.h
 lcd\main.o: ../lvgl/src/../src/misc/../hal/lv_hal_tick.h
-lcd\main.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 lcd\main.o: ../lvgl/src/../src/misc/lv_math.h
 lcd\main.o: ../lvgl/src/../src/misc/lv_mem.h
 lcd\main.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
@@ -189,7 +192,6 @@ lcd\main.o: ../lvgl/examples/porting/lv_port_disp.h
 lcd\main.o: ../lvgl/examples/porting/lv_port_indev.h
 lcd\main.o: ../lvgl/demos/benchmark/lv_demo_benchmark.h
 lcd\main.o: ../lvgl/demos/benchmark/../lv_demos.h
-lcd\main.o: ../lvgl/demos/benchmark/../benchmark/lv_demo_benchmark.h
 lcd\main.o: ../lvgl/generated/gui_guider.h
 lcd\main.o: ../lvgl/generated/events_init.h
 lcd\main.o: ../bsp/dht11.h

@@ -37,10 +37,8 @@ void ui_load_scr_animation(lv_ui *ui, lv_obj_t ** new_scr, bool new_scr_del, boo
     }
     if (new_scr_del) {
         setup_scr(ui);
-
     }
     lv_scr_load_anim(*new_scr, anim_type, time, delay, auto_del);
-
     *old_scr_del = auto_del;
 }
 
@@ -78,6 +76,7 @@ void init_scr_del_flag(lv_ui *ui)
     ui->main_screen_del = true;
     ui->brightness_screen_del = true;
     ui->mqtt_param_screen_del = true;
+    ui->threshold_screen_del = true;
 }
 
 void setup_ui(lv_ui *ui)

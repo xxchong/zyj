@@ -6,7 +6,7 @@ lcd\lv_led.o: ..\lvgl\src\extra\widgets\led\../../../../src/misc/lv_log.h
 lcd\lv_led.o: ..\lvgl\src\extra\widgets\led\../../../../src/misc/../lv_conf_internal.h
 lcd\lv_led.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 lcd\lv_led.o: ..\lvgl\src\extra\widgets\led\../../../../src/misc/../lv_conf_kconfig.h
-lcd\lv_led.o: ..\lvgl\examples\porting\../../lv_conf.h
+lcd\lv_led.o: ../lvgl/examples/porting/../../lv_conf.h
 lcd\lv_led.o: ..\lvgl\src\extra\widgets\led\../../../../src/misc/lv_types.h
 lcd\lv_led.o: ..\lvgl\src\extra\widgets\led\../../../../src/misc/lv_timer.h
 lcd\lv_led.o: ..\lvgl\src\extra\widgets\led\../../../../src/misc/../hal/lv_hal_tick.h

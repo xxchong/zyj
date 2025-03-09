@@ -27,6 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdbool.h"
 
 /* USER CODE END Includes */
 
@@ -53,7 +54,7 @@ void BusFault_Handler(void);
 void UsageFault_Handler(void);
 void DebugMon_Handler(void);
 void DMA1_Stream5_IRQHandler(void);
-void TIM1_UP_TIM10_IRQHandler(void);
+void TIM3_IRQHandler(void);
 void USART2_IRQHandler(void);
 void EXTI15_10_IRQHandler(void);
 void DMA2_Stream3_IRQHandler(void);

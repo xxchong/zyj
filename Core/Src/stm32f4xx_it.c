@@ -24,6 +24,11 @@
 /* USER CODE BEGIN Includes */
 #include "esp01s.h"
 #include "mqtt.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
+#include "timers.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -61,7 +66,7 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart);
 extern DMA_HandleTypeDef hdma_spi1_tx;
 extern DMA_HandleTypeDef hdma_usart2_rx;
 extern UART_HandleTypeDef huart2;
-extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN EV */
 
@@ -180,17 +185,17 @@ void DMA1_Stream5_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM1 update interrupt and TIM10 global interrupt.
+  * @brief This function handles TIM3 global interrupt.
   */
-void TIM1_UP_TIM10_IRQHandler(void)
+void TIM3_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
+  /* USER CODE BEGIN TIM3_IRQn 0 */
 
-  /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim1);
-  /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
 
-  /* USER CODE END TIM1_UP_TIM10_IRQn 1 */
+  /* USER CODE END TIM3_IRQn 1 */
 }
 
 /**
@@ -239,37 +244,35 @@ void DMA2_Stream3_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-//´®¿Ú2¿ÕÏĞÖĞ¶Ï»Øµ÷º¯Êı
+
+
 void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
 {
     if(huart->Instance == USART2)
     {
-        __HAL_UART_CLEAR_IDLEFLAG(huart);   //Çå³ı¿ÕÏĞ±êÖ¾
+        __HAL_UART_CLEAR_IDLEFLAG(huart);   
         
-        HAL_UART_DMAStop(huart);    //Í£Ö¹DMA
+        HAL_UART_DMAStop(huart);    
         
-        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);  //¼ÆËã½ÓÊÕµ½µÄÊı¾İ³¤¶È
+        uint16_t rxLen = ESP_RXBUFFER_SIZE - __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);  
                 
         if(rxLen > 0)
         {
-            esp01s.rxBuffer[rxLen] = '\0';  // Ìí¼Ó×Ö·û´®½áÊø·û
+            esp01s.rxBuffer[rxLen] = '\0';  
             
-            // Èç¹ûÊÇMQTT¶©ÔÄÏûÏ¢£¬Ö±½Ó´¦Àí
+            //
             if(strstr((char*)esp01s.rxBuffer, "+MQTTSUBRECV"))
             {
                 printf("MQTT Message: %s\n", esp01s.rxBuffer);
-                // TODO: Ìí¼ÓMQTTÏûÏ¢´¦ÀíÂß¼­
             }
             else 
             {
-                // ÆäËûÊı¾İ£¨ÈçATÃüÁîÏìÓ¦£©ÉèÖÃ±êÖ¾Î»
-                // printf("¿ÕÏĞÖĞ¶Ï½ÓÊÕµ½µÄÊı¾İ: %s\n", esp01s.rxBuffer);
                 esp01s.rxLen = rxLen;
                 esp01s.dataReady = 1;
             }
         }
         
-        // ÖØĞÂÆô¶¯DMA½ÓÊÕ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½ï¿½ï¿½
         if(HAL_UART_Receive_DMA(&huart2, (uint8_t *)esp01s.rxBuffer, ESP_RXBUFFER_SIZE) != HAL_OK)
         {
             Error_Handler();
@@ -277,23 +280,27 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
     }
 }
 
-/**
-  * º¯Êı¹¦ÄÜ: »ğÑæ´«¸ĞÆ÷Íâ²¿ÖĞ¶Ï»Øµ÷º¯Êı
-  * ÊäÈë²ÎÊı: GPIO_Pin£ºÖĞ¶ÏÒı½Å
-  * ·µ »Ø Öµ: ÎŞ
-  * Ëµ    Ã÷: ÎŞ
-  */
+volatile bool flame_status = false;
+extern TimerHandle_t flame_timer;
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin==GPIO_PIN_14)
-  {
-  
-    if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_14) == GPIO_PIN_SET)
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    
+    if(GPIO_Pin==GPIO_PIN_14)
     {
-			printf("¼ì²âµ½»ğÑæ\n");
+        if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_14) == GPIO_PIN_SET)
+        {
+            flame_status = true;  // è®¾ç½®ç«ç„°çŠ¶æ€
+            
+            // ä»ä¸­æ–­ä¸­é‡å¯å®šæ—¶å™¨
+            if(flame_timer != NULL)
+            {
+                xTimerResetFromISR(flame_timer, &xHigherPriorityTaskWoken);
+            }
+        }
+        __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_14);
     }
-    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_14);
-  }
-  
+    
 }
 /* USER CODE END 1 */

@@ -22,29 +22,20 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 D:\Desktop\STM32\stm32f407vet6\stm32f407_hal\lcdÓ²¼þspi\MDK-ARM\lcd.uvprojx
-Project File Date:  02/26/2025
+Project File Date:  03/10/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil_v5\ARM\ARMCC\Bin'
 Build target 'lcd'
-compiling freertos.c...
-../bsp/gy302.h(21): warning:  #1-D: last line of file ends without a newline
-  #endif
-../bsp/esp01s.h(57): warning:  #1-D: last line of file ends without a newline
-  #endif
-../bsp/mqtt.h(30): warning:  #1-D: last line of file ends without a newline
-  #endif
-../bsp/mqtt_config.h(21): warning:  #1-D: last line of file ends without a newline
-  #endif // MQTT_CONFIG_H
-../Core/Src/freertos.c(137): warning:  #550-D: variable "sensor_timer"  was set but never used
-  static lv_timer_t *sensor_timer = NULL;
-../Core/Src/freertos.c(141): warning:  #177-D: variable "light_str"  was declared but never referenced
-  static char light_str[10];  
-../Core/Src/freertos.c: 6 warnings, 0 errors
+compiling events_init.c...
+compiling setup_scr_threshold_screen.c...
+..\lvgl\generated\setup_scr_threshold_screen.c(166): warning:  #870-D: invalid multibyte character sequence
+      lv_label_set_text(ui->threshold_screen_label_1, "é˜ˆå€¼è®¾ç½? ");
+..\lvgl\generated\setup_scr_threshold_screen.c: 1 warning, 0 errors
 linking...
-Program Size: Code=186256 RO-data=130892 RW-data=852 ZI-data=73384  
+Program Size: Code=186064 RO-data=144908 RW-data=868 ZI-data=73416  
 FromELF: creating hex file...
-"lcd\lcd.axf" - 0 Error(s), 6 Warning(s).
+"lcd\lcd.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -67,7 +58,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

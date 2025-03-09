@@ -114,7 +114,7 @@ void setup_scr_main_screen(lv_ui *ui)
     ui->main_screen_label_6 = lv_label_create(ui->main_screen_tabview_main_tab_1);
     lv_label_set_text(ui->main_screen_label_6, "2025-02-24");
     lv_label_set_long_mode(ui->main_screen_label_6, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->main_screen_label_6, 56, 78);
+    lv_obj_set_pos(ui->main_screen_label_6, 58, 78);
     lv_obj_set_size(ui->main_screen_label_6, 119, 23);
 
     //Write style for main_screen_label_6, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -137,7 +137,7 @@ void setup_scr_main_screen(lv_ui *ui)
     ui->main_screen_label_5 = lv_label_create(ui->main_screen_tabview_main_tab_1);
     lv_label_set_text(ui->main_screen_label_5, "17:02");
     lv_label_set_long_mode(ui->main_screen_label_5, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->main_screen_label_5, 63, 46);
+    lv_obj_set_pos(ui->main_screen_label_5, 66, 46);
     lv_obj_set_size(ui->main_screen_label_5, 100, 32);
 
     //Write style for main_screen_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -160,7 +160,7 @@ void setup_scr_main_screen(lv_ui *ui)
     ui->main_screen_label_7 = lv_label_create(ui->main_screen_tabview_main_tab_1);
     lv_label_set_text(ui->main_screen_label_7, "张有金 202110264127");
     lv_label_set_long_mode(ui->main_screen_label_7, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->main_screen_label_7, 29, 119);
+    lv_obj_set_pos(ui->main_screen_label_7, 29, 118);
     lv_obj_set_size(ui->main_screen_label_7, 188, 16);
 
     //Write style for main_screen_label_7, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -395,6 +395,8 @@ void setup_scr_main_screen(lv_ui *ui)
     lv_arc_set_bg_angles(ui->main_screen_arc_vibration, 135, 45);
     lv_arc_set_value(ui->main_screen_arc_vibration, 100);
     lv_arc_set_rotation(ui->main_screen_arc_vibration, 0);
+    lv_obj_set_style_arc_rounded(ui->main_screen_arc_vibration, 0,  LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_rounded(ui->main_screen_arc_vibration, 0, LV_STATE_DEFAULT);
     lv_obj_set_pos(ui->main_screen_arc_vibration, 164, -9);
     lv_obj_set_size(ui->main_screen_arc_vibration, 80, 80);
 
@@ -588,7 +590,7 @@ void setup_scr_main_screen(lv_ui *ui)
 
     //Write codes main_screen_label_2
     ui->main_screen_label_2 = lv_label_create(ui->main_screen_tabview_main_tab_2);
-    lv_label_set_text(ui->main_screen_label_2, "继电器\n");
+    lv_label_set_text(ui->main_screen_label_2, "继电器 ");
     lv_label_set_long_mode(ui->main_screen_label_2, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->main_screen_label_2, 153, 112);
     lv_obj_set_size(ui->main_screen_label_2, 52, 14);
@@ -611,7 +613,7 @@ void setup_scr_main_screen(lv_ui *ui)
 
     //Write codes main_screen_label_3
     ui->main_screen_label_3 = lv_label_create(ui->main_screen_tabview_main_tab_2);
-    lv_label_set_text(ui->main_screen_label_3, "火焰状况\n");
+    lv_label_set_text(ui->main_screen_label_3, "火焰状况 ");
     lv_label_set_long_mode(ui->main_screen_label_3, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->main_screen_label_3, -14, 154);
     lv_obj_set_size(ui->main_screen_label_3, 60, 14);
@@ -670,7 +672,7 @@ void setup_scr_main_screen(lv_ui *ui)
     //Write codes main_screen_btn_main_net
     ui->main_screen_btn_main_net = lv_btn_create(ui->main_screen_tabview_main_tab_3);
     ui->main_screen_btn_main_net_label = lv_label_create(ui->main_screen_btn_main_net);
-    lv_label_set_text(ui->main_screen_btn_main_net_label, "" LV_SYMBOL_WIFI "  网络配置");
+    lv_label_set_text(ui->main_screen_btn_main_net_label, "" LV_SYMBOL_LIST "  阈值设置 ");
     lv_label_set_long_mode(ui->main_screen_btn_main_net_label, LV_LABEL_LONG_WRAP);
     lv_obj_align(ui->main_screen_btn_main_net_label, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_pad_all(ui->main_screen_btn_main_net, 0, LV_STATE_DEFAULT);
@@ -714,6 +716,7 @@ void setup_scr_main_screen(lv_ui *ui)
     lv_obj_set_style_text_align(ui->main_screen_btn_main_mqtt, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
 
     //The custom code of main_screen.
+
 
     //Update current screen layout.
     lv_obj_update_layout(ui->main_screen);

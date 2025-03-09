@@ -130,4 +130,3 @@ lcd\lv_demo_benchmark.o: ..\lvgl\demos\benchmark\../../src/extra/widgets/colorwh
 lcd\lv_demo_benchmark.o: ..\lvgl\demos\benchmark\../../src/extra/widgets/led/lv_led.h
 lcd\lv_demo_benchmark.o: ..\lvgl\demos\benchmark\../../src/extra/widgets/imgbtn/lv_imgbtn.h
 lcd\lv_demo_benchmark.o: ..\lvgl\demos\benchmark\../../src/extra/widgets/span/lv_span.h
-lcd\lv_demo_benchmark.o: ..\lvgl\demos\benchmark\../benchmark/lv_demo_benchmark.h

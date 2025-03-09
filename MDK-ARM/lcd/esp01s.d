@@ -34,10 +34,13 @@ lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
+lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lcd\esp01s.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 lcd\esp01s.o: ../Core/Inc/usart.h
 lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
 lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

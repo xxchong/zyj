@@ -30,7 +30,7 @@ void setup_scr_brightness_screen(lv_ui *ui)
 
     //Write codes brightness_screen_slider_brightness
     ui->brightness_screen_slider_brightness = lv_slider_create(ui->brightness_screen);
-    lv_slider_set_range(ui->brightness_screen_slider_brightness, 0, 100);
+    lv_slider_set_range(ui->brightness_screen_slider_brightness, 0, brightness_percentage);
     lv_slider_set_mode(ui->brightness_screen_slider_brightness, LV_SLIDER_MODE_NORMAL);
     lv_slider_set_value(ui->brightness_screen_slider_brightness, 50, LV_ANIM_OFF);
     lv_obj_set_pos(ui->brightness_screen_slider_brightness, 28, 127);
@@ -100,9 +100,7 @@ void setup_scr_brightness_screen(lv_ui *ui)
 
     //Write codes brightness_screen_label_percentage
     ui->brightness_screen_label_percentage = lv_label_create(ui->brightness_screen);
-    char percentage[10];
-    sprintf(percentage, "%d%%", brightness_percentage);
-    lv_label_set_text(ui->brightness_screen_label_percentage, percentage);
+    lv_label_set_text(ui->brightness_screen_label_percentage, "100%");
     lv_label_set_long_mode(ui->brightness_screen_label_percentage, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->brightness_screen_label_percentage, 138, 90);
     lv_obj_set_size(ui->brightness_screen_label_percentage, 50, 15);

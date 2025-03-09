@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdbool.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -60,9 +60,20 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
+typedef struct {
+    uint8_t humi;
+    uint8_t temp;
+    uint8_t mq2;
+    uint8_t light;
+} SensorData_threshold_t;
+
+
+extern SensorData_threshold_t threshold_data; //传感器阈值
 
 extern uint16_t brightness_pwm;
 extern uint16_t brightness_percentage;
+extern volatile bool flame_status;
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

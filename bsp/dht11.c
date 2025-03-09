@@ -119,48 +119,48 @@ uint8_t DHT11_ReadData(DHT11_Data_TypeDef *DHT11_Data)
     
     DHT11_PP_OUT();         // 主机输出，主机拉低
     DHT11_PULL_0;    
-    osDelay(20);       // 延时 18 ms
+    vTaskDelay(pdMS_TO_TICKS(20));  // 使用FreeRTOS的延时函数
     
     DHT11_PULL_1;          // 主机拉高，延时 30 us
-    my_delay_us(35);    
+    my_delay_us(30);    
 
     DHT11_UP_IN();         // 主机输入，获取 DHT11 数据
     
-    if (DHT11_ReadPin == 0)        // 收到从机应答
+    timeout = 10000;  // 增加超时时间
+    while (DHT11_ReadPin == 1)  // 等待变为低电平
     {
-        timeout = 1000;
-        while (DHT11_ReadPin == 0)  // 等待从机应答的低电平结束
-        { 
-            if(--timeout == 0) return 0;
-        }
-        
-        timeout = 1000;
-        while (DHT11_ReadPin == 1)  // 等待从机应答的高电平结束
-        {
-            if(--timeout == 0) return 0;
-        }
-        
-        /*开始接收数据*/   
-        DHT11_Data->humi_int  = DHT11_ReadByte();
-        DHT11_Data->humi_dec  = DHT11_ReadByte();
-        DHT11_Data->temp_int  = DHT11_ReadByte();
-        DHT11_Data->temp_dec  = DHT11_ReadByte();
-        DHT11_Data->check_sum = DHT11_ReadByte();
-        
-        DHT11_PP_OUT();     // 读取结束，主机拉高
-        DHT11_PULL_1;    
-        
-        // 数据校验
-        if (DHT11_Data->check_sum == DHT11_Data->humi_int + DHT11_Data->humi_dec + DHT11_Data->temp_int + DHT11_Data->temp_dec)    
-        {
-            return 1;
-        }        
-        else
-        {
-            return 0;
-        }
+        if(--timeout == 0) return 0;
     }
-    else        // 未收到从机应答
+    
+    timeout = 10000;
+    while (DHT11_ReadPin == 0)  // 等待从机应答的低电平结束
+    { 
+        if(--timeout == 0) return 0;
+    }
+    
+    timeout = 10000;
+    while (DHT11_ReadPin == 1)  // 等待从机应答的高电平结束
+    {
+        if(--timeout == 0) return 0;
+    }
+    
+    /*开始接收数据*/   
+    DHT11_Data->humi_int  = DHT11_ReadByte();
+    DHT11_Data->humi_dec  = DHT11_ReadByte();
+    DHT11_Data->temp_int  = DHT11_ReadByte();
+    DHT11_Data->temp_dec  = DHT11_ReadByte();
+    DHT11_Data->check_sum = DHT11_ReadByte();
+    
+    DHT11_PP_OUT();     // 读取结束，主机拉高
+    DHT11_PULL_1;    
+    
+    // 数据校验
+    if (DHT11_Data->check_sum == DHT11_Data->humi_int + DHT11_Data->humi_dec + 
+        DHT11_Data->temp_int + DHT11_Data->temp_dec)    
+    {
+        return 1;
+    }        
+    else
     {
         return 0;
     }
