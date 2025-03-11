@@ -7,6 +7,8 @@
         "mqtt_config.h": "c",
         "events_init.h": "c",
         "tim.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "beep.h": "c",
+        "stm32f4xx_hal.h": "c"
     }
 }

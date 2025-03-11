@@ -101,8 +101,11 @@ Section Cross References
     freertos.o(i.sensorTask) refers to gy302.o(i.GY302_ReadLight) for GY302_ReadLight
     freertos.o(i.sensorTask) refers to queue.o(i.xQueueGenericSend) for xQueueGenericSend
     freertos.o(i.sensorTask) refers to printfa.o(i.__0printf) for __2printf
+    freertos.o(i.sensorTask) refers to stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    freertos.o(i.sensorTask) refers to tasks.o(i.vTaskDelay) for vTaskDelay
     freertos.o(i.sensorTask) refers to tasks.o(i.vTaskDelayUntil) for vTaskDelayUntil
     freertos.o(i.sensorTask) refers to freertos.o(.data) for .data
+    freertos.o(i.sensorTask) refers to main.o(.data) for threshold_data
     freertos.o(i.sensor_timer_callback) refers to queue.o(i.xQueueReceive) for xQueueReceive
     freertos.o(i.sensor_timer_callback) refers to printfa.o(i.__0snprintf) for __2snprintf
     freertos.o(i.sensor_timer_callback) refers to lv_label.o(i.lv_label_set_text) for lv_label_set_text
@@ -12118,377 +12121,377 @@ Image Symbol Table
     i.scrollbar_init_draw_dsc                0x08026822   Section        0  lv_obj.o(i.scrollbar_init_draw_dsc)
     scrollbar_init_draw_dsc                  0x08026823   Thumb Code   252  lv_obj.o(i.scrollbar_init_draw_dsc)
     i.sensorTask                             0x08026920   Section        0  freertos.o(i.sensorTask)
-    i.sensor_timer_callback                  0x08026984   Section        0  freertos.o(i.sensor_timer_callback)
-    i.set_ofs_x_anim                         0x08026a68   Section        0  lv_label.o(i.set_ofs_x_anim)
-    set_ofs_x_anim                           0x08026a69   Thumb Code     8  lv_label.o(i.set_ofs_x_anim)
-    i.set_ofs_y_anim                         0x08026a70   Section        0  lv_label.o(i.set_ofs_y_anim)
-    set_ofs_y_anim                           0x08026a71   Thumb Code     8  lv_label.o(i.set_ofs_y_anim)
-    i.set_x_anim                             0x08026a78   Section        0  lv_disp.o(i.set_x_anim)
-    set_x_anim                               0x08026a79   Thumb Code     6  lv_disp.o(i.set_x_anim)
-    i.set_y_anim                             0x08026a7e   Section        0  lv_disp.o(i.set_y_anim)
-    set_y_anim                               0x08026a7f   Thumb Code     6  lv_disp.o(i.set_y_anim)
-    i.set_y_anim                             0x08026a84   Section        0  lv_roller.o(i.set_y_anim)
-    set_y_anim                               0x08026a85   Thumb Code     6  lv_roller.o(i.set_y_anim)
-    i.setup_scr_brightness_screen            0x08026a8c   Section        0  setup_scr_brightness_screen.o(i.setup_scr_brightness_screen)
-    i.setup_scr_main_screen                  0x08026e1c   Section        0  setup_scr_main_screen.o(i.setup_scr_main_screen)
-    i.setup_scr_mqtt_param_screen            0x08028578   Section        0  setup_scr_mqtt_param_screen.o(i.setup_scr_mqtt_param_screen)
-    i.setup_scr_threshold_screen             0x08028a70   Section        0  setup_scr_threshold_screen.o(i.setup_scr_threshold_screen)
-    i.setup_ui                               0x08029608   Section        0  gui_guider.o(i.setup_ui)
-    i.shadow_blur_corner                     0x08029620   Section        0  lv_draw_sw_rect.o(i.shadow_blur_corner)
-    shadow_blur_corner                       0x08029621   Thumb Code   308  lv_draw_sw_rect.o(i.shadow_blur_corner)
-    i.shadow_draw_corner_buf                 0x08029754   Section        0  lv_draw_sw_rect.o(i.shadow_draw_corner_buf)
-    shadow_draw_corner_buf                   0x08029755   Thumb Code   386  lv_draw_sw_rect.o(i.shadow_draw_corner_buf)
-    i.show_error                             0x080298d6   Section        0  lv_draw_img.o(i.show_error)
-    show_error                               0x080298d7   Thumb Code    78  lv_draw_img.o(i.show_error)
-    i.start_cursor_blink                     0x08029924   Section        0  lv_textarea.o(i.start_cursor_blink)
-    start_cursor_blink                       0x08029925   Thumb Code    88  lv_textarea.o(i.start_cursor_blink)
-    i.style_init                             0x08029984   Section        0  lv_theme_default.o(i.style_init)
-    style_init                               0x08029985   Thumb Code  5164  lv_theme_default.o(i.style_init)
-    i.style_init_reset                       0x0802adb0   Section        0  lv_theme_default.o(i.style_init_reset)
-    style_init_reset                         0x0802adb1   Thumb Code    14  lv_theme_default.o(i.style_init_reset)
-    i.theme_apply                            0x0802adc4   Section        0  lv_theme_default.o(i.theme_apply)
-    theme_apply                              0x0802adc5   Thumb Code  3328  lv_theme_default.o(i.theme_apply)
-    i.threshold_screen_btn_1_event_handler   0x0802bac4   Section        0  events_init.o(i.threshold_screen_btn_1_event_handler)
-    threshold_screen_btn_1_event_handler     0x0802bac5   Thumb Code    70  events_init.o(i.threshold_screen_btn_1_event_handler)
-    i.threshold_screen_slider_humi_event_handler 0x0802bb14   Section        0  events_init.o(i.threshold_screen_slider_humi_event_handler)
-    threshold_screen_slider_humi_event_handler 0x0802bb15   Thumb Code   164  events_init.o(i.threshold_screen_slider_humi_event_handler)
-    i.tileview_event_cb                      0x0802bbc4   Section        0  lv_tileview.o(i.tileview_event_cb)
-    tileview_event_cb                        0x0802bbc5   Thumb Code   182  lv_tileview.o(i.tileview_event_cb)
-    i.tlsf_ffs                               0x0802bc7a   Section        0  lv_tlsf.o(i.tlsf_ffs)
-    tlsf_ffs                                 0x0802bc7b   Thumb Code    16  lv_tlsf.o(i.tlsf_ffs)
-    i.tlsf_fls                               0x0802bc8a   Section        0  lv_tlsf.o(i.tlsf_fls)
-    tlsf_fls                                 0x0802bc8b   Thumb Code    14  lv_tlsf.o(i.tlsf_fls)
-    i.touch_driver_init                      0x0802bc98   Section        0  cst816.o(i.touch_driver_init)
-    i.touchpad_read                          0x0802bca4   Section        0  lv_port_indev.o(i.touchpad_read)
-    touchpad_read                            0x0802bca5   Thumb Code    50  lv_port_indev.o(i.touchpad_read)
-    i.trans_anim_cb                          0x0802bcdc   Section        0  lv_obj_style.o(i.trans_anim_cb)
-    trans_anim_cb                            0x0802bcdd   Thumb Code   322  lv_obj_style.o(i.trans_anim_cb)
-    i.trans_anim_ready_cb                    0x0802be24   Section        0  lv_obj_style.o(i.trans_anim_ready_cb)
-    trans_anim_ready_cb                      0x0802be25   Thumb Code   164  lv_obj_style.o(i.trans_anim_ready_cb)
-    i.trans_anim_start_cb                    0x0802becc   Section        0  lv_obj_style.o(i.trans_anim_start_cb)
-    trans_anim_start_cb                      0x0802becd   Thumb Code    64  lv_obj_style.o(i.trans_anim_start_cb)
-    i.trans_del                              0x0802bf0c   Section        0  lv_obj_style.o(i.trans_del)
-    trans_del                                0x0802bf0d   Thumb Code   164  lv_obj_style.o(i.trans_del)
-    i.transform_point                        0x0802bfb4   Section        0  lv_obj_pos.o(i.transform_point)
-    transform_point                          0x0802bfb5   Thumb Code   254  lv_obj_pos.o(i.transform_point)
-    i.transform_point_upscaled               0x0802c0b2   Section        0  lv_draw_sw_transform.o(i.transform_point_upscaled)
-    transform_point_upscaled                 0x0802c0b3   Thumb Code   146  lv_draw_sw_transform.o(i.transform_point_upscaled)
-    i.ui_init_style                          0x0802c144   Section        0  gui_guider.o(i.ui_init_style)
-    i.ui_load_scr_animation                  0x0802c152   Section        0  gui_guider.o(i.ui_load_scr_animation)
-    i.unicode_list_compare                   0x0802c198   Section        0  lv_font_fmt_txt.o(i.unicode_list_compare)
-    unicode_list_compare                     0x0802c199   Thumb Code     8  lv_font_fmt_txt.o(i.unicode_list_compare)
-    i.update_cursor_position_on_click        0x0802c1a0   Section        0  lv_textarea.o(i.update_cursor_position_on_click)
-    update_cursor_position_on_click          0x0802c1a1   Thumb Code   382  lv_textarea.o(i.update_cursor_position_on_click)
-    i.uxListRemove                           0x0802c31e   Section        0  list.o(i.uxListRemove)
-    i.vApplicationGetIdleTaskMemory          0x0802c344   Section        0  cmsis_os2.o(i.vApplicationGetIdleTaskMemory)
-    i.vApplicationGetTimerTaskMemory         0x0802c358   Section        0  cmsis_os2.o(i.vApplicationGetTimerTaskMemory)
-    i.vApplicationTickHook                   0x0802c370   Section        0  freertos.o(i.vApplicationTickHook)
-    i.vListInitialise                        0x0802c376   Section        0  list.o(i.vListInitialise)
-    i.vListInitialiseItem                    0x0802c38c   Section        0  list.o(i.vListInitialiseItem)
-    i.vListInsert                            0x0802c392   Section        0  list.o(i.vListInsert)
-    i.vListInsertEnd                         0x0802c3c2   Section        0  list.o(i.vListInsertEnd)
-    i.vPortEnterCritical                     0x0802c3dc   Section        0  port.o(i.vPortEnterCritical)
-    i.vPortExitCritical                      0x0802c41c   Section        0  port.o(i.vPortExitCritical)
-    i.vPortFree                              0x0802c444   Section        0  heap_4.o(i.vPortFree)
-    i.vPortSetupTimerInterrupt               0x0802c4a8   Section        0  port.o(i.vPortSetupTimerInterrupt)
-    i.vPortValidateInterruptPriority         0x0802c4cc   Section        0  port.o(i.vPortValidateInterruptPriority)
-    i.vQueueAddToRegistry                    0x0802c520   Section        0  queue.o(i.vQueueAddToRegistry)
-    i.vQueueWaitForMessageRestricted         0x0802c544   Section        0  queue.o(i.vQueueWaitForMessageRestricted)
-    i.vTaskDelay                             0x0802c588   Section        0  tasks.o(i.vTaskDelay)
-    i.vTaskDelayUntil                        0x0802c5d4   Section        0  tasks.o(i.vTaskDelayUntil)
-    i.vTaskInternalSetTimeOutState           0x0802c664   Section        0  tasks.o(i.vTaskInternalSetTimeOutState)
-    i.vTaskMissedYield                       0x0802c674   Section        0  tasks.o(i.vTaskMissedYield)
-    i.vTaskPlaceOnEventList                  0x0802c680   Section        0  tasks.o(i.vTaskPlaceOnEventList)
-    i.vTaskPlaceOnEventListRestricted        0x0802c6b0   Section        0  tasks.o(i.vTaskPlaceOnEventListRestricted)
-    i.vTaskPriorityDisinheritAfterTimeout    0x0802c6e8   Section        0  tasks.o(i.vTaskPriorityDisinheritAfterTimeout)
-    i.vTaskStartScheduler                    0x0802c778   Section        0  tasks.o(i.vTaskStartScheduler)
-    i.vTaskSuspendAll                        0x0802c7fc   Section        0  tasks.o(i.vTaskSuspendAll)
-    i.vTaskSwitchContext                     0x0802c80c   Section        0  tasks.o(i.vTaskSwitchContext)
-    i.value_changed_event_cb                 0x0802c870   Section        0  lv_calendar_header_arrow.o(i.value_changed_event_cb)
-    value_changed_event_cb                   0x0802c871   Thumb Code    52  lv_calendar_header_arrow.o(i.value_changed_event_cb)
-    i.value_changed_event_cb                 0x0802c8b0   Section        0  lv_calendar_header_dropdown.o(i.value_changed_event_cb)
-    value_changed_event_cb                   0x0802c8b1   Thumb Code    64  lv_calendar_header_dropdown.o(i.value_changed_event_cb)
-    i.value_update                           0x0802c8f0   Section        0  lv_arc.o(i.value_update)
-    value_update                             0x0802c8f1   Thumb Code   194  lv_arc.o(i.value_update)
-    i.xPortStartScheduler                    0x0802c9b4   Section        0  port.o(i.xPortStartScheduler)
-    i.xPortSysTickHandler                    0x0802caa8   Section        0  port.o(i.xPortSysTickHandler)
-    i.xQueueCreateMutex                      0x0802cad4   Section        0  queue.o(i.xQueueCreateMutex)
-    i.xQueueCreateMutexStatic                0x0802caea   Section        0  queue.o(i.xQueueCreateMutexStatic)
-    i.xQueueGenericCreate                    0x0802cb04   Section        0  queue.o(i.xQueueGenericCreate)
-    i.xQueueGenericCreateStatic              0x0802cb46   Section        0  queue.o(i.xQueueGenericCreateStatic)
-    i.xQueueGenericReset                     0x0802cbac   Section        0  queue.o(i.xQueueGenericReset)
-    i.xQueueGenericSend                      0x0802cc34   Section        0  queue.o(i.xQueueGenericSend)
-    i.xQueueGenericSendFromISR               0x0802cd98   Section        0  queue.o(i.xQueueGenericSendFromISR)
-    i.xQueueGiveMutexRecursive               0x0802ce56   Section        0  queue.o(i.xQueueGiveMutexRecursive)
-    i.xQueuePeek                             0x0802ce94   Section        0  queue.o(i.xQueuePeek)
-    i.xQueueReceive                          0x0802cfcc   Section        0  queue.o(i.xQueueReceive)
-    i.xQueueSemaphoreTake                    0x0802d104   Section        0  queue.o(i.xQueueSemaphoreTake)
-    i.xQueueTakeMutexRecursive               0x0802d27c   Section        0  queue.o(i.xQueueTakeMutexRecursive)
-    i.xTaskCheckForTimeOut                   0x0802d2bc   Section        0  tasks.o(i.xTaskCheckForTimeOut)
-    i.xTaskCreate                            0x0802d330   Section        0  tasks.o(i.xTaskCreate)
-    i.xTaskCreateStatic                      0x0802d38a   Section        0  tasks.o(i.xTaskCreateStatic)
-    i.xTaskGetCurrentTaskHandle              0x0802d3e4   Section        0  tasks.o(i.xTaskGetCurrentTaskHandle)
-    i.xTaskGetSchedulerState                 0x0802d3f0   Section        0  tasks.o(i.xTaskGetSchedulerState)
-    i.xTaskGetTickCount                      0x0802d40c   Section        0  tasks.o(i.xTaskGetTickCount)
-    i.xTaskGetTickCountFromISR               0x0802d418   Section        0  tasks.o(i.xTaskGetTickCountFromISR)
-    i.xTaskIncrementTick                     0x0802d428   Section        0  tasks.o(i.xTaskIncrementTick)
-    i.xTaskPriorityDisinherit                0x0802d500   Section        0  tasks.o(i.xTaskPriorityDisinherit)
-    i.xTaskPriorityInherit                   0x0802d57c   Section        0  tasks.o(i.xTaskPriorityInherit)
-    i.xTaskRemoveFromEventList               0x0802d5f8   Section        0  tasks.o(i.xTaskRemoveFromEventList)
-    i.xTaskResumeAll                         0x0802d668   Section        0  tasks.o(i.xTaskResumeAll)
-    i.xTimerCreate                           0x0802d728   Section        0  timers.o(i.xTimerCreate)
-    i.xTimerCreateTimerTask                  0x0802d75c   Section        0  timers.o(i.xTimerCreateTimerTask)
-    i.xTimerGenericCommand                   0x0802d7bc   Section        0  timers.o(i.xTimerGenericCommand)
-    i.year_event_cb                          0x0802d820   Section        0  lv_calendar_header_dropdown.o(i.year_event_cb)
-    year_event_cb                            0x0802d821   Thumb Code    56  lv_calendar_header_dropdown.o(i.year_event_cb)
-    .constdata                               0x0802d858   Section      124  freertos.o(.constdata)
-    .constdata                               0x0802d8d4   Section        8  stm32f4xx_hal_dma.o(.constdata)
-    flagBitshiftOffset                       0x0802d8d4   Data           8  stm32f4xx_hal_dma.o(.constdata)
-    .constdata                               0x0802d8dc   Section       16  system_stm32f4xx.o(.constdata)
-    .constdata                               0x0802d8ec   Section        8  system_stm32f4xx.o(.constdata)
-    .constdata                               0x0802d8f4   Section       28  lv_obj.o(.constdata)
-    .constdata                               0x0802d910   Section        8  lv_obj_pos.o(.constdata)
-    .constdata                               0x0802d918   Section      278  lv_draw_sw_letter.o(.constdata)
-    .constdata                               0x0802da2e   Section       33  lv_draw_sw_line.o(.constdata)
-    wcorr                                    0x0802da2e   Data          33  lv_draw_sw_line.o(.constdata)
-    .constdata                               0x0802da50   Section        8  lv_draw_sw_polygon.o(.constdata)
-    .constdata                               0x0802da58   Section       22  lv_theme_default.o(.constdata)
-    trans_props                              0x0802da58   Data          22  lv_theme_default.o(.constdata)
-    .constdata                               0x0802da70   Section       28  lv_calendar.o(.constdata)
-    .constdata                               0x0802da8c   Section       28  lv_calendar_header_arrow.o(.constdata)
-    .constdata                               0x0802daa8   Section       28  lv_calendar_header_dropdown.o(.constdata)
-    .constdata                               0x0802dac4   Section       28  lv_colorwheel.o(.constdata)
-    .constdata                               0x0802dae0   Section       28  lv_keyboard.o(.constdata)
-    .constdata                               0x0802dafc   Section      176  lv_keyboard.o(.constdata)
-    default_kb_map_lc                        0x0802dafc   Data         176  lv_keyboard.o(.constdata)
-    .constdata                               0x0802dbac   Section       80  lv_keyboard.o(.constdata)
-    default_kb_ctrl_lc_map                   0x0802dbac   Data          80  lv_keyboard.o(.constdata)
-    .constdata                               0x0802dbfc   Section      176  lv_keyboard.o(.constdata)
-    default_kb_map_uc                        0x0802dbfc   Data         176  lv_keyboard.o(.constdata)
-    .constdata                               0x0802dcac   Section       80  lv_keyboard.o(.constdata)
-    default_kb_ctrl_uc_map                   0x0802dcac   Data          80  lv_keyboard.o(.constdata)
-    .constdata                               0x0802dcfc   Section      176  lv_keyboard.o(.constdata)
-    default_kb_map_spec                      0x0802dcfc   Data         176  lv_keyboard.o(.constdata)
-    .constdata                               0x0802ddac   Section       80  lv_keyboard.o(.constdata)
-    default_kb_ctrl_spec_map                 0x0802ddac   Data          80  lv_keyboard.o(.constdata)
-    .constdata                               0x0802ddfc   Section       84  lv_keyboard.o(.constdata)
-    default_kb_map_num                       0x0802ddfc   Data          84  lv_keyboard.o(.constdata)
-    .constdata                               0x0802de50   Section       34  lv_keyboard.o(.constdata)
-    default_kb_ctrl_num_map                  0x0802de50   Data          34  lv_keyboard.o(.constdata)
-    .constdata                               0x0802de74   Section       28  lv_led.o(.constdata)
-    .constdata                               0x0802de90   Section       84  lv_list.o(.constdata)
-    .constdata                               0x0802dee4   Section      252  lv_menu.o(.constdata)
-    .constdata                               0x0802dfe0   Section       28  lv_meter.o(.constdata)
-    .constdata                               0x0802dffc   Section       84  lv_msgbox.o(.constdata)
-    .constdata                               0x0802e050   Section       28  lv_spinbox.o(.constdata)
-    .constdata                               0x0802e06c   Section       28  lv_spinner.o(.constdata)
-    .constdata                               0x0802e088   Section       28  lv_tabview.o(.constdata)
-    .constdata                               0x0802e0a4   Section       56  lv_tileview.o(.constdata)
-    .constdata                               0x0802e0dc   Section       28  lv_win.o(.constdata)
-    .constdata                               0x0802e0f8   Section     8832  lv_font_montserrat_14.o(.constdata)
-    glyph_bitmap                             0x0802e0f8   Data        8832  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x08030378   Section     1264  lv_font_montserrat_14.o(.constdata)
-    glyph_dsc                                0x08030378   Data        1264  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x08030868   Section      124  lv_font_montserrat_14.o(.constdata)
-    unicode_list_1                           0x08030868   Data         124  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x080308e4   Section       40  lv_font_montserrat_14.o(.constdata)
-    cmaps                                    0x080308e4   Data          40  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x0803090c   Section      158  lv_font_montserrat_14.o(.constdata)
-    kern_left_class_mapping                  0x0803090c   Data         158  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x080309aa   Section      158  lv_font_montserrat_14.o(.constdata)
-    kern_right_class_mapping                 0x080309aa   Data         158  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x08030a48   Section     2989  lv_font_montserrat_14.o(.constdata)
-    kern_class_values                        0x08030a48   Data        2989  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x080315f8   Section       16  lv_font_montserrat_14.o(.constdata)
-    kern_classes                             0x080315f8   Data          16  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x08031608   Section       24  lv_font_montserrat_14.o(.constdata)
-    font_dsc                                 0x08031608   Data          24  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x08031620   Section       28  lv_font_montserrat_14.o(.constdata)
-    .constdata                               0x0803163c   Section      380  lv_color.o(.constdata)
-    colors                                   0x0803163c   Data          38  lv_color.o(.constdata)
-    colors                                   0x08031662   Data         190  lv_color.o(.constdata)
-    colors                                   0x08031720   Data         152  lv_color.o(.constdata)
-    .constdata                               0x080317b8   Section      182  lv_math.o(.constdata)
-    sin0_90_table                            0x080317b8   Data         182  lv_math.o(.constdata)
-    .constdata                               0x08031870   Section      117  lv_style.o(.constdata)
-    null_style_value                         0x08031870   Data           4  lv_style.o(.constdata)
-    .constdata                               0x080318e8   Section       28  lv_arc.o(.constdata)
-    .constdata                               0x08031904   Section       28  lv_bar.o(.constdata)
-    .constdata                               0x08031920   Section       28  lv_btn.o(.constdata)
-    .constdata                               0x0803193c   Section       28  lv_btnmatrix.o(.constdata)
-    .constdata                               0x08031958   Section       28  lv_checkbox.o(.constdata)
-    .constdata                               0x08031974   Section       56  lv_dropdown.o(.constdata)
-    .constdata                               0x080319ac   Section       28  lv_img.o(.constdata)
-    .constdata                               0x080319c8   Section       28  lv_label.o(.constdata)
-    .constdata                               0x080319e4   Section       28  lv_line.o(.constdata)
-    .constdata                               0x08031a00   Section       56  lv_roller.o(.constdata)
-    .constdata                               0x08031a38   Section       28  lv_slider.o(.constdata)
-    .constdata                               0x08031a54   Section       28  lv_switch.o(.constdata)
-    .constdata                               0x08031a70   Section       28  lv_table.o(.constdata)
-    .constdata                               0x08031a8c   Section       28  lv_textarea.o(.constdata)
-    .constdata                               0x08031aa8   Section     8163  lv_font_misansnormal_13.o(.constdata)
-    glyph_bitmap                             0x08031aa8   Data        8163  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08033a8c   Section     1328  lv_font_misansnormal_13.o(.constdata)
-    glyph_dsc                                0x08033a8c   Data        1328  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08033fbc   Section      140  lv_font_misansnormal_13.o(.constdata)
-    unicode_list_3                           0x08033fbc   Data         140  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08034048   Section       80  lv_font_misansnormal_13.o(.constdata)
-    cmaps                                    0x08034048   Data          80  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08034098   Section      166  lv_font_misansnormal_13.o(.constdata)
-    kern_left_class_mapping                  0x08034098   Data         166  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x0803413e   Section      166  lv_font_misansnormal_13.o(.constdata)
-    kern_right_class_mapping                 0x0803413e   Data         166  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x080341e4   Section     2080  lv_font_misansnormal_13.o(.constdata)
-    kern_class_values                        0x080341e4   Data        2080  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08034a04   Section       16  lv_font_misansnormal_13.o(.constdata)
-    kern_classes                             0x08034a04   Data          16  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08034a14   Section       24  lv_font_misansnormal_13.o(.constdata)
-    font_dsc                                 0x08034a14   Data          24  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08034a2c   Section       28  lv_font_misansnormal_13.o(.constdata)
-    .constdata                               0x08034a48   Section    10204  lv_font_misansnormal_15.o(.constdata)
-    glyph_bitmap                             0x08034a48   Data       10204  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08037224   Section     1296  lv_font_misansnormal_15.o(.constdata)
-    glyph_dsc                                0x08037224   Data        1296  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08037734   Section      132  lv_font_misansnormal_15.o(.constdata)
-    unicode_list_1                           0x08037734   Data         132  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x080377b8   Section       40  lv_font_misansnormal_15.o(.constdata)
-    cmaps                                    0x080377b8   Data          40  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x080377e0   Section      162  lv_font_misansnormal_15.o(.constdata)
-    kern_left_class_mapping                  0x080377e0   Data         162  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08037882   Section      162  lv_font_misansnormal_15.o(.constdata)
-    kern_right_class_mapping                 0x08037882   Data         162  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08037924   Section     2080  lv_font_misansnormal_15.o(.constdata)
-    kern_class_values                        0x08037924   Data        2080  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08038144   Section       16  lv_font_misansnormal_15.o(.constdata)
-    kern_classes                             0x08038144   Data          16  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08038154   Section       24  lv_font_misansnormal_15.o(.constdata)
-    font_dsc                                 0x08038154   Data          24  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x0803816c   Section       28  lv_font_misansnormal_15.o(.constdata)
-    .constdata                               0x08038188   Section    13785  lv_font_misansnormal_16.o(.constdata)
-    glyph_bitmap                             0x08038188   Data       13785  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803b764   Section     1472  lv_font_misansnormal_16.o(.constdata)
-    glyph_dsc                                0x0803b764   Data        1472  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803bd24   Section      176  lv_font_misansnormal_16.o(.constdata)
-    unicode_list_3                           0x0803bd24   Data         176  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803bdd4   Section       80  lv_font_misansnormal_16.o(.constdata)
-    cmaps                                    0x0803bdd4   Data          80  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803be24   Section      184  lv_font_misansnormal_16.o(.constdata)
-    kern_left_class_mapping                  0x0803be24   Data         184  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803bedc   Section      184  lv_font_misansnormal_16.o(.constdata)
-    kern_right_class_mapping                 0x0803bedc   Data         184  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803bf94   Section     2080  lv_font_misansnormal_16.o(.constdata)
-    kern_class_values                        0x0803bf94   Data        2080  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803c7b4   Section       16  lv_font_misansnormal_16.o(.constdata)
-    kern_classes                             0x0803c7b4   Data          16  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803c7c4   Section       24  lv_font_misansnormal_16.o(.constdata)
-    font_dsc                                 0x0803c7c4   Data          24  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803c7dc   Section       28  lv_font_misansnormal_16.o(.constdata)
-    .constdata                               0x0803c7f8   Section    15070  lv_font_misansnormal_18.o(.constdata)
-    glyph_bitmap                             0x0803c7f8   Data       15070  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x080402d8   Section     1320  lv_font_misansnormal_18.o(.constdata)
-    glyph_dsc                                0x080402d8   Data        1320  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x08040800   Section      140  lv_font_misansnormal_18.o(.constdata)
-    unicode_list_2                           0x08040800   Data         140  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x0804088c   Section       60  lv_font_misansnormal_18.o(.constdata)
-    cmaps                                    0x0804088c   Data          60  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x080408c8   Section      165  lv_font_misansnormal_18.o(.constdata)
-    kern_left_class_mapping                  0x080408c8   Data         165  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x0804096d   Section      165  lv_font_misansnormal_18.o(.constdata)
-    kern_right_class_mapping                 0x0804096d   Data         165  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x08040a12   Section     2080  lv_font_misansnormal_18.o(.constdata)
-    kern_class_values                        0x08040a12   Data        2080  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x08041234   Section       16  lv_font_misansnormal_18.o(.constdata)
-    kern_classes                             0x08041234   Data          16  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x08041244   Section       24  lv_font_misansnormal_18.o(.constdata)
-    font_dsc                                 0x08041244   Data          24  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x0804125c   Section       28  lv_font_misansnormal_18.o(.constdata)
-    .constdata                               0x08041278   Section     6647  lv_font_montserratmedium_12.o(.constdata)
-    glyph_bitmap                             0x08041278   Data        6647  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08042c70   Section     1240  lv_font_montserratmedium_12.o(.constdata)
-    glyph_dsc                                0x08042c70   Data        1240  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043148   Section      120  lv_font_montserratmedium_12.o(.constdata)
-    unicode_list_2                           0x08043148   Data         120  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x080431c0   Section       60  lv_font_montserratmedium_12.o(.constdata)
-    cmaps                                    0x080431c0   Data          60  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x080431fc   Section      155  lv_font_montserratmedium_12.o(.constdata)
-    kern_left_class_mapping                  0x080431fc   Data         155  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043297   Section      155  lv_font_montserratmedium_12.o(.constdata)
-    kern_right_class_mapping                 0x08043297   Data         155  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043332   Section     2880  lv_font_montserratmedium_12.o(.constdata)
-    kern_class_values                        0x08043332   Data        2880  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043e74   Section       16  lv_font_montserratmedium_12.o(.constdata)
-    kern_classes                             0x08043e74   Data          16  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043e84   Section       24  lv_font_montserratmedium_12.o(.constdata)
-    font_dsc                                 0x08043e84   Data          24  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043e9c   Section       28  lv_font_montserratmedium_12.o(.constdata)
-    .constdata                               0x08043eb8   Section     8803  lv_font_montserratmedium_14.o(.constdata)
-    glyph_bitmap                             0x08043eb8   Data        8803  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x0804611c   Section     1240  lv_font_montserratmedium_14.o(.constdata)
-    glyph_dsc                                0x0804611c   Data        1240  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x080465f4   Section      120  lv_font_montserratmedium_14.o(.constdata)
-    unicode_list_2                           0x080465f4   Data         120  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x0804666c   Section       60  lv_font_montserratmedium_14.o(.constdata)
-    cmaps                                    0x0804666c   Data          60  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x080466a8   Section      155  lv_font_montserratmedium_14.o(.constdata)
-    kern_left_class_mapping                  0x080466a8   Data         155  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x08046743   Section      155  lv_font_montserratmedium_14.o(.constdata)
-    kern_right_class_mapping                 0x08046743   Data         155  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x080467de   Section     2880  lv_font_montserratmedium_14.o(.constdata)
-    kern_class_values                        0x080467de   Data        2880  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x08047320   Section       16  lv_font_montserratmedium_14.o(.constdata)
-    kern_classes                             0x08047320   Data          16  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x08047330   Section       24  lv_font_montserratmedium_14.o(.constdata)
-    font_dsc                                 0x08047330   Data          24  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x08047348   Section       28  lv_font_montserratmedium_14.o(.constdata)
-    .constdata                               0x08047364   Section    11058  lv_font_montserratmedium_16.o(.constdata)
-    glyph_bitmap                             0x08047364   Data       11058  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x08049e98   Section     1240  lv_font_montserratmedium_16.o(.constdata)
-    glyph_dsc                                0x08049e98   Data        1240  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804a370   Section      120  lv_font_montserratmedium_16.o(.constdata)
-    unicode_list_2                           0x0804a370   Data         120  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804a3e8   Section       60  lv_font_montserratmedium_16.o(.constdata)
-    cmaps                                    0x0804a3e8   Data          60  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804a424   Section      155  lv_font_montserratmedium_16.o(.constdata)
-    kern_left_class_mapping                  0x0804a424   Data         155  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804a4bf   Section      155  lv_font_montserratmedium_16.o(.constdata)
-    kern_right_class_mapping                 0x0804a4bf   Data         155  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804a55a   Section     2880  lv_font_montserratmedium_16.o(.constdata)
-    kern_class_values                        0x0804a55a   Data        2880  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804b09c   Section       16  lv_font_montserratmedium_16.o(.constdata)
-    kern_classes                             0x0804b09c   Data          16  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804b0ac   Section       24  lv_font_montserratmedium_16.o(.constdata)
-    font_dsc                                 0x0804b0ac   Data          24  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804b0c4   Section       28  lv_font_montserratmedium_16.o(.constdata)
-    .constdata                               0x0804b0e0   Section    16934  lv_font_montserratmedium_20.o(.constdata)
-    glyph_bitmap                             0x0804b0e0   Data       16934  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0804f308   Section     1240  lv_font_montserratmedium_20.o(.constdata)
-    glyph_dsc                                0x0804f308   Data        1240  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0804f7e0   Section      120  lv_font_montserratmedium_20.o(.constdata)
-    unicode_list_2                           0x0804f7e0   Data         120  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0804f858   Section       60  lv_font_montserratmedium_20.o(.constdata)
-    cmaps                                    0x0804f858   Data          60  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0804f894   Section      155  lv_font_montserratmedium_20.o(.constdata)
-    kern_left_class_mapping                  0x0804f894   Data         155  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0804f92f   Section      155  lv_font_montserratmedium_20.o(.constdata)
-    kern_right_class_mapping                 0x0804f92f   Data         155  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0804f9ca   Section     2880  lv_font_montserratmedium_20.o(.constdata)
-    kern_class_values                        0x0804f9ca   Data        2880  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0805050c   Section       16  lv_font_montserratmedium_20.o(.constdata)
-    kern_classes                             0x0805050c   Data          16  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x0805051c   Section       24  lv_font_montserratmedium_20.o(.constdata)
-    font_dsc                                 0x0805051c   Data          24  lv_font_montserratmedium_20.o(.constdata)
-    .constdata                               0x08050534   Section       28  lv_font_montserratmedium_20.o(.constdata)
-    .conststring                             0x08050550   Section      171  freertos.o(.conststring)
-    .conststring                             0x080505fc   Section        7  esp01s.o(.conststring)
-    .conststring                             0x08050604   Section      461  mqtt.o(.conststring)
-    .conststring                             0x080507d4   Section       27  lv_calendar.o(.conststring)
-    .conststring                             0x080507f0   Section      105  lv_calendar_header_arrow.o(.conststring)
-    .conststring                             0x0805085c   Section      652  lv_calendar_header_dropdown.o(.conststring)
-    .conststring                             0x08050ae8   Section      153  lv_keyboard.o(.conststring)
-    .conststring                             0x08050b84   Section      108  lv_keyboard.o(.conststring)
-    .conststring                             0x08050bf0   Section      126  lv_keyboard.o(.conststring)
-    .conststring                             0x08050c70   Section        4  lv_keyboard.o(.conststring)
-    .conststring                             0x08050c74   Section       37  lv_btnmatrix.o(.conststring)
+    i.sensor_timer_callback                  0x080269d4   Section        0  freertos.o(i.sensor_timer_callback)
+    i.set_ofs_x_anim                         0x08026ab8   Section        0  lv_label.o(i.set_ofs_x_anim)
+    set_ofs_x_anim                           0x08026ab9   Thumb Code     8  lv_label.o(i.set_ofs_x_anim)
+    i.set_ofs_y_anim                         0x08026ac0   Section        0  lv_label.o(i.set_ofs_y_anim)
+    set_ofs_y_anim                           0x08026ac1   Thumb Code     8  lv_label.o(i.set_ofs_y_anim)
+    i.set_x_anim                             0x08026ac8   Section        0  lv_disp.o(i.set_x_anim)
+    set_x_anim                               0x08026ac9   Thumb Code     6  lv_disp.o(i.set_x_anim)
+    i.set_y_anim                             0x08026ace   Section        0  lv_disp.o(i.set_y_anim)
+    set_y_anim                               0x08026acf   Thumb Code     6  lv_disp.o(i.set_y_anim)
+    i.set_y_anim                             0x08026ad4   Section        0  lv_roller.o(i.set_y_anim)
+    set_y_anim                               0x08026ad5   Thumb Code     6  lv_roller.o(i.set_y_anim)
+    i.setup_scr_brightness_screen            0x08026adc   Section        0  setup_scr_brightness_screen.o(i.setup_scr_brightness_screen)
+    i.setup_scr_main_screen                  0x08026e6c   Section        0  setup_scr_main_screen.o(i.setup_scr_main_screen)
+    i.setup_scr_mqtt_param_screen            0x080285c8   Section        0  setup_scr_mqtt_param_screen.o(i.setup_scr_mqtt_param_screen)
+    i.setup_scr_threshold_screen             0x08028ac0   Section        0  setup_scr_threshold_screen.o(i.setup_scr_threshold_screen)
+    i.setup_ui                               0x08029658   Section        0  gui_guider.o(i.setup_ui)
+    i.shadow_blur_corner                     0x08029670   Section        0  lv_draw_sw_rect.o(i.shadow_blur_corner)
+    shadow_blur_corner                       0x08029671   Thumb Code   308  lv_draw_sw_rect.o(i.shadow_blur_corner)
+    i.shadow_draw_corner_buf                 0x080297a4   Section        0  lv_draw_sw_rect.o(i.shadow_draw_corner_buf)
+    shadow_draw_corner_buf                   0x080297a5   Thumb Code   386  lv_draw_sw_rect.o(i.shadow_draw_corner_buf)
+    i.show_error                             0x08029926   Section        0  lv_draw_img.o(i.show_error)
+    show_error                               0x08029927   Thumb Code    78  lv_draw_img.o(i.show_error)
+    i.start_cursor_blink                     0x08029974   Section        0  lv_textarea.o(i.start_cursor_blink)
+    start_cursor_blink                       0x08029975   Thumb Code    88  lv_textarea.o(i.start_cursor_blink)
+    i.style_init                             0x080299d4   Section        0  lv_theme_default.o(i.style_init)
+    style_init                               0x080299d5   Thumb Code  5164  lv_theme_default.o(i.style_init)
+    i.style_init_reset                       0x0802ae00   Section        0  lv_theme_default.o(i.style_init_reset)
+    style_init_reset                         0x0802ae01   Thumb Code    14  lv_theme_default.o(i.style_init_reset)
+    i.theme_apply                            0x0802ae14   Section        0  lv_theme_default.o(i.theme_apply)
+    theme_apply                              0x0802ae15   Thumb Code  3328  lv_theme_default.o(i.theme_apply)
+    i.threshold_screen_btn_1_event_handler   0x0802bb14   Section        0  events_init.o(i.threshold_screen_btn_1_event_handler)
+    threshold_screen_btn_1_event_handler     0x0802bb15   Thumb Code    70  events_init.o(i.threshold_screen_btn_1_event_handler)
+    i.threshold_screen_slider_humi_event_handler 0x0802bb64   Section        0  events_init.o(i.threshold_screen_slider_humi_event_handler)
+    threshold_screen_slider_humi_event_handler 0x0802bb65   Thumb Code   164  events_init.o(i.threshold_screen_slider_humi_event_handler)
+    i.tileview_event_cb                      0x0802bc14   Section        0  lv_tileview.o(i.tileview_event_cb)
+    tileview_event_cb                        0x0802bc15   Thumb Code   182  lv_tileview.o(i.tileview_event_cb)
+    i.tlsf_ffs                               0x0802bcca   Section        0  lv_tlsf.o(i.tlsf_ffs)
+    tlsf_ffs                                 0x0802bccb   Thumb Code    16  lv_tlsf.o(i.tlsf_ffs)
+    i.tlsf_fls                               0x0802bcda   Section        0  lv_tlsf.o(i.tlsf_fls)
+    tlsf_fls                                 0x0802bcdb   Thumb Code    14  lv_tlsf.o(i.tlsf_fls)
+    i.touch_driver_init                      0x0802bce8   Section        0  cst816.o(i.touch_driver_init)
+    i.touchpad_read                          0x0802bcf4   Section        0  lv_port_indev.o(i.touchpad_read)
+    touchpad_read                            0x0802bcf5   Thumb Code    50  lv_port_indev.o(i.touchpad_read)
+    i.trans_anim_cb                          0x0802bd2c   Section        0  lv_obj_style.o(i.trans_anim_cb)
+    trans_anim_cb                            0x0802bd2d   Thumb Code   322  lv_obj_style.o(i.trans_anim_cb)
+    i.trans_anim_ready_cb                    0x0802be74   Section        0  lv_obj_style.o(i.trans_anim_ready_cb)
+    trans_anim_ready_cb                      0x0802be75   Thumb Code   164  lv_obj_style.o(i.trans_anim_ready_cb)
+    i.trans_anim_start_cb                    0x0802bf1c   Section        0  lv_obj_style.o(i.trans_anim_start_cb)
+    trans_anim_start_cb                      0x0802bf1d   Thumb Code    64  lv_obj_style.o(i.trans_anim_start_cb)
+    i.trans_del                              0x0802bf5c   Section        0  lv_obj_style.o(i.trans_del)
+    trans_del                                0x0802bf5d   Thumb Code   164  lv_obj_style.o(i.trans_del)
+    i.transform_point                        0x0802c004   Section        0  lv_obj_pos.o(i.transform_point)
+    transform_point                          0x0802c005   Thumb Code   254  lv_obj_pos.o(i.transform_point)
+    i.transform_point_upscaled               0x0802c102   Section        0  lv_draw_sw_transform.o(i.transform_point_upscaled)
+    transform_point_upscaled                 0x0802c103   Thumb Code   146  lv_draw_sw_transform.o(i.transform_point_upscaled)
+    i.ui_init_style                          0x0802c194   Section        0  gui_guider.o(i.ui_init_style)
+    i.ui_load_scr_animation                  0x0802c1a2   Section        0  gui_guider.o(i.ui_load_scr_animation)
+    i.unicode_list_compare                   0x0802c1e8   Section        0  lv_font_fmt_txt.o(i.unicode_list_compare)
+    unicode_list_compare                     0x0802c1e9   Thumb Code     8  lv_font_fmt_txt.o(i.unicode_list_compare)
+    i.update_cursor_position_on_click        0x0802c1f0   Section        0  lv_textarea.o(i.update_cursor_position_on_click)
+    update_cursor_position_on_click          0x0802c1f1   Thumb Code   382  lv_textarea.o(i.update_cursor_position_on_click)
+    i.uxListRemove                           0x0802c36e   Section        0  list.o(i.uxListRemove)
+    i.vApplicationGetIdleTaskMemory          0x0802c394   Section        0  cmsis_os2.o(i.vApplicationGetIdleTaskMemory)
+    i.vApplicationGetTimerTaskMemory         0x0802c3a8   Section        0  cmsis_os2.o(i.vApplicationGetTimerTaskMemory)
+    i.vApplicationTickHook                   0x0802c3c0   Section        0  freertos.o(i.vApplicationTickHook)
+    i.vListInitialise                        0x0802c3c6   Section        0  list.o(i.vListInitialise)
+    i.vListInitialiseItem                    0x0802c3dc   Section        0  list.o(i.vListInitialiseItem)
+    i.vListInsert                            0x0802c3e2   Section        0  list.o(i.vListInsert)
+    i.vListInsertEnd                         0x0802c412   Section        0  list.o(i.vListInsertEnd)
+    i.vPortEnterCritical                     0x0802c42c   Section        0  port.o(i.vPortEnterCritical)
+    i.vPortExitCritical                      0x0802c46c   Section        0  port.o(i.vPortExitCritical)
+    i.vPortFree                              0x0802c494   Section        0  heap_4.o(i.vPortFree)
+    i.vPortSetupTimerInterrupt               0x0802c4f8   Section        0  port.o(i.vPortSetupTimerInterrupt)
+    i.vPortValidateInterruptPriority         0x0802c51c   Section        0  port.o(i.vPortValidateInterruptPriority)
+    i.vQueueAddToRegistry                    0x0802c570   Section        0  queue.o(i.vQueueAddToRegistry)
+    i.vQueueWaitForMessageRestricted         0x0802c594   Section        0  queue.o(i.vQueueWaitForMessageRestricted)
+    i.vTaskDelay                             0x0802c5d8   Section        0  tasks.o(i.vTaskDelay)
+    i.vTaskDelayUntil                        0x0802c624   Section        0  tasks.o(i.vTaskDelayUntil)
+    i.vTaskInternalSetTimeOutState           0x0802c6b4   Section        0  tasks.o(i.vTaskInternalSetTimeOutState)
+    i.vTaskMissedYield                       0x0802c6c4   Section        0  tasks.o(i.vTaskMissedYield)
+    i.vTaskPlaceOnEventList                  0x0802c6d0   Section        0  tasks.o(i.vTaskPlaceOnEventList)
+    i.vTaskPlaceOnEventListRestricted        0x0802c700   Section        0  tasks.o(i.vTaskPlaceOnEventListRestricted)
+    i.vTaskPriorityDisinheritAfterTimeout    0x0802c738   Section        0  tasks.o(i.vTaskPriorityDisinheritAfterTimeout)
+    i.vTaskStartScheduler                    0x0802c7c8   Section        0  tasks.o(i.vTaskStartScheduler)
+    i.vTaskSuspendAll                        0x0802c84c   Section        0  tasks.o(i.vTaskSuspendAll)
+    i.vTaskSwitchContext                     0x0802c85c   Section        0  tasks.o(i.vTaskSwitchContext)
+    i.value_changed_event_cb                 0x0802c8c0   Section        0  lv_calendar_header_arrow.o(i.value_changed_event_cb)
+    value_changed_event_cb                   0x0802c8c1   Thumb Code    52  lv_calendar_header_arrow.o(i.value_changed_event_cb)
+    i.value_changed_event_cb                 0x0802c900   Section        0  lv_calendar_header_dropdown.o(i.value_changed_event_cb)
+    value_changed_event_cb                   0x0802c901   Thumb Code    64  lv_calendar_header_dropdown.o(i.value_changed_event_cb)
+    i.value_update                           0x0802c940   Section        0  lv_arc.o(i.value_update)
+    value_update                             0x0802c941   Thumb Code   194  lv_arc.o(i.value_update)
+    i.xPortStartScheduler                    0x0802ca04   Section        0  port.o(i.xPortStartScheduler)
+    i.xPortSysTickHandler                    0x0802caf8   Section        0  port.o(i.xPortSysTickHandler)
+    i.xQueueCreateMutex                      0x0802cb24   Section        0  queue.o(i.xQueueCreateMutex)
+    i.xQueueCreateMutexStatic                0x0802cb3a   Section        0  queue.o(i.xQueueCreateMutexStatic)
+    i.xQueueGenericCreate                    0x0802cb54   Section        0  queue.o(i.xQueueGenericCreate)
+    i.xQueueGenericCreateStatic              0x0802cb96   Section        0  queue.o(i.xQueueGenericCreateStatic)
+    i.xQueueGenericReset                     0x0802cbfc   Section        0  queue.o(i.xQueueGenericReset)
+    i.xQueueGenericSend                      0x0802cc84   Section        0  queue.o(i.xQueueGenericSend)
+    i.xQueueGenericSendFromISR               0x0802cde8   Section        0  queue.o(i.xQueueGenericSendFromISR)
+    i.xQueueGiveMutexRecursive               0x0802cea6   Section        0  queue.o(i.xQueueGiveMutexRecursive)
+    i.xQueuePeek                             0x0802cee4   Section        0  queue.o(i.xQueuePeek)
+    i.xQueueReceive                          0x0802d01c   Section        0  queue.o(i.xQueueReceive)
+    i.xQueueSemaphoreTake                    0x0802d154   Section        0  queue.o(i.xQueueSemaphoreTake)
+    i.xQueueTakeMutexRecursive               0x0802d2cc   Section        0  queue.o(i.xQueueTakeMutexRecursive)
+    i.xTaskCheckForTimeOut                   0x0802d30c   Section        0  tasks.o(i.xTaskCheckForTimeOut)
+    i.xTaskCreate                            0x0802d380   Section        0  tasks.o(i.xTaskCreate)
+    i.xTaskCreateStatic                      0x0802d3da   Section        0  tasks.o(i.xTaskCreateStatic)
+    i.xTaskGetCurrentTaskHandle              0x0802d434   Section        0  tasks.o(i.xTaskGetCurrentTaskHandle)
+    i.xTaskGetSchedulerState                 0x0802d440   Section        0  tasks.o(i.xTaskGetSchedulerState)
+    i.xTaskGetTickCount                      0x0802d45c   Section        0  tasks.o(i.xTaskGetTickCount)
+    i.xTaskGetTickCountFromISR               0x0802d468   Section        0  tasks.o(i.xTaskGetTickCountFromISR)
+    i.xTaskIncrementTick                     0x0802d478   Section        0  tasks.o(i.xTaskIncrementTick)
+    i.xTaskPriorityDisinherit                0x0802d550   Section        0  tasks.o(i.xTaskPriorityDisinherit)
+    i.xTaskPriorityInherit                   0x0802d5cc   Section        0  tasks.o(i.xTaskPriorityInherit)
+    i.xTaskRemoveFromEventList               0x0802d648   Section        0  tasks.o(i.xTaskRemoveFromEventList)
+    i.xTaskResumeAll                         0x0802d6b8   Section        0  tasks.o(i.xTaskResumeAll)
+    i.xTimerCreate                           0x0802d778   Section        0  timers.o(i.xTimerCreate)
+    i.xTimerCreateTimerTask                  0x0802d7ac   Section        0  timers.o(i.xTimerCreateTimerTask)
+    i.xTimerGenericCommand                   0x0802d80c   Section        0  timers.o(i.xTimerGenericCommand)
+    i.year_event_cb                          0x0802d870   Section        0  lv_calendar_header_dropdown.o(i.year_event_cb)
+    year_event_cb                            0x0802d871   Thumb Code    56  lv_calendar_header_dropdown.o(i.year_event_cb)
+    .constdata                               0x0802d8a8   Section      124  freertos.o(.constdata)
+    .constdata                               0x0802d924   Section        8  stm32f4xx_hal_dma.o(.constdata)
+    flagBitshiftOffset                       0x0802d924   Data           8  stm32f4xx_hal_dma.o(.constdata)
+    .constdata                               0x0802d92c   Section       16  system_stm32f4xx.o(.constdata)
+    .constdata                               0x0802d93c   Section        8  system_stm32f4xx.o(.constdata)
+    .constdata                               0x0802d944   Section       28  lv_obj.o(.constdata)
+    .constdata                               0x0802d960   Section        8  lv_obj_pos.o(.constdata)
+    .constdata                               0x0802d968   Section      278  lv_draw_sw_letter.o(.constdata)
+    .constdata                               0x0802da7e   Section       33  lv_draw_sw_line.o(.constdata)
+    wcorr                                    0x0802da7e   Data          33  lv_draw_sw_line.o(.constdata)
+    .constdata                               0x0802daa0   Section        8  lv_draw_sw_polygon.o(.constdata)
+    .constdata                               0x0802daa8   Section       22  lv_theme_default.o(.constdata)
+    trans_props                              0x0802daa8   Data          22  lv_theme_default.o(.constdata)
+    .constdata                               0x0802dac0   Section       28  lv_calendar.o(.constdata)
+    .constdata                               0x0802dadc   Section       28  lv_calendar_header_arrow.o(.constdata)
+    .constdata                               0x0802daf8   Section       28  lv_calendar_header_dropdown.o(.constdata)
+    .constdata                               0x0802db14   Section       28  lv_colorwheel.o(.constdata)
+    .constdata                               0x0802db30   Section       28  lv_keyboard.o(.constdata)
+    .constdata                               0x0802db4c   Section      176  lv_keyboard.o(.constdata)
+    default_kb_map_lc                        0x0802db4c   Data         176  lv_keyboard.o(.constdata)
+    .constdata                               0x0802dbfc   Section       80  lv_keyboard.o(.constdata)
+    default_kb_ctrl_lc_map                   0x0802dbfc   Data          80  lv_keyboard.o(.constdata)
+    .constdata                               0x0802dc4c   Section      176  lv_keyboard.o(.constdata)
+    default_kb_map_uc                        0x0802dc4c   Data         176  lv_keyboard.o(.constdata)
+    .constdata                               0x0802dcfc   Section       80  lv_keyboard.o(.constdata)
+    default_kb_ctrl_uc_map                   0x0802dcfc   Data          80  lv_keyboard.o(.constdata)
+    .constdata                               0x0802dd4c   Section      176  lv_keyboard.o(.constdata)
+    default_kb_map_spec                      0x0802dd4c   Data         176  lv_keyboard.o(.constdata)
+    .constdata                               0x0802ddfc   Section       80  lv_keyboard.o(.constdata)
+    default_kb_ctrl_spec_map                 0x0802ddfc   Data          80  lv_keyboard.o(.constdata)
+    .constdata                               0x0802de4c   Section       84  lv_keyboard.o(.constdata)
+    default_kb_map_num                       0x0802de4c   Data          84  lv_keyboard.o(.constdata)
+    .constdata                               0x0802dea0   Section       34  lv_keyboard.o(.constdata)
+    default_kb_ctrl_num_map                  0x0802dea0   Data          34  lv_keyboard.o(.constdata)
+    .constdata                               0x0802dec4   Section       28  lv_led.o(.constdata)
+    .constdata                               0x0802dee0   Section       84  lv_list.o(.constdata)
+    .constdata                               0x0802df34   Section      252  lv_menu.o(.constdata)
+    .constdata                               0x0802e030   Section       28  lv_meter.o(.constdata)
+    .constdata                               0x0802e04c   Section       84  lv_msgbox.o(.constdata)
+    .constdata                               0x0802e0a0   Section       28  lv_spinbox.o(.constdata)
+    .constdata                               0x0802e0bc   Section       28  lv_spinner.o(.constdata)
+    .constdata                               0x0802e0d8   Section       28  lv_tabview.o(.constdata)
+    .constdata                               0x0802e0f4   Section       56  lv_tileview.o(.constdata)
+    .constdata                               0x0802e12c   Section       28  lv_win.o(.constdata)
+    .constdata                               0x0802e148   Section     8832  lv_font_montserrat_14.o(.constdata)
+    glyph_bitmap                             0x0802e148   Data        8832  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x080303c8   Section     1264  lv_font_montserrat_14.o(.constdata)
+    glyph_dsc                                0x080303c8   Data        1264  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x080308b8   Section      124  lv_font_montserrat_14.o(.constdata)
+    unicode_list_1                           0x080308b8   Data         124  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x08030934   Section       40  lv_font_montserrat_14.o(.constdata)
+    cmaps                                    0x08030934   Data          40  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x0803095c   Section      158  lv_font_montserrat_14.o(.constdata)
+    kern_left_class_mapping                  0x0803095c   Data         158  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x080309fa   Section      158  lv_font_montserrat_14.o(.constdata)
+    kern_right_class_mapping                 0x080309fa   Data         158  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x08030a98   Section     2989  lv_font_montserrat_14.o(.constdata)
+    kern_class_values                        0x08030a98   Data        2989  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x08031648   Section       16  lv_font_montserrat_14.o(.constdata)
+    kern_classes                             0x08031648   Data          16  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x08031658   Section       24  lv_font_montserrat_14.o(.constdata)
+    font_dsc                                 0x08031658   Data          24  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x08031670   Section       28  lv_font_montserrat_14.o(.constdata)
+    .constdata                               0x0803168c   Section      380  lv_color.o(.constdata)
+    colors                                   0x0803168c   Data          38  lv_color.o(.constdata)
+    colors                                   0x080316b2   Data         190  lv_color.o(.constdata)
+    colors                                   0x08031770   Data         152  lv_color.o(.constdata)
+    .constdata                               0x08031808   Section      182  lv_math.o(.constdata)
+    sin0_90_table                            0x08031808   Data         182  lv_math.o(.constdata)
+    .constdata                               0x080318c0   Section      117  lv_style.o(.constdata)
+    null_style_value                         0x080318c0   Data           4  lv_style.o(.constdata)
+    .constdata                               0x08031938   Section       28  lv_arc.o(.constdata)
+    .constdata                               0x08031954   Section       28  lv_bar.o(.constdata)
+    .constdata                               0x08031970   Section       28  lv_btn.o(.constdata)
+    .constdata                               0x0803198c   Section       28  lv_btnmatrix.o(.constdata)
+    .constdata                               0x080319a8   Section       28  lv_checkbox.o(.constdata)
+    .constdata                               0x080319c4   Section       56  lv_dropdown.o(.constdata)
+    .constdata                               0x080319fc   Section       28  lv_img.o(.constdata)
+    .constdata                               0x08031a18   Section       28  lv_label.o(.constdata)
+    .constdata                               0x08031a34   Section       28  lv_line.o(.constdata)
+    .constdata                               0x08031a50   Section       56  lv_roller.o(.constdata)
+    .constdata                               0x08031a88   Section       28  lv_slider.o(.constdata)
+    .constdata                               0x08031aa4   Section       28  lv_switch.o(.constdata)
+    .constdata                               0x08031ac0   Section       28  lv_table.o(.constdata)
+    .constdata                               0x08031adc   Section       28  lv_textarea.o(.constdata)
+    .constdata                               0x08031af8   Section     8163  lv_font_misansnormal_13.o(.constdata)
+    glyph_bitmap                             0x08031af8   Data        8163  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08033adc   Section     1328  lv_font_misansnormal_13.o(.constdata)
+    glyph_dsc                                0x08033adc   Data        1328  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x0803400c   Section      140  lv_font_misansnormal_13.o(.constdata)
+    unicode_list_3                           0x0803400c   Data         140  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08034098   Section       80  lv_font_misansnormal_13.o(.constdata)
+    cmaps                                    0x08034098   Data          80  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x080340e8   Section      166  lv_font_misansnormal_13.o(.constdata)
+    kern_left_class_mapping                  0x080340e8   Data         166  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x0803418e   Section      166  lv_font_misansnormal_13.o(.constdata)
+    kern_right_class_mapping                 0x0803418e   Data         166  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08034234   Section     2080  lv_font_misansnormal_13.o(.constdata)
+    kern_class_values                        0x08034234   Data        2080  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08034a54   Section       16  lv_font_misansnormal_13.o(.constdata)
+    kern_classes                             0x08034a54   Data          16  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08034a64   Section       24  lv_font_misansnormal_13.o(.constdata)
+    font_dsc                                 0x08034a64   Data          24  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08034a7c   Section       28  lv_font_misansnormal_13.o(.constdata)
+    .constdata                               0x08034a98   Section    10204  lv_font_misansnormal_15.o(.constdata)
+    glyph_bitmap                             0x08034a98   Data       10204  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x08037274   Section     1296  lv_font_misansnormal_15.o(.constdata)
+    glyph_dsc                                0x08037274   Data        1296  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x08037784   Section      132  lv_font_misansnormal_15.o(.constdata)
+    unicode_list_1                           0x08037784   Data         132  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x08037808   Section       40  lv_font_misansnormal_15.o(.constdata)
+    cmaps                                    0x08037808   Data          40  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x08037830   Section      162  lv_font_misansnormal_15.o(.constdata)
+    kern_left_class_mapping                  0x08037830   Data         162  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x080378d2   Section      162  lv_font_misansnormal_15.o(.constdata)
+    kern_right_class_mapping                 0x080378d2   Data         162  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x08037974   Section     2080  lv_font_misansnormal_15.o(.constdata)
+    kern_class_values                        0x08037974   Data        2080  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x08038194   Section       16  lv_font_misansnormal_15.o(.constdata)
+    kern_classes                             0x08038194   Data          16  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x080381a4   Section       24  lv_font_misansnormal_15.o(.constdata)
+    font_dsc                                 0x080381a4   Data          24  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x080381bc   Section       28  lv_font_misansnormal_15.o(.constdata)
+    .constdata                               0x080381d8   Section    13785  lv_font_misansnormal_16.o(.constdata)
+    glyph_bitmap                             0x080381d8   Data       13785  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803b7b4   Section     1472  lv_font_misansnormal_16.o(.constdata)
+    glyph_dsc                                0x0803b7b4   Data        1472  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803bd74   Section      176  lv_font_misansnormal_16.o(.constdata)
+    unicode_list_3                           0x0803bd74   Data         176  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803be24   Section       80  lv_font_misansnormal_16.o(.constdata)
+    cmaps                                    0x0803be24   Data          80  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803be74   Section      184  lv_font_misansnormal_16.o(.constdata)
+    kern_left_class_mapping                  0x0803be74   Data         184  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803bf2c   Section      184  lv_font_misansnormal_16.o(.constdata)
+    kern_right_class_mapping                 0x0803bf2c   Data         184  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803bfe4   Section     2080  lv_font_misansnormal_16.o(.constdata)
+    kern_class_values                        0x0803bfe4   Data        2080  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803c804   Section       16  lv_font_misansnormal_16.o(.constdata)
+    kern_classes                             0x0803c804   Data          16  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803c814   Section       24  lv_font_misansnormal_16.o(.constdata)
+    font_dsc                                 0x0803c814   Data          24  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803c82c   Section       28  lv_font_misansnormal_16.o(.constdata)
+    .constdata                               0x0803c848   Section    15070  lv_font_misansnormal_18.o(.constdata)
+    glyph_bitmap                             0x0803c848   Data       15070  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x08040328   Section     1320  lv_font_misansnormal_18.o(.constdata)
+    glyph_dsc                                0x08040328   Data        1320  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x08040850   Section      140  lv_font_misansnormal_18.o(.constdata)
+    unicode_list_2                           0x08040850   Data         140  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x080408dc   Section       60  lv_font_misansnormal_18.o(.constdata)
+    cmaps                                    0x080408dc   Data          60  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x08040918   Section      165  lv_font_misansnormal_18.o(.constdata)
+    kern_left_class_mapping                  0x08040918   Data         165  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x080409bd   Section      165  lv_font_misansnormal_18.o(.constdata)
+    kern_right_class_mapping                 0x080409bd   Data         165  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x08040a62   Section     2080  lv_font_misansnormal_18.o(.constdata)
+    kern_class_values                        0x08040a62   Data        2080  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x08041284   Section       16  lv_font_misansnormal_18.o(.constdata)
+    kern_classes                             0x08041284   Data          16  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x08041294   Section       24  lv_font_misansnormal_18.o(.constdata)
+    font_dsc                                 0x08041294   Data          24  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x080412ac   Section       28  lv_font_misansnormal_18.o(.constdata)
+    .constdata                               0x080412c8   Section     6647  lv_font_montserratmedium_12.o(.constdata)
+    glyph_bitmap                             0x080412c8   Data        6647  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08042cc0   Section     1240  lv_font_montserratmedium_12.o(.constdata)
+    glyph_dsc                                0x08042cc0   Data        1240  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043198   Section      120  lv_font_montserratmedium_12.o(.constdata)
+    unicode_list_2                           0x08043198   Data         120  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043210   Section       60  lv_font_montserratmedium_12.o(.constdata)
+    cmaps                                    0x08043210   Data          60  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x0804324c   Section      155  lv_font_montserratmedium_12.o(.constdata)
+    kern_left_class_mapping                  0x0804324c   Data         155  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x080432e7   Section      155  lv_font_montserratmedium_12.o(.constdata)
+    kern_right_class_mapping                 0x080432e7   Data         155  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043382   Section     2880  lv_font_montserratmedium_12.o(.constdata)
+    kern_class_values                        0x08043382   Data        2880  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043ec4   Section       16  lv_font_montserratmedium_12.o(.constdata)
+    kern_classes                             0x08043ec4   Data          16  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043ed4   Section       24  lv_font_montserratmedium_12.o(.constdata)
+    font_dsc                                 0x08043ed4   Data          24  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043eec   Section       28  lv_font_montserratmedium_12.o(.constdata)
+    .constdata                               0x08043f08   Section     8803  lv_font_montserratmedium_14.o(.constdata)
+    glyph_bitmap                             0x08043f08   Data        8803  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x0804616c   Section     1240  lv_font_montserratmedium_14.o(.constdata)
+    glyph_dsc                                0x0804616c   Data        1240  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x08046644   Section      120  lv_font_montserratmedium_14.o(.constdata)
+    unicode_list_2                           0x08046644   Data         120  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x080466bc   Section       60  lv_font_montserratmedium_14.o(.constdata)
+    cmaps                                    0x080466bc   Data          60  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x080466f8   Section      155  lv_font_montserratmedium_14.o(.constdata)
+    kern_left_class_mapping                  0x080466f8   Data         155  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x08046793   Section      155  lv_font_montserratmedium_14.o(.constdata)
+    kern_right_class_mapping                 0x08046793   Data         155  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x0804682e   Section     2880  lv_font_montserratmedium_14.o(.constdata)
+    kern_class_values                        0x0804682e   Data        2880  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x08047370   Section       16  lv_font_montserratmedium_14.o(.constdata)
+    kern_classes                             0x08047370   Data          16  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x08047380   Section       24  lv_font_montserratmedium_14.o(.constdata)
+    font_dsc                                 0x08047380   Data          24  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x08047398   Section       28  lv_font_montserratmedium_14.o(.constdata)
+    .constdata                               0x080473b4   Section    11058  lv_font_montserratmedium_16.o(.constdata)
+    glyph_bitmap                             0x080473b4   Data       11058  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x08049ee8   Section     1240  lv_font_montserratmedium_16.o(.constdata)
+    glyph_dsc                                0x08049ee8   Data        1240  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804a3c0   Section      120  lv_font_montserratmedium_16.o(.constdata)
+    unicode_list_2                           0x0804a3c0   Data         120  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804a438   Section       60  lv_font_montserratmedium_16.o(.constdata)
+    cmaps                                    0x0804a438   Data          60  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804a474   Section      155  lv_font_montserratmedium_16.o(.constdata)
+    kern_left_class_mapping                  0x0804a474   Data         155  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804a50f   Section      155  lv_font_montserratmedium_16.o(.constdata)
+    kern_right_class_mapping                 0x0804a50f   Data         155  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804a5aa   Section     2880  lv_font_montserratmedium_16.o(.constdata)
+    kern_class_values                        0x0804a5aa   Data        2880  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804b0ec   Section       16  lv_font_montserratmedium_16.o(.constdata)
+    kern_classes                             0x0804b0ec   Data          16  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804b0fc   Section       24  lv_font_montserratmedium_16.o(.constdata)
+    font_dsc                                 0x0804b0fc   Data          24  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804b114   Section       28  lv_font_montserratmedium_16.o(.constdata)
+    .constdata                               0x0804b130   Section    16934  lv_font_montserratmedium_20.o(.constdata)
+    glyph_bitmap                             0x0804b130   Data       16934  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0804f358   Section     1240  lv_font_montserratmedium_20.o(.constdata)
+    glyph_dsc                                0x0804f358   Data        1240  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0804f830   Section      120  lv_font_montserratmedium_20.o(.constdata)
+    unicode_list_2                           0x0804f830   Data         120  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0804f8a8   Section       60  lv_font_montserratmedium_20.o(.constdata)
+    cmaps                                    0x0804f8a8   Data          60  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0804f8e4   Section      155  lv_font_montserratmedium_20.o(.constdata)
+    kern_left_class_mapping                  0x0804f8e4   Data         155  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0804f97f   Section      155  lv_font_montserratmedium_20.o(.constdata)
+    kern_right_class_mapping                 0x0804f97f   Data         155  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0804fa1a   Section     2880  lv_font_montserratmedium_20.o(.constdata)
+    kern_class_values                        0x0804fa1a   Data        2880  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0805055c   Section       16  lv_font_montserratmedium_20.o(.constdata)
+    kern_classes                             0x0805055c   Data          16  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x0805056c   Section       24  lv_font_montserratmedium_20.o(.constdata)
+    font_dsc                                 0x0805056c   Data          24  lv_font_montserratmedium_20.o(.constdata)
+    .constdata                               0x08050584   Section       28  lv_font_montserratmedium_20.o(.constdata)
+    .conststring                             0x080505a0   Section      171  freertos.o(.conststring)
+    .conststring                             0x0805064c   Section        7  esp01s.o(.conststring)
+    .conststring                             0x08050654   Section      461  mqtt.o(.conststring)
+    .conststring                             0x08050824   Section       27  lv_calendar.o(.conststring)
+    .conststring                             0x08050840   Section      105  lv_calendar_header_arrow.o(.conststring)
+    .conststring                             0x080508ac   Section      652  lv_calendar_header_dropdown.o(.conststring)
+    .conststring                             0x08050b38   Section      153  lv_keyboard.o(.conststring)
+    .conststring                             0x08050bd4   Section      108  lv_keyboard.o(.conststring)
+    .conststring                             0x08050c40   Section      126  lv_keyboard.o(.conststring)
+    .conststring                             0x08050cc0   Section        4  lv_keyboard.o(.conststring)
+    .conststring                             0x08050cc4   Section       37  lv_btnmatrix.o(.conststring)
     .data                                    0x10000000   Section        2  main.o(.data)
     .data                                    0x10000004   Section       12  stm32f4xx_hal.o(.data)
     .data                                    0x10000010   Section       10  lcd.o(.data)
@@ -13678,137 +13681,137 @@ Image Symbol Table
     pvPortMalloc                             0x080253bd   Thumb Code   216  heap_4.o(i.pvPortMalloc)
     pvTaskIncrementMutexHeldCount            0x08025499   Thumb Code    18  tasks.o(i.pvTaskIncrementMutexHeldCount)
     pxPortInitialiseStack                    0x08025531   Thumb Code    40  port.o(i.pxPortInitialiseStack)
-    sensorTask                               0x08026921   Thumb Code    72  freertos.o(i.sensorTask)
-    sensor_timer_callback                    0x08026985   Thumb Code   190  freertos.o(i.sensor_timer_callback)
-    setup_scr_brightness_screen              0x08026a8d   Thumb Code   866  setup_scr_brightness_screen.o(i.setup_scr_brightness_screen)
-    setup_scr_main_screen                    0x08026e1d   Thumb Code  5956  setup_scr_main_screen.o(i.setup_scr_main_screen)
-    setup_scr_mqtt_param_screen              0x08028579   Thumb Code  1268  setup_scr_mqtt_param_screen.o(i.setup_scr_mqtt_param_screen)
-    setup_scr_threshold_screen               0x08028a71   Thumb Code  2962  setup_scr_threshold_screen.o(i.setup_scr_threshold_screen)
-    setup_ui                                 0x08029609   Thumb Code    24  gui_guider.o(i.setup_ui)
-    touch_driver_init                        0x0802bc99   Thumb Code     8  cst816.o(i.touch_driver_init)
-    ui_init_style                            0x0802c145   Thumb Code    14  gui_guider.o(i.ui_init_style)
-    ui_load_scr_animation                    0x0802c153   Thumb Code    70  gui_guider.o(i.ui_load_scr_animation)
-    uxListRemove                             0x0802c31f   Thumb Code    38  list.o(i.uxListRemove)
-    vApplicationGetIdleTaskMemory            0x0802c345   Thumb Code    16  cmsis_os2.o(i.vApplicationGetIdleTaskMemory)
-    vApplicationGetTimerTaskMemory           0x0802c359   Thumb Code    18  cmsis_os2.o(i.vApplicationGetTimerTaskMemory)
-    vApplicationTickHook                     0x0802c371   Thumb Code     6  freertos.o(i.vApplicationTickHook)
-    vListInitialise                          0x0802c377   Thumb Code    22  list.o(i.vListInitialise)
-    vListInitialiseItem                      0x0802c38d   Thumb Code     6  list.o(i.vListInitialiseItem)
-    vListInsert                              0x0802c393   Thumb Code    48  list.o(i.vListInsert)
-    vListInsertEnd                           0x0802c3c3   Thumb Code    24  list.o(i.vListInsertEnd)
-    vPortEnterCritical                       0x0802c3dd   Thumb Code    54  port.o(i.vPortEnterCritical)
-    vPortExitCritical                        0x0802c41d   Thumb Code    34  port.o(i.vPortExitCritical)
-    vPortFree                                0x0802c445   Thumb Code    94  heap_4.o(i.vPortFree)
-    vPortSetupTimerInterrupt                 0x0802c4a9   Thumb Code    32  port.o(i.vPortSetupTimerInterrupt)
-    vPortValidateInterruptPriority           0x0802c4cd   Thumb Code    74  port.o(i.vPortValidateInterruptPriority)
-    vQueueAddToRegistry                      0x0802c521   Thumb Code    32  queue.o(i.vQueueAddToRegistry)
-    vQueueWaitForMessageRestricted           0x0802c545   Thumb Code    68  queue.o(i.vQueueWaitForMessageRestricted)
-    vTaskDelay                               0x0802c589   Thumb Code    66  tasks.o(i.vTaskDelay)
-    vTaskDelayUntil                          0x0802c5d5   Thumb Code   136  tasks.o(i.vTaskDelayUntil)
-    vTaskInternalSetTimeOutState             0x0802c665   Thumb Code    12  tasks.o(i.vTaskInternalSetTimeOutState)
-    vTaskMissedYield                         0x0802c675   Thumb Code     8  tasks.o(i.vTaskMissedYield)
-    vTaskPlaceOnEventList                    0x0802c681   Thumb Code    44  tasks.o(i.vTaskPlaceOnEventList)
-    vTaskPlaceOnEventListRestricted          0x0802c6b1   Thumb Code    52  tasks.o(i.vTaskPlaceOnEventListRestricted)
-    vTaskPriorityDisinheritAfterTimeout      0x0802c6e9   Thumb Code   136  tasks.o(i.vTaskPriorityDisinheritAfterTimeout)
-    vTaskStartScheduler                      0x0802c779   Thumb Code   116  tasks.o(i.vTaskStartScheduler)
-    vTaskSuspendAll                          0x0802c7fd   Thumb Code    10  tasks.o(i.vTaskSuspendAll)
-    vTaskSwitchContext                       0x0802c80d   Thumb Code    90  tasks.o(i.vTaskSwitchContext)
-    xPortStartScheduler                      0x0802c9b5   Thumb Code   224  port.o(i.xPortStartScheduler)
-    xPortSysTickHandler                      0x0802caa9   Thumb Code    38  port.o(i.xPortSysTickHandler)
-    xQueueCreateMutex                        0x0802cad5   Thumb Code    22  queue.o(i.xQueueCreateMutex)
-    xQueueCreateMutexStatic                  0x0802caeb   Thumb Code    26  queue.o(i.xQueueCreateMutexStatic)
-    xQueueGenericCreate                      0x0802cb05   Thumb Code    66  queue.o(i.xQueueGenericCreate)
-    xQueueGenericCreateStatic                0x0802cb47   Thumb Code   102  queue.o(i.xQueueGenericCreateStatic)
-    xQueueGenericReset                       0x0802cbad   Thumb Code   132  queue.o(i.xQueueGenericReset)
-    xQueueGenericSend                        0x0802cc35   Thumb Code   350  queue.o(i.xQueueGenericSend)
-    xQueueGenericSendFromISR                 0x0802cd99   Thumb Code   190  queue.o(i.xQueueGenericSendFromISR)
-    xQueueGiveMutexRecursive                 0x0802ce57   Thumb Code    62  queue.o(i.xQueueGiveMutexRecursive)
-    xQueuePeek                               0x0802ce95   Thumb Code   308  queue.o(i.xQueuePeek)
-    xQueueReceive                            0x0802cfcd   Thumb Code   308  queue.o(i.xQueueReceive)
-    xQueueSemaphoreTake                      0x0802d105   Thumb Code   372  queue.o(i.xQueueSemaphoreTake)
-    xQueueTakeMutexRecursive                 0x0802d27d   Thumb Code    64  queue.o(i.xQueueTakeMutexRecursive)
-    xTaskCheckForTimeOut                     0x0802d2bd   Thumb Code   112  tasks.o(i.xTaskCheckForTimeOut)
-    xTaskCreate                              0x0802d331   Thumb Code    90  tasks.o(i.xTaskCreate)
-    xTaskCreateStatic                        0x0802d38b   Thumb Code    90  tasks.o(i.xTaskCreateStatic)
-    xTaskGetCurrentTaskHandle                0x0802d3e5   Thumb Code     6  tasks.o(i.xTaskGetCurrentTaskHandle)
-    xTaskGetSchedulerState                   0x0802d3f1   Thumb Code    22  tasks.o(i.xTaskGetSchedulerState)
-    xTaskGetTickCount                        0x0802d40d   Thumb Code     6  tasks.o(i.xTaskGetTickCount)
-    xTaskGetTickCountFromISR                 0x0802d419   Thumb Code    12  tasks.o(i.xTaskGetTickCountFromISR)
-    xTaskIncrementTick                       0x0802d429   Thumb Code   206  tasks.o(i.xTaskIncrementTick)
-    xTaskPriorityDisinherit                  0x0802d501   Thumb Code   116  tasks.o(i.xTaskPriorityDisinherit)
-    xTaskPriorityInherit                     0x0802d57d   Thumb Code   114  tasks.o(i.xTaskPriorityInherit)
-    xTaskRemoveFromEventList                 0x0802d5f9   Thumb Code    98  tasks.o(i.xTaskRemoveFromEventList)
-    xTaskResumeAll                           0x0802d669   Thumb Code   180  tasks.o(i.xTaskResumeAll)
-    xTimerCreate                             0x0802d729   Thumb Code    52  timers.o(i.xTimerCreate)
-    xTimerCreateTimerTask                    0x0802d75d   Thumb Code    78  timers.o(i.xTimerCreateTimerTask)
-    xTimerGenericCommand                     0x0802d7bd   Thumb Code    94  timers.o(i.xTimerGenericCommand)
-    sensorTask_attributes                    0x0802d858   Data          36  freertos.o(.constdata)
-    displayTask_attributes                   0x0802d87c   Data          36  freertos.o(.constdata)
-    mqttTask_attributes                      0x0802d8a0   Data          36  freertos.o(.constdata)
-    lvgl_Mutex_attributes                    0x0802d8c4   Data          16  freertos.o(.constdata)
-    AHBPrescTable                            0x0802d8dc   Data          16  system_stm32f4xx.o(.constdata)
-    APBPrescTable                            0x0802d8ec   Data           8  system_stm32f4xx.o(.constdata)
-    lv_obj_class                             0x0802d8f4   Data          28  lv_obj.o(.constdata)
-    _lv_bpp1_opa_table                       0x0802d918   Data           2  lv_draw_sw_letter.o(.constdata)
-    _lv_bpp2_opa_table                       0x0802d91a   Data           4  lv_draw_sw_letter.o(.constdata)
-    _lv_bpp4_opa_table                       0x0802d91e   Data          16  lv_draw_sw_letter.o(.constdata)
-    _lv_bpp8_opa_table                       0x0802d92e   Data         256  lv_draw_sw_letter.o(.constdata)
-    lv_calendar_class                        0x0802da70   Data          28  lv_calendar.o(.constdata)
-    lv_calendar_header_arrow_class           0x0802da8c   Data          28  lv_calendar_header_arrow.o(.constdata)
-    lv_calendar_header_dropdown_class        0x0802daa8   Data          28  lv_calendar_header_dropdown.o(.constdata)
-    lv_colorwheel_class                      0x0802dac4   Data          28  lv_colorwheel.o(.constdata)
-    lv_keyboard_class                        0x0802dae0   Data          28  lv_keyboard.o(.constdata)
-    lv_led_class                             0x0802de74   Data          28  lv_led.o(.constdata)
-    lv_list_class                            0x0802de90   Data          28  lv_list.o(.constdata)
-    lv_list_btn_class                        0x0802deac   Data          28  lv_list.o(.constdata)
-    lv_list_text_class                       0x0802dec8   Data          28  lv_list.o(.constdata)
-    lv_menu_class                            0x0802dee4   Data          28  lv_menu.o(.constdata)
-    lv_menu_page_class                       0x0802df00   Data          28  lv_menu.o(.constdata)
-    lv_menu_cont_class                       0x0802df1c   Data          28  lv_menu.o(.constdata)
-    lv_menu_section_class                    0x0802df38   Data          28  lv_menu.o(.constdata)
-    lv_menu_separator_class                  0x0802df54   Data          28  lv_menu.o(.constdata)
-    lv_menu_sidebar_cont_class               0x0802df70   Data          28  lv_menu.o(.constdata)
-    lv_menu_main_cont_class                  0x0802df8c   Data          28  lv_menu.o(.constdata)
-    lv_menu_main_header_cont_class           0x0802dfa8   Data          28  lv_menu.o(.constdata)
-    lv_menu_sidebar_header_cont_class        0x0802dfc4   Data          28  lv_menu.o(.constdata)
-    lv_meter_class                           0x0802dfe0   Data          28  lv_meter.o(.constdata)
-    lv_msgbox_class                          0x0802dffc   Data          28  lv_msgbox.o(.constdata)
-    lv_msgbox_content_class                  0x0802e018   Data          28  lv_msgbox.o(.constdata)
-    lv_msgbox_backdrop_class                 0x0802e034   Data          28  lv_msgbox.o(.constdata)
-    lv_spinbox_class                         0x0802e050   Data          28  lv_spinbox.o(.constdata)
-    lv_spinner_class                         0x0802e06c   Data          28  lv_spinner.o(.constdata)
-    lv_tabview_class                         0x0802e088   Data          28  lv_tabview.o(.constdata)
-    lv_tileview_class                        0x0802e0a4   Data          28  lv_tileview.o(.constdata)
-    lv_tileview_tile_class                   0x0802e0c0   Data          28  lv_tileview.o(.constdata)
-    lv_win_class                             0x0802e0dc   Data          28  lv_win.o(.constdata)
-    lv_font_montserrat_14                    0x08031620   Data          28  lv_font_montserrat_14.o(.constdata)
-    _lv_style_builtin_prop_flag_lookup_table 0x08031874   Data         113  lv_style.o(.constdata)
-    lv_arc_class                             0x080318e8   Data          28  lv_arc.o(.constdata)
-    lv_bar_class                             0x08031904   Data          28  lv_bar.o(.constdata)
-    lv_btn_class                             0x08031920   Data          28  lv_btn.o(.constdata)
-    lv_btnmatrix_class                       0x0803193c   Data          28  lv_btnmatrix.o(.constdata)
-    lv_checkbox_class                        0x08031958   Data          28  lv_checkbox.o(.constdata)
-    lv_dropdown_class                        0x08031974   Data          28  lv_dropdown.o(.constdata)
-    lv_dropdownlist_class                    0x08031990   Data          28  lv_dropdown.o(.constdata)
-    lv_img_class                             0x080319ac   Data          28  lv_img.o(.constdata)
-    lv_label_class                           0x080319c8   Data          28  lv_label.o(.constdata)
-    lv_line_class                            0x080319e4   Data          28  lv_line.o(.constdata)
-    lv_roller_class                          0x08031a00   Data          28  lv_roller.o(.constdata)
-    lv_roller_label_class                    0x08031a1c   Data          28  lv_roller.o(.constdata)
-    lv_slider_class                          0x08031a38   Data          28  lv_slider.o(.constdata)
-    lv_switch_class                          0x08031a54   Data          28  lv_switch.o(.constdata)
-    lv_table_class                           0x08031a70   Data          28  lv_table.o(.constdata)
-    lv_textarea_class                        0x08031a8c   Data          28  lv_textarea.o(.constdata)
-    lv_font_MiSansNormal_13                  0x08034a2c   Data          28  lv_font_misansnormal_13.o(.constdata)
-    lv_font_MiSansNormal_15                  0x0803816c   Data          28  lv_font_misansnormal_15.o(.constdata)
-    lv_font_MiSansNormal_16                  0x0803c7dc   Data          28  lv_font_misansnormal_16.o(.constdata)
-    lv_font_MiSansNormal_18                  0x0804125c   Data          28  lv_font_misansnormal_18.o(.constdata)
-    lv_font_montserratMedium_12              0x08043e9c   Data          28  lv_font_montserratmedium_12.o(.constdata)
-    lv_font_montserratMedium_14              0x08047348   Data          28  lv_font_montserratmedium_14.o(.constdata)
-    lv_font_montserratMedium_16              0x0804b0c4   Data          28  lv_font_montserratmedium_16.o(.constdata)
-    lv_font_montserratMedium_20              0x08050534   Data          28  lv_font_montserratmedium_20.o(.constdata)
-    Region$$Table$$Base                      0x08050c9c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08050cdc   Number         0  anon$$obj.o(Region$$Table)
+    sensorTask                               0x08026921   Thumb Code   144  freertos.o(i.sensorTask)
+    sensor_timer_callback                    0x080269d5   Thumb Code   190  freertos.o(i.sensor_timer_callback)
+    setup_scr_brightness_screen              0x08026add   Thumb Code   866  setup_scr_brightness_screen.o(i.setup_scr_brightness_screen)
+    setup_scr_main_screen                    0x08026e6d   Thumb Code  5956  setup_scr_main_screen.o(i.setup_scr_main_screen)
+    setup_scr_mqtt_param_screen              0x080285c9   Thumb Code  1268  setup_scr_mqtt_param_screen.o(i.setup_scr_mqtt_param_screen)
+    setup_scr_threshold_screen               0x08028ac1   Thumb Code  2962  setup_scr_threshold_screen.o(i.setup_scr_threshold_screen)
+    setup_ui                                 0x08029659   Thumb Code    24  gui_guider.o(i.setup_ui)
+    touch_driver_init                        0x0802bce9   Thumb Code     8  cst816.o(i.touch_driver_init)
+    ui_init_style                            0x0802c195   Thumb Code    14  gui_guider.o(i.ui_init_style)
+    ui_load_scr_animation                    0x0802c1a3   Thumb Code    70  gui_guider.o(i.ui_load_scr_animation)
+    uxListRemove                             0x0802c36f   Thumb Code    38  list.o(i.uxListRemove)
+    vApplicationGetIdleTaskMemory            0x0802c395   Thumb Code    16  cmsis_os2.o(i.vApplicationGetIdleTaskMemory)
+    vApplicationGetTimerTaskMemory           0x0802c3a9   Thumb Code    18  cmsis_os2.o(i.vApplicationGetTimerTaskMemory)
+    vApplicationTickHook                     0x0802c3c1   Thumb Code     6  freertos.o(i.vApplicationTickHook)
+    vListInitialise                          0x0802c3c7   Thumb Code    22  list.o(i.vListInitialise)
+    vListInitialiseItem                      0x0802c3dd   Thumb Code     6  list.o(i.vListInitialiseItem)
+    vListInsert                              0x0802c3e3   Thumb Code    48  list.o(i.vListInsert)
+    vListInsertEnd                           0x0802c413   Thumb Code    24  list.o(i.vListInsertEnd)
+    vPortEnterCritical                       0x0802c42d   Thumb Code    54  port.o(i.vPortEnterCritical)
+    vPortExitCritical                        0x0802c46d   Thumb Code    34  port.o(i.vPortExitCritical)
+    vPortFree                                0x0802c495   Thumb Code    94  heap_4.o(i.vPortFree)
+    vPortSetupTimerInterrupt                 0x0802c4f9   Thumb Code    32  port.o(i.vPortSetupTimerInterrupt)
+    vPortValidateInterruptPriority           0x0802c51d   Thumb Code    74  port.o(i.vPortValidateInterruptPriority)
+    vQueueAddToRegistry                      0x0802c571   Thumb Code    32  queue.o(i.vQueueAddToRegistry)
+    vQueueWaitForMessageRestricted           0x0802c595   Thumb Code    68  queue.o(i.vQueueWaitForMessageRestricted)
+    vTaskDelay                               0x0802c5d9   Thumb Code    66  tasks.o(i.vTaskDelay)
+    vTaskDelayUntil                          0x0802c625   Thumb Code   136  tasks.o(i.vTaskDelayUntil)
+    vTaskInternalSetTimeOutState             0x0802c6b5   Thumb Code    12  tasks.o(i.vTaskInternalSetTimeOutState)
+    vTaskMissedYield                         0x0802c6c5   Thumb Code     8  tasks.o(i.vTaskMissedYield)
+    vTaskPlaceOnEventList                    0x0802c6d1   Thumb Code    44  tasks.o(i.vTaskPlaceOnEventList)
+    vTaskPlaceOnEventListRestricted          0x0802c701   Thumb Code    52  tasks.o(i.vTaskPlaceOnEventListRestricted)
+    vTaskPriorityDisinheritAfterTimeout      0x0802c739   Thumb Code   136  tasks.o(i.vTaskPriorityDisinheritAfterTimeout)
+    vTaskStartScheduler                      0x0802c7c9   Thumb Code   116  tasks.o(i.vTaskStartScheduler)
+    vTaskSuspendAll                          0x0802c84d   Thumb Code    10  tasks.o(i.vTaskSuspendAll)
+    vTaskSwitchContext                       0x0802c85d   Thumb Code    90  tasks.o(i.vTaskSwitchContext)
+    xPortStartScheduler                      0x0802ca05   Thumb Code   224  port.o(i.xPortStartScheduler)
+    xPortSysTickHandler                      0x0802caf9   Thumb Code    38  port.o(i.xPortSysTickHandler)
+    xQueueCreateMutex                        0x0802cb25   Thumb Code    22  queue.o(i.xQueueCreateMutex)
+    xQueueCreateMutexStatic                  0x0802cb3b   Thumb Code    26  queue.o(i.xQueueCreateMutexStatic)
+    xQueueGenericCreate                      0x0802cb55   Thumb Code    66  queue.o(i.xQueueGenericCreate)
+    xQueueGenericCreateStatic                0x0802cb97   Thumb Code   102  queue.o(i.xQueueGenericCreateStatic)
+    xQueueGenericReset                       0x0802cbfd   Thumb Code   132  queue.o(i.xQueueGenericReset)
+    xQueueGenericSend                        0x0802cc85   Thumb Code   350  queue.o(i.xQueueGenericSend)
+    xQueueGenericSendFromISR                 0x0802cde9   Thumb Code   190  queue.o(i.xQueueGenericSendFromISR)
+    xQueueGiveMutexRecursive                 0x0802cea7   Thumb Code    62  queue.o(i.xQueueGiveMutexRecursive)
+    xQueuePeek                               0x0802cee5   Thumb Code   308  queue.o(i.xQueuePeek)
+    xQueueReceive                            0x0802d01d   Thumb Code   308  queue.o(i.xQueueReceive)
+    xQueueSemaphoreTake                      0x0802d155   Thumb Code   372  queue.o(i.xQueueSemaphoreTake)
+    xQueueTakeMutexRecursive                 0x0802d2cd   Thumb Code    64  queue.o(i.xQueueTakeMutexRecursive)
+    xTaskCheckForTimeOut                     0x0802d30d   Thumb Code   112  tasks.o(i.xTaskCheckForTimeOut)
+    xTaskCreate                              0x0802d381   Thumb Code    90  tasks.o(i.xTaskCreate)
+    xTaskCreateStatic                        0x0802d3db   Thumb Code    90  tasks.o(i.xTaskCreateStatic)
+    xTaskGetCurrentTaskHandle                0x0802d435   Thumb Code     6  tasks.o(i.xTaskGetCurrentTaskHandle)
+    xTaskGetSchedulerState                   0x0802d441   Thumb Code    22  tasks.o(i.xTaskGetSchedulerState)
+    xTaskGetTickCount                        0x0802d45d   Thumb Code     6  tasks.o(i.xTaskGetTickCount)
+    xTaskGetTickCountFromISR                 0x0802d469   Thumb Code    12  tasks.o(i.xTaskGetTickCountFromISR)
+    xTaskIncrementTick                       0x0802d479   Thumb Code   206  tasks.o(i.xTaskIncrementTick)
+    xTaskPriorityDisinherit                  0x0802d551   Thumb Code   116  tasks.o(i.xTaskPriorityDisinherit)
+    xTaskPriorityInherit                     0x0802d5cd   Thumb Code   114  tasks.o(i.xTaskPriorityInherit)
+    xTaskRemoveFromEventList                 0x0802d649   Thumb Code    98  tasks.o(i.xTaskRemoveFromEventList)
+    xTaskResumeAll                           0x0802d6b9   Thumb Code   180  tasks.o(i.xTaskResumeAll)
+    xTimerCreate                             0x0802d779   Thumb Code    52  timers.o(i.xTimerCreate)
+    xTimerCreateTimerTask                    0x0802d7ad   Thumb Code    78  timers.o(i.xTimerCreateTimerTask)
+    xTimerGenericCommand                     0x0802d80d   Thumb Code    94  timers.o(i.xTimerGenericCommand)
+    sensorTask_attributes                    0x0802d8a8   Data          36  freertos.o(.constdata)
+    displayTask_attributes                   0x0802d8cc   Data          36  freertos.o(.constdata)
+    mqttTask_attributes                      0x0802d8f0   Data          36  freertos.o(.constdata)
+    lvgl_Mutex_attributes                    0x0802d914   Data          16  freertos.o(.constdata)
+    AHBPrescTable                            0x0802d92c   Data          16  system_stm32f4xx.o(.constdata)
+    APBPrescTable                            0x0802d93c   Data           8  system_stm32f4xx.o(.constdata)
+    lv_obj_class                             0x0802d944   Data          28  lv_obj.o(.constdata)
+    _lv_bpp1_opa_table                       0x0802d968   Data           2  lv_draw_sw_letter.o(.constdata)
+    _lv_bpp2_opa_table                       0x0802d96a   Data           4  lv_draw_sw_letter.o(.constdata)
+    _lv_bpp4_opa_table                       0x0802d96e   Data          16  lv_draw_sw_letter.o(.constdata)
+    _lv_bpp8_opa_table                       0x0802d97e   Data         256  lv_draw_sw_letter.o(.constdata)
+    lv_calendar_class                        0x0802dac0   Data          28  lv_calendar.o(.constdata)
+    lv_calendar_header_arrow_class           0x0802dadc   Data          28  lv_calendar_header_arrow.o(.constdata)
+    lv_calendar_header_dropdown_class        0x0802daf8   Data          28  lv_calendar_header_dropdown.o(.constdata)
+    lv_colorwheel_class                      0x0802db14   Data          28  lv_colorwheel.o(.constdata)
+    lv_keyboard_class                        0x0802db30   Data          28  lv_keyboard.o(.constdata)
+    lv_led_class                             0x0802dec4   Data          28  lv_led.o(.constdata)
+    lv_list_class                            0x0802dee0   Data          28  lv_list.o(.constdata)
+    lv_list_btn_class                        0x0802defc   Data          28  lv_list.o(.constdata)
+    lv_list_text_class                       0x0802df18   Data          28  lv_list.o(.constdata)
+    lv_menu_class                            0x0802df34   Data          28  lv_menu.o(.constdata)
+    lv_menu_page_class                       0x0802df50   Data          28  lv_menu.o(.constdata)
+    lv_menu_cont_class                       0x0802df6c   Data          28  lv_menu.o(.constdata)
+    lv_menu_section_class                    0x0802df88   Data          28  lv_menu.o(.constdata)
+    lv_menu_separator_class                  0x0802dfa4   Data          28  lv_menu.o(.constdata)
+    lv_menu_sidebar_cont_class               0x0802dfc0   Data          28  lv_menu.o(.constdata)
+    lv_menu_main_cont_class                  0x0802dfdc   Data          28  lv_menu.o(.constdata)
+    lv_menu_main_header_cont_class           0x0802dff8   Data          28  lv_menu.o(.constdata)
+    lv_menu_sidebar_header_cont_class        0x0802e014   Data          28  lv_menu.o(.constdata)
+    lv_meter_class                           0x0802e030   Data          28  lv_meter.o(.constdata)
+    lv_msgbox_class                          0x0802e04c   Data          28  lv_msgbox.o(.constdata)
+    lv_msgbox_content_class                  0x0802e068   Data          28  lv_msgbox.o(.constdata)
+    lv_msgbox_backdrop_class                 0x0802e084   Data          28  lv_msgbox.o(.constdata)
+    lv_spinbox_class                         0x0802e0a0   Data          28  lv_spinbox.o(.constdata)
+    lv_spinner_class                         0x0802e0bc   Data          28  lv_spinner.o(.constdata)
+    lv_tabview_class                         0x0802e0d8   Data          28  lv_tabview.o(.constdata)
+    lv_tileview_class                        0x0802e0f4   Data          28  lv_tileview.o(.constdata)
+    lv_tileview_tile_class                   0x0802e110   Data          28  lv_tileview.o(.constdata)
+    lv_win_class                             0x0802e12c   Data          28  lv_win.o(.constdata)
+    lv_font_montserrat_14                    0x08031670   Data          28  lv_font_montserrat_14.o(.constdata)
+    _lv_style_builtin_prop_flag_lookup_table 0x080318c4   Data         113  lv_style.o(.constdata)
+    lv_arc_class                             0x08031938   Data          28  lv_arc.o(.constdata)
+    lv_bar_class                             0x08031954   Data          28  lv_bar.o(.constdata)
+    lv_btn_class                             0x08031970   Data          28  lv_btn.o(.constdata)
+    lv_btnmatrix_class                       0x0803198c   Data          28  lv_btnmatrix.o(.constdata)
+    lv_checkbox_class                        0x080319a8   Data          28  lv_checkbox.o(.constdata)
+    lv_dropdown_class                        0x080319c4   Data          28  lv_dropdown.o(.constdata)
+    lv_dropdownlist_class                    0x080319e0   Data          28  lv_dropdown.o(.constdata)
+    lv_img_class                             0x080319fc   Data          28  lv_img.o(.constdata)
+    lv_label_class                           0x08031a18   Data          28  lv_label.o(.constdata)
+    lv_line_class                            0x08031a34   Data          28  lv_line.o(.constdata)
+    lv_roller_class                          0x08031a50   Data          28  lv_roller.o(.constdata)
+    lv_roller_label_class                    0x08031a6c   Data          28  lv_roller.o(.constdata)
+    lv_slider_class                          0x08031a88   Data          28  lv_slider.o(.constdata)
+    lv_switch_class                          0x08031aa4   Data          28  lv_switch.o(.constdata)
+    lv_table_class                           0x08031ac0   Data          28  lv_table.o(.constdata)
+    lv_textarea_class                        0x08031adc   Data          28  lv_textarea.o(.constdata)
+    lv_font_MiSansNormal_13                  0x08034a7c   Data          28  lv_font_misansnormal_13.o(.constdata)
+    lv_font_MiSansNormal_15                  0x080381bc   Data          28  lv_font_misansnormal_15.o(.constdata)
+    lv_font_MiSansNormal_16                  0x0803c82c   Data          28  lv_font_misansnormal_16.o(.constdata)
+    lv_font_MiSansNormal_18                  0x080412ac   Data          28  lv_font_misansnormal_18.o(.constdata)
+    lv_font_montserratMedium_12              0x08043eec   Data          28  lv_font_montserratmedium_12.o(.constdata)
+    lv_font_montserratMedium_14              0x08047398   Data          28  lv_font_montserratmedium_14.o(.constdata)
+    lv_font_montserratMedium_16              0x0804b114   Data          28  lv_font_montserratmedium_16.o(.constdata)
+    lv_font_montserratMedium_20              0x08050584   Data          28  lv_font_montserratmedium_20.o(.constdata)
+    Region$$Table$$Base                      0x08050cec   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08050d2c   Number         0  anon$$obj.o(Region$$Table)
     brightness_pwm                           0x10000000   Data           2  main.o(.data)
     uwTickFreq                               0x10000004   Data           1  stm32f4xx_hal.o(.data)
     uwTickPrio                               0x10000008   Data           4  stm32f4xx_hal.o(.data)
@@ -13900,9 +13903,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00051040, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00050dc4])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00051090, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00050e14])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00050cdc, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00050d2c, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -15408,284 +15411,284 @@ Memory Map of the image
     0x0802680a   0x0802680a   0x00000018   Code   RO         8784    i.scroll_y_anim     lv_obj_scroll.o
     0x08026822   0x08026822   0x000000fc   Code   RO         7490    i.scrollbar_init_draw_dsc  lv_obj.o
     0x0802691e   0x0802691e   0x00000002   PAD
-    0x08026920   0x08026920   0x00000064   Code   RO          749    i.sensorTask        freertos.o
-    0x08026984   0x08026984   0x000000e4   Code   RO          750    i.sensor_timer_callback  freertos.o
-    0x08026a68   0x08026a68   0x00000008   Code   RO        36810    i.set_ofs_x_anim    lv_label.o
-    0x08026a70   0x08026a70   0x00000008   Code   RO        36811    i.set_ofs_y_anim    lv_label.o
-    0x08026a78   0x08026a78   0x00000006   Code   RO         6163    i.set_x_anim        lv_disp.o
-    0x08026a7e   0x08026a7e   0x00000006   Code   RO         6164    i.set_y_anim        lv_disp.o
-    0x08026a84   0x08026a84   0x00000006   Code   RO        37136    i.set_y_anim        lv_roller.o
-    0x08026a8a   0x08026a8a   0x00000002   PAD
-    0x08026a8c   0x08026a8c   0x00000390   Code   RO        39800    i.setup_scr_brightness_screen  setup_scr_brightness_screen.o
-    0x08026e1c   0x08026e1c   0x0000175c   Code   RO        40018    i.setup_scr_main_screen  setup_scr_main_screen.o
-    0x08028578   0x08028578   0x000004f8   Code   RO        40235    i.setup_scr_mqtt_param_screen  setup_scr_mqtt_param_screen.o
-    0x08028a70   0x08028a70   0x00000b98   Code   RO        40272    i.setup_scr_threshold_screen  setup_scr_threshold_screen.o
-    0x08029608   0x08029608   0x00000018   Code   RO        39546    i.setup_ui          gui_guider.o
-    0x08029620   0x08029620   0x00000134   Code   RO        13422    i.shadow_blur_corner  lv_draw_sw_rect.o
-    0x08029754   0x08029754   0x00000182   Code   RO        13423    i.shadow_draw_corner_buf  lv_draw_sw_rect.o
-    0x080298d6   0x080298d6   0x0000004e   Code   RO        11899    i.show_error        lv_draw_img.o
-    0x08029924   0x08029924   0x00000060   Code   RO        37985    i.start_cursor_blink  lv_textarea.o
-    0x08029984   0x08029984   0x0000142c   Code   RO        21866    i.style_init        lv_theme_default.o
-    0x0802adb0   0x0802adb0   0x00000014   Code   RO        21867    i.style_init_reset  lv_theme_default.o
-    0x0802adc4   0x0802adc4   0x00000d00   Code   RO        21868    i.theme_apply       lv_theme_default.o
-    0x0802bac4   0x0802bac4   0x00000050   Code   RO        39452    i.threshold_screen_btn_1_event_handler  events_init.o
-    0x0802bb14   0x0802bb14   0x000000b0   Code   RO        39453    i.threshold_screen_slider_humi_event_handler  events_init.o
-    0x0802bbc4   0x0802bbc4   0x000000b6   Code   RO        29786    i.tileview_event_cb  lv_tileview.o
-    0x0802bc7a   0x0802bc7a   0x00000010   Code   RO        34529    i.tlsf_ffs          lv_tlsf.o
-    0x0802bc8a   0x0802bc8a   0x0000000e   Code   RO        34530    i.tlsf_fls          lv_tlsf.o
-    0x0802bc98   0x0802bc98   0x0000000c   Code   RO         5923    i.touch_driver_init  cst816.o
-    0x0802bca4   0x0802bca4   0x00000038   Code   RO         6099    i.touchpad_read     lv_port_indev.o
-    0x0802bcdc   0x0802bcdc   0x00000148   Code   RO         9080    i.trans_anim_cb     lv_obj_style.o
-    0x0802be24   0x0802be24   0x000000a8   Code   RO         9081    i.trans_anim_ready_cb  lv_obj_style.o
-    0x0802becc   0x0802becc   0x00000040   Code   RO         9082    i.trans_anim_start_cb  lv_obj_style.o
-    0x0802bf0c   0x0802bf0c   0x000000a8   Code   RO         9083    i.trans_del         lv_obj_style.o
-    0x0802bfb4   0x0802bfb4   0x000000fe   Code   RO         8357    i.transform_point   lv_obj_pos.o
-    0x0802c0b2   0x0802c0b2   0x00000092   Code   RO        13529    i.transform_point_upscaled  lv_draw_sw_transform.o
-    0x0802c144   0x0802c144   0x0000000e   Code   RO        39548    i.ui_init_style     gui_guider.o
-    0x0802c152   0x0802c152   0x00000046   Code   RO        39549    i.ui_load_scr_animation  gui_guider.o
-    0x0802c198   0x0802c198   0x00000008   Code   RO        30899    i.unicode_list_compare  lv_font_fmt_txt.o
-    0x0802c1a0   0x0802c1a0   0x0000017e   Code   RO        37986    i.update_cursor_position_on_click  lv_textarea.o
-    0x0802c31e   0x0802c31e   0x00000026   Code   RO        40635    i.uxListRemove      list.o
-    0x0802c344   0x0802c344   0x00000014   Code   RO        41678    i.vApplicationGetIdleTaskMemory  cmsis_os2.o
-    0x0802c358   0x0802c358   0x00000018   Code   RO        41679    i.vApplicationGetTimerTaskMemory  cmsis_os2.o
-    0x0802c370   0x0802c370   0x00000006   Code   RO          751    i.vApplicationTickHook  freertos.o
-    0x0802c376   0x0802c376   0x00000016   Code   RO        40636    i.vListInitialise   list.o
-    0x0802c38c   0x0802c38c   0x00000006   Code   RO        40637    i.vListInitialiseItem  list.o
-    0x0802c392   0x0802c392   0x00000030   Code   RO        40638    i.vListInsert       list.o
-    0x0802c3c2   0x0802c3c2   0x00000018   Code   RO        40639    i.vListInsertEnd    list.o
-    0x0802c3da   0x0802c3da   0x00000002   PAD
-    0x0802c3dc   0x0802c3dc   0x00000040   Code   RO        42183    i.vPortEnterCritical  port.o
-    0x0802c41c   0x0802c41c   0x00000028   Code   RO        42184    i.vPortExitCritical  port.o
-    0x0802c444   0x0802c444   0x00000064   Code   RO        42127    i.vPortFree         heap_4.o
-    0x0802c4a8   0x0802c4a8   0x00000024   Code   RO        42185    i.vPortSetupTimerInterrupt  port.o
-    0x0802c4cc   0x0802c4cc   0x00000054   Code   RO        42186    i.vPortValidateInterruptPriority  port.o
-    0x0802c520   0x0802c520   0x00000024   Code   RO        40686    i.vQueueAddToRegistry  queue.o
-    0x0802c544   0x0802c544   0x00000044   Code   RO        40690    i.vQueueWaitForMessageRestricted  queue.o
-    0x0802c588   0x0802c588   0x0000004c   Code   RO        41088    i.vTaskDelay        tasks.o
-    0x0802c5d4   0x0802c5d4   0x00000090   Code   RO        41089    i.vTaskDelayUntil   tasks.o
-    0x0802c664   0x0802c664   0x00000010   Code   RO        41093    i.vTaskInternalSetTimeOutState  tasks.o
-    0x0802c674   0x0802c674   0x0000000c   Code   RO        41094    i.vTaskMissedYield  tasks.o
-    0x0802c680   0x0802c680   0x00000030   Code   RO        41096    i.vTaskPlaceOnEventList  tasks.o
-    0x0802c6b0   0x0802c6b0   0x00000038   Code   RO        41097    i.vTaskPlaceOnEventListRestricted  tasks.o
-    0x0802c6e8   0x0802c6e8   0x00000090   Code   RO        41099    i.vTaskPriorityDisinheritAfterTimeout  tasks.o
-    0x0802c778   0x0802c778   0x00000084   Code   RO        41105    i.vTaskStartScheduler  tasks.o
-    0x0802c7fc   0x0802c7fc   0x00000010   Code   RO        41107    i.vTaskSuspendAll   tasks.o
-    0x0802c80c   0x0802c80c   0x00000064   Code   RO        41108    i.vTaskSwitchContext  tasks.o
-    0x0802c870   0x0802c870   0x00000040   Code   RO        23767    i.value_changed_event_cb  lv_calendar_header_arrow.o
-    0x0802c8b0   0x0802c8b0   0x00000040   Code   RO        23971    i.value_changed_event_cb  lv_calendar_header_dropdown.o
-    0x0802c8f0   0x0802c8f0   0x000000c2   Code   RO        34972    i.value_update      lv_arc.o
-    0x0802c9b2   0x0802c9b2   0x00000002   PAD
-    0x0802c9b4   0x0802c9b4   0x000000f4   Code   RO        42187    i.xPortStartScheduler  port.o
-    0x0802caa8   0x0802caa8   0x0000002c   Code   RO        42188    i.xPortSysTickHandler  port.o
-    0x0802cad4   0x0802cad4   0x00000016   Code   RO        40693    i.xQueueCreateMutex  queue.o
-    0x0802caea   0x0802caea   0x0000001a   Code   RO        40694    i.xQueueCreateMutexStatic  queue.o
-    0x0802cb04   0x0802cb04   0x00000042   Code   RO        40695    i.xQueueGenericCreate  queue.o
-    0x0802cb46   0x0802cb46   0x00000066   Code   RO        40696    i.xQueueGenericCreateStatic  queue.o
-    0x0802cbac   0x0802cbac   0x00000088   Code   RO        40697    i.xQueueGenericReset  queue.o
-    0x0802cc34   0x0802cc34   0x00000164   Code   RO        40698    i.xQueueGenericSend  queue.o
-    0x0802cd98   0x0802cd98   0x000000be   Code   RO        40699    i.xQueueGenericSendFromISR  queue.o
-    0x0802ce56   0x0802ce56   0x0000003e   Code   RO        40703    i.xQueueGiveMutexRecursive  queue.o
-    0x0802ce94   0x0802ce94   0x00000138   Code   RO        40706    i.xQueuePeek        queue.o
-    0x0802cfcc   0x0802cfcc   0x00000138   Code   RO        40708    i.xQueueReceive     queue.o
-    0x0802d104   0x0802d104   0x00000178   Code   RO        40710    i.xQueueSemaphoreTake  queue.o
-    0x0802d27c   0x0802d27c   0x00000040   Code   RO        40711    i.xQueueTakeMutexRecursive  queue.o
-    0x0802d2bc   0x0802d2bc   0x00000074   Code   RO        41110    i.xTaskCheckForTimeOut  tasks.o
-    0x0802d330   0x0802d330   0x0000005a   Code   RO        41111    i.xTaskCreate       tasks.o
-    0x0802d38a   0x0802d38a   0x0000005a   Code   RO        41112    i.xTaskCreateStatic  tasks.o
-    0x0802d3e4   0x0802d3e4   0x0000000c   Code   RO        41115    i.xTaskGetCurrentTaskHandle  tasks.o
-    0x0802d3f0   0x0802d3f0   0x0000001c   Code   RO        41116    i.xTaskGetSchedulerState  tasks.o
-    0x0802d40c   0x0802d40c   0x0000000c   Code   RO        41117    i.xTaskGetTickCount  tasks.o
-    0x0802d418   0x0802d418   0x00000010   Code   RO        41118    i.xTaskGetTickCountFromISR  tasks.o
-    0x0802d428   0x0802d428   0x000000d8   Code   RO        41119    i.xTaskIncrementTick  tasks.o
-    0x0802d500   0x0802d500   0x0000007c   Code   RO        41122    i.xTaskPriorityDisinherit  tasks.o
-    0x0802d57c   0x0802d57c   0x0000007c   Code   RO        41123    i.xTaskPriorityInherit  tasks.o
-    0x0802d5f8   0x0802d5f8   0x00000070   Code   RO        41124    i.xTaskRemoveFromEventList  tasks.o
-    0x0802d668   0x0802d668   0x000000c0   Code   RO        41125    i.xTaskResumeAll    tasks.o
-    0x0802d728   0x0802d728   0x00000034   Code   RO        41448    i.xTimerCreate      timers.o
-    0x0802d75c   0x0802d75c   0x00000060   Code   RO        41450    i.xTimerCreateTimerTask  timers.o
-    0x0802d7bc   0x0802d7bc   0x00000064   Code   RO        41451    i.xTimerGenericCommand  timers.o
-    0x0802d820   0x0802d820   0x00000038   Code   RO        23972    i.year_event_cb     lv_calendar_header_dropdown.o
-    0x0802d858   0x0802d858   0x0000007c   Data   RO          754    .constdata          freertos.o
-    0x0802d8d4   0x0802d8d4   0x00000008   Data   RO         2310    .constdata          stm32f4xx_hal_dma.o
-    0x0802d8dc   0x0802d8dc   0x00000010   Data   RO         5473    .constdata          system_stm32f4xx.o
-    0x0802d8ec   0x0802d8ec   0x00000008   Data   RO         5474    .constdata          system_stm32f4xx.o
-    0x0802d8f4   0x0802d8f4   0x0000001c   Data   RO         7491    .constdata          lv_obj.o
-    0x0802d910   0x0802d910   0x00000008   Data   RO         8358    .constdata          lv_obj_pos.o
-    0x0802d918   0x0802d918   0x00000116   Data   RO        13139    .constdata          lv_draw_sw_letter.o
-    0x0802da2e   0x0802da2e   0x00000021   Data   RO        13242    .constdata          lv_draw_sw_line.o
-    0x0802da4f   0x0802da4f   0x00000001   PAD
-    0x0802da50   0x0802da50   0x00000008   Data   RO        13346    .constdata          lv_draw_sw_polygon.o
-    0x0802da58   0x0802da58   0x00000016   Data   RO        21870    .constdata          lv_theme_default.o
-    0x0802da6e   0x0802da6e   0x00000002   PAD
-    0x0802da70   0x0802da70   0x0000001c   Data   RO        23280    .constdata          lv_calendar.o
-    0x0802da8c   0x0802da8c   0x0000001c   Data   RO        23768    .constdata          lv_calendar_header_arrow.o
-    0x0802daa8   0x0802daa8   0x0000001c   Data   RO        23973    .constdata          lv_calendar_header_dropdown.o
-    0x0802dac4   0x0802dac4   0x0000001c   Data   RO        24530    .constdata          lv_colorwheel.o
-    0x0802dae0   0x0802dae0   0x0000001c   Data   RO        25460    .constdata          lv_keyboard.o
-    0x0802dafc   0x0802dafc   0x000000b0   Data   RO        25461    .constdata          lv_keyboard.o
-    0x0802dbac   0x0802dbac   0x00000050   Data   RO        25462    .constdata          lv_keyboard.o
-    0x0802dbfc   0x0802dbfc   0x000000b0   Data   RO        25463    .constdata          lv_keyboard.o
-    0x0802dcac   0x0802dcac   0x00000050   Data   RO        25464    .constdata          lv_keyboard.o
-    0x0802dcfc   0x0802dcfc   0x000000b0   Data   RO        25465    .constdata          lv_keyboard.o
-    0x0802ddac   0x0802ddac   0x00000050   Data   RO        25466    .constdata          lv_keyboard.o
-    0x0802ddfc   0x0802ddfc   0x00000054   Data   RO        25467    .constdata          lv_keyboard.o
-    0x0802de50   0x0802de50   0x00000022   Data   RO        25468    .constdata          lv_keyboard.o
-    0x0802de72   0x0802de72   0x00000002   PAD
-    0x0802de74   0x0802de74   0x0000001c   Data   RO        25718    .constdata          lv_led.o
-    0x0802de90   0x0802de90   0x00000054   Data   RO        26181    .constdata          lv_list.o
-    0x0802dee4   0x0802dee4   0x000000fc   Data   RO        26415    .constdata          lv_menu.o
-    0x0802dfe0   0x0802dfe0   0x0000001c   Data   RO        26754    .constdata          lv_meter.o
-    0x0802dffc   0x0802dffc   0x00000054   Data   RO        27278    .constdata          lv_msgbox.o
-    0x0802e050   0x0802e050   0x0000001c   Data   RO        28373    .constdata          lv_spinbox.o
-    0x0802e06c   0x0802e06c   0x0000001c   Data   RO        28871    .constdata          lv_spinner.o
-    0x0802e088   0x0802e088   0x0000001c   Data   RO        29310    .constdata          lv_tabview.o
-    0x0802e0a4   0x0802e0a4   0x00000038   Data   RO        29787    .constdata          lv_tileview.o
-    0x0802e0dc   0x0802e0dc   0x0000001c   Data   RO        29995    .constdata          lv_win.o
-    0x0802e0f8   0x0802e0f8   0x00002280   Data   RO        31075    .constdata          lv_font_montserrat_14.o
-    0x08030378   0x08030378   0x000004f0   Data   RO        31076    .constdata          lv_font_montserrat_14.o
-    0x08030868   0x08030868   0x0000007c   Data   RO        31077    .constdata          lv_font_montserrat_14.o
-    0x080308e4   0x080308e4   0x00000028   Data   RO        31078    .constdata          lv_font_montserrat_14.o
-    0x0803090c   0x0803090c   0x0000009e   Data   RO        31079    .constdata          lv_font_montserrat_14.o
-    0x080309aa   0x080309aa   0x0000009e   Data   RO        31080    .constdata          lv_font_montserrat_14.o
-    0x08030a48   0x08030a48   0x00000bad   Data   RO        31081    .constdata          lv_font_montserrat_14.o
-    0x080315f5   0x080315f5   0x00000003   PAD
-    0x080315f8   0x080315f8   0x00000010   Data   RO        31082    .constdata          lv_font_montserrat_14.o
-    0x08031608   0x08031608   0x00000018   Data   RO        31083    .constdata          lv_font_montserrat_14.o
-    0x08031620   0x08031620   0x0000001c   Data   RO        31084    .constdata          lv_font_montserrat_14.o
-    0x0803163c   0x0803163c   0x0000017c   Data   RO        33070    .constdata          lv_color.o
-    0x080317b8   0x080317b8   0x000000b6   Data   RO        33489    .constdata          lv_math.o
-    0x0803186e   0x0803186e   0x00000002   PAD
-    0x08031870   0x08031870   0x00000075   Data   RO        33710    .constdata          lv_style.o
-    0x080318e5   0x080318e5   0x00000003   PAD
-    0x080318e8   0x080318e8   0x0000001c   Data   RO        34973    .constdata          lv_arc.o
-    0x08031904   0x08031904   0x0000001c   Data   RO        35339    .constdata          lv_bar.o
-    0x08031920   0x08031920   0x0000001c   Data   RO        35547    .constdata          lv_btn.o
-    0x0803193c   0x0803193c   0x0000001c   Data   RO        35606    .constdata          lv_btnmatrix.o
-    0x08031958   0x08031958   0x0000001c   Data   RO        36079    .constdata          lv_checkbox.o
-    0x08031974   0x08031974   0x00000038   Data   RO        36274    .constdata          lv_dropdown.o
-    0x080319ac   0x080319ac   0x0000001c   Data   RO        36578    .constdata          lv_img.o
-    0x080319c8   0x080319c8   0x0000001c   Data   RO        36812    .constdata          lv_label.o
-    0x080319e4   0x080319e4   0x0000001c   Data   RO        37062    .constdata          lv_line.o
-    0x08031a00   0x08031a00   0x00000038   Data   RO        37137    .constdata          lv_roller.o
-    0x08031a38   0x08031a38   0x0000001c   Data   RO        37333    .constdata          lv_slider.o
-    0x08031a54   0x08031a54   0x0000001c   Data   RO        37518    .constdata          lv_switch.o
-    0x08031a70   0x08031a70   0x0000001c   Data   RO        37697    .constdata          lv_table.o
-    0x08031a8c   0x08031a8c   0x0000001c   Data   RO        37987    .constdata          lv_textarea.o
-    0x08031aa8   0x08031aa8   0x00001fe3   Data   RO        40342    .constdata          lv_font_misansnormal_13.o
-    0x08033a8b   0x08033a8b   0x00000001   PAD
-    0x08033a8c   0x08033a8c   0x00000530   Data   RO        40343    .constdata          lv_font_misansnormal_13.o
-    0x08033fbc   0x08033fbc   0x0000008c   Data   RO        40344    .constdata          lv_font_misansnormal_13.o
-    0x08034048   0x08034048   0x00000050   Data   RO        40345    .constdata          lv_font_misansnormal_13.o
-    0x08034098   0x08034098   0x000000a6   Data   RO        40346    .constdata          lv_font_misansnormal_13.o
-    0x0803413e   0x0803413e   0x000000a6   Data   RO        40347    .constdata          lv_font_misansnormal_13.o
-    0x080341e4   0x080341e4   0x00000820   Data   RO        40348    .constdata          lv_font_misansnormal_13.o
-    0x08034a04   0x08034a04   0x00000010   Data   RO        40349    .constdata          lv_font_misansnormal_13.o
-    0x08034a14   0x08034a14   0x00000018   Data   RO        40350    .constdata          lv_font_misansnormal_13.o
-    0x08034a2c   0x08034a2c   0x0000001c   Data   RO        40351    .constdata          lv_font_misansnormal_13.o
-    0x08034a48   0x08034a48   0x000027dc   Data   RO        40361    .constdata          lv_font_misansnormal_15.o
-    0x08037224   0x08037224   0x00000510   Data   RO        40362    .constdata          lv_font_misansnormal_15.o
-    0x08037734   0x08037734   0x00000084   Data   RO        40363    .constdata          lv_font_misansnormal_15.o
-    0x080377b8   0x080377b8   0x00000028   Data   RO        40364    .constdata          lv_font_misansnormal_15.o
-    0x080377e0   0x080377e0   0x000000a2   Data   RO        40365    .constdata          lv_font_misansnormal_15.o
-    0x08037882   0x08037882   0x000000a2   Data   RO        40366    .constdata          lv_font_misansnormal_15.o
-    0x08037924   0x08037924   0x00000820   Data   RO        40367    .constdata          lv_font_misansnormal_15.o
-    0x08038144   0x08038144   0x00000010   Data   RO        40368    .constdata          lv_font_misansnormal_15.o
-    0x08038154   0x08038154   0x00000018   Data   RO        40369    .constdata          lv_font_misansnormal_15.o
-    0x0803816c   0x0803816c   0x0000001c   Data   RO        40370    .constdata          lv_font_misansnormal_15.o
-    0x08038188   0x08038188   0x000035d9   Data   RO        40380    .constdata          lv_font_misansnormal_16.o
-    0x0803b761   0x0803b761   0x00000003   PAD
-    0x0803b764   0x0803b764   0x000005c0   Data   RO        40381    .constdata          lv_font_misansnormal_16.o
-    0x0803bd24   0x0803bd24   0x000000b0   Data   RO        40382    .constdata          lv_font_misansnormal_16.o
-    0x0803bdd4   0x0803bdd4   0x00000050   Data   RO        40383    .constdata          lv_font_misansnormal_16.o
-    0x0803be24   0x0803be24   0x000000b8   Data   RO        40384    .constdata          lv_font_misansnormal_16.o
-    0x0803bedc   0x0803bedc   0x000000b8   Data   RO        40385    .constdata          lv_font_misansnormal_16.o
-    0x0803bf94   0x0803bf94   0x00000820   Data   RO        40386    .constdata          lv_font_misansnormal_16.o
-    0x0803c7b4   0x0803c7b4   0x00000010   Data   RO        40387    .constdata          lv_font_misansnormal_16.o
-    0x0803c7c4   0x0803c7c4   0x00000018   Data   RO        40388    .constdata          lv_font_misansnormal_16.o
-    0x0803c7dc   0x0803c7dc   0x0000001c   Data   RO        40389    .constdata          lv_font_misansnormal_16.o
-    0x0803c7f8   0x0803c7f8   0x00003ade   Data   RO        40399    .constdata          lv_font_misansnormal_18.o
-    0x080402d6   0x080402d6   0x00000002   PAD
-    0x080402d8   0x080402d8   0x00000528   Data   RO        40400    .constdata          lv_font_misansnormal_18.o
-    0x08040800   0x08040800   0x0000008c   Data   RO        40401    .constdata          lv_font_misansnormal_18.o
-    0x0804088c   0x0804088c   0x0000003c   Data   RO        40402    .constdata          lv_font_misansnormal_18.o
-    0x080408c8   0x080408c8   0x000000a5   Data   RO        40403    .constdata          lv_font_misansnormal_18.o
-    0x0804096d   0x0804096d   0x000000a5   Data   RO        40404    .constdata          lv_font_misansnormal_18.o
-    0x08040a12   0x08040a12   0x00000820   Data   RO        40405    .constdata          lv_font_misansnormal_18.o
-    0x08041232   0x08041232   0x00000002   PAD
-    0x08041234   0x08041234   0x00000010   Data   RO        40406    .constdata          lv_font_misansnormal_18.o
-    0x08041244   0x08041244   0x00000018   Data   RO        40407    .constdata          lv_font_misansnormal_18.o
-    0x0804125c   0x0804125c   0x0000001c   Data   RO        40408    .constdata          lv_font_misansnormal_18.o
-    0x08041278   0x08041278   0x000019f7   Data   RO        40418    .constdata          lv_font_montserratmedium_12.o
-    0x08042c6f   0x08042c6f   0x00000001   PAD
-    0x08042c70   0x08042c70   0x000004d8   Data   RO        40419    .constdata          lv_font_montserratmedium_12.o
-    0x08043148   0x08043148   0x00000078   Data   RO        40420    .constdata          lv_font_montserratmedium_12.o
-    0x080431c0   0x080431c0   0x0000003c   Data   RO        40421    .constdata          lv_font_montserratmedium_12.o
-    0x080431fc   0x080431fc   0x0000009b   Data   RO        40422    .constdata          lv_font_montserratmedium_12.o
-    0x08043297   0x08043297   0x0000009b   Data   RO        40423    .constdata          lv_font_montserratmedium_12.o
-    0x08043332   0x08043332   0x00000b40   Data   RO        40424    .constdata          lv_font_montserratmedium_12.o
-    0x08043e72   0x08043e72   0x00000002   PAD
-    0x08043e74   0x08043e74   0x00000010   Data   RO        40425    .constdata          lv_font_montserratmedium_12.o
-    0x08043e84   0x08043e84   0x00000018   Data   RO        40426    .constdata          lv_font_montserratmedium_12.o
-    0x08043e9c   0x08043e9c   0x0000001c   Data   RO        40427    .constdata          lv_font_montserratmedium_12.o
-    0x08043eb8   0x08043eb8   0x00002263   Data   RO        40456    .constdata          lv_font_montserratmedium_14.o
-    0x0804611b   0x0804611b   0x00000001   PAD
-    0x0804611c   0x0804611c   0x000004d8   Data   RO        40457    .constdata          lv_font_montserratmedium_14.o
-    0x080465f4   0x080465f4   0x00000078   Data   RO        40458    .constdata          lv_font_montserratmedium_14.o
-    0x0804666c   0x0804666c   0x0000003c   Data   RO        40459    .constdata          lv_font_montserratmedium_14.o
-    0x080466a8   0x080466a8   0x0000009b   Data   RO        40460    .constdata          lv_font_montserratmedium_14.o
-    0x08046743   0x08046743   0x0000009b   Data   RO        40461    .constdata          lv_font_montserratmedium_14.o
-    0x080467de   0x080467de   0x00000b40   Data   RO        40462    .constdata          lv_font_montserratmedium_14.o
-    0x0804731e   0x0804731e   0x00000002   PAD
-    0x08047320   0x08047320   0x00000010   Data   RO        40463    .constdata          lv_font_montserratmedium_14.o
-    0x08047330   0x08047330   0x00000018   Data   RO        40464    .constdata          lv_font_montserratmedium_14.o
-    0x08047348   0x08047348   0x0000001c   Data   RO        40465    .constdata          lv_font_montserratmedium_14.o
-    0x08047364   0x08047364   0x00002b32   Data   RO        40475    .constdata          lv_font_montserratmedium_16.o
-    0x08049e96   0x08049e96   0x00000002   PAD
-    0x08049e98   0x08049e98   0x000004d8   Data   RO        40476    .constdata          lv_font_montserratmedium_16.o
-    0x0804a370   0x0804a370   0x00000078   Data   RO        40477    .constdata          lv_font_montserratmedium_16.o
-    0x0804a3e8   0x0804a3e8   0x0000003c   Data   RO        40478    .constdata          lv_font_montserratmedium_16.o
-    0x0804a424   0x0804a424   0x0000009b   Data   RO        40479    .constdata          lv_font_montserratmedium_16.o
-    0x0804a4bf   0x0804a4bf   0x0000009b   Data   RO        40480    .constdata          lv_font_montserratmedium_16.o
-    0x0804a55a   0x0804a55a   0x00000b40   Data   RO        40481    .constdata          lv_font_montserratmedium_16.o
-    0x0804b09a   0x0804b09a   0x00000002   PAD
-    0x0804b09c   0x0804b09c   0x00000010   Data   RO        40482    .constdata          lv_font_montserratmedium_16.o
-    0x0804b0ac   0x0804b0ac   0x00000018   Data   RO        40483    .constdata          lv_font_montserratmedium_16.o
-    0x0804b0c4   0x0804b0c4   0x0000001c   Data   RO        40484    .constdata          lv_font_montserratmedium_16.o
-    0x0804b0e0   0x0804b0e0   0x00004226   Data   RO        40494    .constdata          lv_font_montserratmedium_20.o
-    0x0804f306   0x0804f306   0x00000002   PAD
-    0x0804f308   0x0804f308   0x000004d8   Data   RO        40495    .constdata          lv_font_montserratmedium_20.o
-    0x0804f7e0   0x0804f7e0   0x00000078   Data   RO        40496    .constdata          lv_font_montserratmedium_20.o
-    0x0804f858   0x0804f858   0x0000003c   Data   RO        40497    .constdata          lv_font_montserratmedium_20.o
-    0x0804f894   0x0804f894   0x0000009b   Data   RO        40498    .constdata          lv_font_montserratmedium_20.o
-    0x0804f92f   0x0804f92f   0x0000009b   Data   RO        40499    .constdata          lv_font_montserratmedium_20.o
-    0x0804f9ca   0x0804f9ca   0x00000b40   Data   RO        40500    .constdata          lv_font_montserratmedium_20.o
-    0x0805050a   0x0805050a   0x00000002   PAD
-    0x0805050c   0x0805050c   0x00000010   Data   RO        40501    .constdata          lv_font_montserratmedium_20.o
-    0x0805051c   0x0805051c   0x00000018   Data   RO        40502    .constdata          lv_font_montserratmedium_20.o
-    0x08050534   0x08050534   0x0000001c   Data   RO        40503    .constdata          lv_font_montserratmedium_20.o
-    0x08050550   0x08050550   0x000000ab   Data   RO          757    .conststring        freertos.o
-    0x080505fb   0x080505fb   0x00000001   PAD
-    0x080505fc   0x080505fc   0x00000007   Data   RO         5867    .conststring        esp01s.o
-    0x08050603   0x08050603   0x00000001   PAD
-    0x08050604   0x08050604   0x000001cd   Data   RO         5993    .conststring        mqtt.o
-    0x080507d1   0x080507d1   0x00000003   PAD
-    0x080507d4   0x080507d4   0x0000001b   Data   RO        23281    .conststring        lv_calendar.o
-    0x080507ef   0x080507ef   0x00000001   PAD
-    0x080507f0   0x080507f0   0x00000069   Data   RO        23769    .conststring        lv_calendar_header_arrow.o
-    0x08050859   0x08050859   0x00000003   PAD
-    0x0805085c   0x0805085c   0x0000028c   Data   RO        23974    .conststring        lv_calendar_header_dropdown.o
-    0x08050ae8   0x08050ae8   0x00000099   Data   RO        25469    .conststring        lv_keyboard.o
-    0x08050b81   0x08050b81   0x00000003   PAD
-    0x08050b84   0x08050b84   0x0000006c   Data   RO        25470    .conststring        lv_keyboard.o
-    0x08050bf0   0x08050bf0   0x0000007e   Data   RO        25471    .conststring        lv_keyboard.o
-    0x08050c6e   0x08050c6e   0x00000002   PAD
-    0x08050c70   0x08050c70   0x00000004   Data   RO        25472    .conststring        lv_keyboard.o
-    0x08050c74   0x08050c74   0x00000025   Data   RO        35607    .conststring        lv_btnmatrix.o
-    0x08050c99   0x08050c99   0x00000003   PAD
-    0x08050c9c   0x08050c9c   0x00000040   Data   RO        42626    Region$$Table       anon$$obj.o
+    0x08026920   0x08026920   0x000000b4   Code   RO          749    i.sensorTask        freertos.o
+    0x080269d4   0x080269d4   0x000000e4   Code   RO          750    i.sensor_timer_callback  freertos.o
+    0x08026ab8   0x08026ab8   0x00000008   Code   RO        36810    i.set_ofs_x_anim    lv_label.o
+    0x08026ac0   0x08026ac0   0x00000008   Code   RO        36811    i.set_ofs_y_anim    lv_label.o
+    0x08026ac8   0x08026ac8   0x00000006   Code   RO         6163    i.set_x_anim        lv_disp.o
+    0x08026ace   0x08026ace   0x00000006   Code   RO         6164    i.set_y_anim        lv_disp.o
+    0x08026ad4   0x08026ad4   0x00000006   Code   RO        37136    i.set_y_anim        lv_roller.o
+    0x08026ada   0x08026ada   0x00000002   PAD
+    0x08026adc   0x08026adc   0x00000390   Code   RO        39800    i.setup_scr_brightness_screen  setup_scr_brightness_screen.o
+    0x08026e6c   0x08026e6c   0x0000175c   Code   RO        40018    i.setup_scr_main_screen  setup_scr_main_screen.o
+    0x080285c8   0x080285c8   0x000004f8   Code   RO        40235    i.setup_scr_mqtt_param_screen  setup_scr_mqtt_param_screen.o
+    0x08028ac0   0x08028ac0   0x00000b98   Code   RO        40272    i.setup_scr_threshold_screen  setup_scr_threshold_screen.o
+    0x08029658   0x08029658   0x00000018   Code   RO        39546    i.setup_ui          gui_guider.o
+    0x08029670   0x08029670   0x00000134   Code   RO        13422    i.shadow_blur_corner  lv_draw_sw_rect.o
+    0x080297a4   0x080297a4   0x00000182   Code   RO        13423    i.shadow_draw_corner_buf  lv_draw_sw_rect.o
+    0x08029926   0x08029926   0x0000004e   Code   RO        11899    i.show_error        lv_draw_img.o
+    0x08029974   0x08029974   0x00000060   Code   RO        37985    i.start_cursor_blink  lv_textarea.o
+    0x080299d4   0x080299d4   0x0000142c   Code   RO        21866    i.style_init        lv_theme_default.o
+    0x0802ae00   0x0802ae00   0x00000014   Code   RO        21867    i.style_init_reset  lv_theme_default.o
+    0x0802ae14   0x0802ae14   0x00000d00   Code   RO        21868    i.theme_apply       lv_theme_default.o
+    0x0802bb14   0x0802bb14   0x00000050   Code   RO        39452    i.threshold_screen_btn_1_event_handler  events_init.o
+    0x0802bb64   0x0802bb64   0x000000b0   Code   RO        39453    i.threshold_screen_slider_humi_event_handler  events_init.o
+    0x0802bc14   0x0802bc14   0x000000b6   Code   RO        29786    i.tileview_event_cb  lv_tileview.o
+    0x0802bcca   0x0802bcca   0x00000010   Code   RO        34529    i.tlsf_ffs          lv_tlsf.o
+    0x0802bcda   0x0802bcda   0x0000000e   Code   RO        34530    i.tlsf_fls          lv_tlsf.o
+    0x0802bce8   0x0802bce8   0x0000000c   Code   RO         5923    i.touch_driver_init  cst816.o
+    0x0802bcf4   0x0802bcf4   0x00000038   Code   RO         6099    i.touchpad_read     lv_port_indev.o
+    0x0802bd2c   0x0802bd2c   0x00000148   Code   RO         9080    i.trans_anim_cb     lv_obj_style.o
+    0x0802be74   0x0802be74   0x000000a8   Code   RO         9081    i.trans_anim_ready_cb  lv_obj_style.o
+    0x0802bf1c   0x0802bf1c   0x00000040   Code   RO         9082    i.trans_anim_start_cb  lv_obj_style.o
+    0x0802bf5c   0x0802bf5c   0x000000a8   Code   RO         9083    i.trans_del         lv_obj_style.o
+    0x0802c004   0x0802c004   0x000000fe   Code   RO         8357    i.transform_point   lv_obj_pos.o
+    0x0802c102   0x0802c102   0x00000092   Code   RO        13529    i.transform_point_upscaled  lv_draw_sw_transform.o
+    0x0802c194   0x0802c194   0x0000000e   Code   RO        39548    i.ui_init_style     gui_guider.o
+    0x0802c1a2   0x0802c1a2   0x00000046   Code   RO        39549    i.ui_load_scr_animation  gui_guider.o
+    0x0802c1e8   0x0802c1e8   0x00000008   Code   RO        30899    i.unicode_list_compare  lv_font_fmt_txt.o
+    0x0802c1f0   0x0802c1f0   0x0000017e   Code   RO        37986    i.update_cursor_position_on_click  lv_textarea.o
+    0x0802c36e   0x0802c36e   0x00000026   Code   RO        40635    i.uxListRemove      list.o
+    0x0802c394   0x0802c394   0x00000014   Code   RO        41678    i.vApplicationGetIdleTaskMemory  cmsis_os2.o
+    0x0802c3a8   0x0802c3a8   0x00000018   Code   RO        41679    i.vApplicationGetTimerTaskMemory  cmsis_os2.o
+    0x0802c3c0   0x0802c3c0   0x00000006   Code   RO          751    i.vApplicationTickHook  freertos.o
+    0x0802c3c6   0x0802c3c6   0x00000016   Code   RO        40636    i.vListInitialise   list.o
+    0x0802c3dc   0x0802c3dc   0x00000006   Code   RO        40637    i.vListInitialiseItem  list.o
+    0x0802c3e2   0x0802c3e2   0x00000030   Code   RO        40638    i.vListInsert       list.o
+    0x0802c412   0x0802c412   0x00000018   Code   RO        40639    i.vListInsertEnd    list.o
+    0x0802c42a   0x0802c42a   0x00000002   PAD
+    0x0802c42c   0x0802c42c   0x00000040   Code   RO        42183    i.vPortEnterCritical  port.o
+    0x0802c46c   0x0802c46c   0x00000028   Code   RO        42184    i.vPortExitCritical  port.o
+    0x0802c494   0x0802c494   0x00000064   Code   RO        42127    i.vPortFree         heap_4.o
+    0x0802c4f8   0x0802c4f8   0x00000024   Code   RO        42185    i.vPortSetupTimerInterrupt  port.o
+    0x0802c51c   0x0802c51c   0x00000054   Code   RO        42186    i.vPortValidateInterruptPriority  port.o
+    0x0802c570   0x0802c570   0x00000024   Code   RO        40686    i.vQueueAddToRegistry  queue.o
+    0x0802c594   0x0802c594   0x00000044   Code   RO        40690    i.vQueueWaitForMessageRestricted  queue.o
+    0x0802c5d8   0x0802c5d8   0x0000004c   Code   RO        41088    i.vTaskDelay        tasks.o
+    0x0802c624   0x0802c624   0x00000090   Code   RO        41089    i.vTaskDelayUntil   tasks.o
+    0x0802c6b4   0x0802c6b4   0x00000010   Code   RO        41093    i.vTaskInternalSetTimeOutState  tasks.o
+    0x0802c6c4   0x0802c6c4   0x0000000c   Code   RO        41094    i.vTaskMissedYield  tasks.o
+    0x0802c6d0   0x0802c6d0   0x00000030   Code   RO        41096    i.vTaskPlaceOnEventList  tasks.o
+    0x0802c700   0x0802c700   0x00000038   Code   RO        41097    i.vTaskPlaceOnEventListRestricted  tasks.o
+    0x0802c738   0x0802c738   0x00000090   Code   RO        41099    i.vTaskPriorityDisinheritAfterTimeout  tasks.o
+    0x0802c7c8   0x0802c7c8   0x00000084   Code   RO        41105    i.vTaskStartScheduler  tasks.o
+    0x0802c84c   0x0802c84c   0x00000010   Code   RO        41107    i.vTaskSuspendAll   tasks.o
+    0x0802c85c   0x0802c85c   0x00000064   Code   RO        41108    i.vTaskSwitchContext  tasks.o
+    0x0802c8c0   0x0802c8c0   0x00000040   Code   RO        23767    i.value_changed_event_cb  lv_calendar_header_arrow.o
+    0x0802c900   0x0802c900   0x00000040   Code   RO        23971    i.value_changed_event_cb  lv_calendar_header_dropdown.o
+    0x0802c940   0x0802c940   0x000000c2   Code   RO        34972    i.value_update      lv_arc.o
+    0x0802ca02   0x0802ca02   0x00000002   PAD
+    0x0802ca04   0x0802ca04   0x000000f4   Code   RO        42187    i.xPortStartScheduler  port.o
+    0x0802caf8   0x0802caf8   0x0000002c   Code   RO        42188    i.xPortSysTickHandler  port.o
+    0x0802cb24   0x0802cb24   0x00000016   Code   RO        40693    i.xQueueCreateMutex  queue.o
+    0x0802cb3a   0x0802cb3a   0x0000001a   Code   RO        40694    i.xQueueCreateMutexStatic  queue.o
+    0x0802cb54   0x0802cb54   0x00000042   Code   RO        40695    i.xQueueGenericCreate  queue.o
+    0x0802cb96   0x0802cb96   0x00000066   Code   RO        40696    i.xQueueGenericCreateStatic  queue.o
+    0x0802cbfc   0x0802cbfc   0x00000088   Code   RO        40697    i.xQueueGenericReset  queue.o
+    0x0802cc84   0x0802cc84   0x00000164   Code   RO        40698    i.xQueueGenericSend  queue.o
+    0x0802cde8   0x0802cde8   0x000000be   Code   RO        40699    i.xQueueGenericSendFromISR  queue.o
+    0x0802cea6   0x0802cea6   0x0000003e   Code   RO        40703    i.xQueueGiveMutexRecursive  queue.o
+    0x0802cee4   0x0802cee4   0x00000138   Code   RO        40706    i.xQueuePeek        queue.o
+    0x0802d01c   0x0802d01c   0x00000138   Code   RO        40708    i.xQueueReceive     queue.o
+    0x0802d154   0x0802d154   0x00000178   Code   RO        40710    i.xQueueSemaphoreTake  queue.o
+    0x0802d2cc   0x0802d2cc   0x00000040   Code   RO        40711    i.xQueueTakeMutexRecursive  queue.o
+    0x0802d30c   0x0802d30c   0x00000074   Code   RO        41110    i.xTaskCheckForTimeOut  tasks.o
+    0x0802d380   0x0802d380   0x0000005a   Code   RO        41111    i.xTaskCreate       tasks.o
+    0x0802d3da   0x0802d3da   0x0000005a   Code   RO        41112    i.xTaskCreateStatic  tasks.o
+    0x0802d434   0x0802d434   0x0000000c   Code   RO        41115    i.xTaskGetCurrentTaskHandle  tasks.o
+    0x0802d440   0x0802d440   0x0000001c   Code   RO        41116    i.xTaskGetSchedulerState  tasks.o
+    0x0802d45c   0x0802d45c   0x0000000c   Code   RO        41117    i.xTaskGetTickCount  tasks.o
+    0x0802d468   0x0802d468   0x00000010   Code   RO        41118    i.xTaskGetTickCountFromISR  tasks.o
+    0x0802d478   0x0802d478   0x000000d8   Code   RO        41119    i.xTaskIncrementTick  tasks.o
+    0x0802d550   0x0802d550   0x0000007c   Code   RO        41122    i.xTaskPriorityDisinherit  tasks.o
+    0x0802d5cc   0x0802d5cc   0x0000007c   Code   RO        41123    i.xTaskPriorityInherit  tasks.o
+    0x0802d648   0x0802d648   0x00000070   Code   RO        41124    i.xTaskRemoveFromEventList  tasks.o
+    0x0802d6b8   0x0802d6b8   0x000000c0   Code   RO        41125    i.xTaskResumeAll    tasks.o
+    0x0802d778   0x0802d778   0x00000034   Code   RO        41448    i.xTimerCreate      timers.o
+    0x0802d7ac   0x0802d7ac   0x00000060   Code   RO        41450    i.xTimerCreateTimerTask  timers.o
+    0x0802d80c   0x0802d80c   0x00000064   Code   RO        41451    i.xTimerGenericCommand  timers.o
+    0x0802d870   0x0802d870   0x00000038   Code   RO        23972    i.year_event_cb     lv_calendar_header_dropdown.o
+    0x0802d8a8   0x0802d8a8   0x0000007c   Data   RO          754    .constdata          freertos.o
+    0x0802d924   0x0802d924   0x00000008   Data   RO         2310    .constdata          stm32f4xx_hal_dma.o
+    0x0802d92c   0x0802d92c   0x00000010   Data   RO         5473    .constdata          system_stm32f4xx.o
+    0x0802d93c   0x0802d93c   0x00000008   Data   RO         5474    .constdata          system_stm32f4xx.o
+    0x0802d944   0x0802d944   0x0000001c   Data   RO         7491    .constdata          lv_obj.o
+    0x0802d960   0x0802d960   0x00000008   Data   RO         8358    .constdata          lv_obj_pos.o
+    0x0802d968   0x0802d968   0x00000116   Data   RO        13139    .constdata          lv_draw_sw_letter.o
+    0x0802da7e   0x0802da7e   0x00000021   Data   RO        13242    .constdata          lv_draw_sw_line.o
+    0x0802da9f   0x0802da9f   0x00000001   PAD
+    0x0802daa0   0x0802daa0   0x00000008   Data   RO        13346    .constdata          lv_draw_sw_polygon.o
+    0x0802daa8   0x0802daa8   0x00000016   Data   RO        21870    .constdata          lv_theme_default.o
+    0x0802dabe   0x0802dabe   0x00000002   PAD
+    0x0802dac0   0x0802dac0   0x0000001c   Data   RO        23280    .constdata          lv_calendar.o
+    0x0802dadc   0x0802dadc   0x0000001c   Data   RO        23768    .constdata          lv_calendar_header_arrow.o
+    0x0802daf8   0x0802daf8   0x0000001c   Data   RO        23973    .constdata          lv_calendar_header_dropdown.o
+    0x0802db14   0x0802db14   0x0000001c   Data   RO        24530    .constdata          lv_colorwheel.o
+    0x0802db30   0x0802db30   0x0000001c   Data   RO        25460    .constdata          lv_keyboard.o
+    0x0802db4c   0x0802db4c   0x000000b0   Data   RO        25461    .constdata          lv_keyboard.o
+    0x0802dbfc   0x0802dbfc   0x00000050   Data   RO        25462    .constdata          lv_keyboard.o
+    0x0802dc4c   0x0802dc4c   0x000000b0   Data   RO        25463    .constdata          lv_keyboard.o
+    0x0802dcfc   0x0802dcfc   0x00000050   Data   RO        25464    .constdata          lv_keyboard.o
+    0x0802dd4c   0x0802dd4c   0x000000b0   Data   RO        25465    .constdata          lv_keyboard.o
+    0x0802ddfc   0x0802ddfc   0x00000050   Data   RO        25466    .constdata          lv_keyboard.o
+    0x0802de4c   0x0802de4c   0x00000054   Data   RO        25467    .constdata          lv_keyboard.o
+    0x0802dea0   0x0802dea0   0x00000022   Data   RO        25468    .constdata          lv_keyboard.o
+    0x0802dec2   0x0802dec2   0x00000002   PAD
+    0x0802dec4   0x0802dec4   0x0000001c   Data   RO        25718    .constdata          lv_led.o
+    0x0802dee0   0x0802dee0   0x00000054   Data   RO        26181    .constdata          lv_list.o
+    0x0802df34   0x0802df34   0x000000fc   Data   RO        26415    .constdata          lv_menu.o
+    0x0802e030   0x0802e030   0x0000001c   Data   RO        26754    .constdata          lv_meter.o
+    0x0802e04c   0x0802e04c   0x00000054   Data   RO        27278    .constdata          lv_msgbox.o
+    0x0802e0a0   0x0802e0a0   0x0000001c   Data   RO        28373    .constdata          lv_spinbox.o
+    0x0802e0bc   0x0802e0bc   0x0000001c   Data   RO        28871    .constdata          lv_spinner.o
+    0x0802e0d8   0x0802e0d8   0x0000001c   Data   RO        29310    .constdata          lv_tabview.o
+    0x0802e0f4   0x0802e0f4   0x00000038   Data   RO        29787    .constdata          lv_tileview.o
+    0x0802e12c   0x0802e12c   0x0000001c   Data   RO        29995    .constdata          lv_win.o
+    0x0802e148   0x0802e148   0x00002280   Data   RO        31075    .constdata          lv_font_montserrat_14.o
+    0x080303c8   0x080303c8   0x000004f0   Data   RO        31076    .constdata          lv_font_montserrat_14.o
+    0x080308b8   0x080308b8   0x0000007c   Data   RO        31077    .constdata          lv_font_montserrat_14.o
+    0x08030934   0x08030934   0x00000028   Data   RO        31078    .constdata          lv_font_montserrat_14.o
+    0x0803095c   0x0803095c   0x0000009e   Data   RO        31079    .constdata          lv_font_montserrat_14.o
+    0x080309fa   0x080309fa   0x0000009e   Data   RO        31080    .constdata          lv_font_montserrat_14.o
+    0x08030a98   0x08030a98   0x00000bad   Data   RO        31081    .constdata          lv_font_montserrat_14.o
+    0x08031645   0x08031645   0x00000003   PAD
+    0x08031648   0x08031648   0x00000010   Data   RO        31082    .constdata          lv_font_montserrat_14.o
+    0x08031658   0x08031658   0x00000018   Data   RO        31083    .constdata          lv_font_montserrat_14.o
+    0x08031670   0x08031670   0x0000001c   Data   RO        31084    .constdata          lv_font_montserrat_14.o
+    0x0803168c   0x0803168c   0x0000017c   Data   RO        33070    .constdata          lv_color.o
+    0x08031808   0x08031808   0x000000b6   Data   RO        33489    .constdata          lv_math.o
+    0x080318be   0x080318be   0x00000002   PAD
+    0x080318c0   0x080318c0   0x00000075   Data   RO        33710    .constdata          lv_style.o
+    0x08031935   0x08031935   0x00000003   PAD
+    0x08031938   0x08031938   0x0000001c   Data   RO        34973    .constdata          lv_arc.o
+    0x08031954   0x08031954   0x0000001c   Data   RO        35339    .constdata          lv_bar.o
+    0x08031970   0x08031970   0x0000001c   Data   RO        35547    .constdata          lv_btn.o
+    0x0803198c   0x0803198c   0x0000001c   Data   RO        35606    .constdata          lv_btnmatrix.o
+    0x080319a8   0x080319a8   0x0000001c   Data   RO        36079    .constdata          lv_checkbox.o
+    0x080319c4   0x080319c4   0x00000038   Data   RO        36274    .constdata          lv_dropdown.o
+    0x080319fc   0x080319fc   0x0000001c   Data   RO        36578    .constdata          lv_img.o
+    0x08031a18   0x08031a18   0x0000001c   Data   RO        36812    .constdata          lv_label.o
+    0x08031a34   0x08031a34   0x0000001c   Data   RO        37062    .constdata          lv_line.o
+    0x08031a50   0x08031a50   0x00000038   Data   RO        37137    .constdata          lv_roller.o
+    0x08031a88   0x08031a88   0x0000001c   Data   RO        37333    .constdata          lv_slider.o
+    0x08031aa4   0x08031aa4   0x0000001c   Data   RO        37518    .constdata          lv_switch.o
+    0x08031ac0   0x08031ac0   0x0000001c   Data   RO        37697    .constdata          lv_table.o
+    0x08031adc   0x08031adc   0x0000001c   Data   RO        37987    .constdata          lv_textarea.o
+    0x08031af8   0x08031af8   0x00001fe3   Data   RO        40342    .constdata          lv_font_misansnormal_13.o
+    0x08033adb   0x08033adb   0x00000001   PAD
+    0x08033adc   0x08033adc   0x00000530   Data   RO        40343    .constdata          lv_font_misansnormal_13.o
+    0x0803400c   0x0803400c   0x0000008c   Data   RO        40344    .constdata          lv_font_misansnormal_13.o
+    0x08034098   0x08034098   0x00000050   Data   RO        40345    .constdata          lv_font_misansnormal_13.o
+    0x080340e8   0x080340e8   0x000000a6   Data   RO        40346    .constdata          lv_font_misansnormal_13.o
+    0x0803418e   0x0803418e   0x000000a6   Data   RO        40347    .constdata          lv_font_misansnormal_13.o
+    0x08034234   0x08034234   0x00000820   Data   RO        40348    .constdata          lv_font_misansnormal_13.o
+    0x08034a54   0x08034a54   0x00000010   Data   RO        40349    .constdata          lv_font_misansnormal_13.o
+    0x08034a64   0x08034a64   0x00000018   Data   RO        40350    .constdata          lv_font_misansnormal_13.o
+    0x08034a7c   0x08034a7c   0x0000001c   Data   RO        40351    .constdata          lv_font_misansnormal_13.o
+    0x08034a98   0x08034a98   0x000027dc   Data   RO        40361    .constdata          lv_font_misansnormal_15.o
+    0x08037274   0x08037274   0x00000510   Data   RO        40362    .constdata          lv_font_misansnormal_15.o
+    0x08037784   0x08037784   0x00000084   Data   RO        40363    .constdata          lv_font_misansnormal_15.o
+    0x08037808   0x08037808   0x00000028   Data   RO        40364    .constdata          lv_font_misansnormal_15.o
+    0x08037830   0x08037830   0x000000a2   Data   RO        40365    .constdata          lv_font_misansnormal_15.o
+    0x080378d2   0x080378d2   0x000000a2   Data   RO        40366    .constdata          lv_font_misansnormal_15.o
+    0x08037974   0x08037974   0x00000820   Data   RO        40367    .constdata          lv_font_misansnormal_15.o
+    0x08038194   0x08038194   0x00000010   Data   RO        40368    .constdata          lv_font_misansnormal_15.o
+    0x080381a4   0x080381a4   0x00000018   Data   RO        40369    .constdata          lv_font_misansnormal_15.o
+    0x080381bc   0x080381bc   0x0000001c   Data   RO        40370    .constdata          lv_font_misansnormal_15.o
+    0x080381d8   0x080381d8   0x000035d9   Data   RO        40380    .constdata          lv_font_misansnormal_16.o
+    0x0803b7b1   0x0803b7b1   0x00000003   PAD
+    0x0803b7b4   0x0803b7b4   0x000005c0   Data   RO        40381    .constdata          lv_font_misansnormal_16.o
+    0x0803bd74   0x0803bd74   0x000000b0   Data   RO        40382    .constdata          lv_font_misansnormal_16.o
+    0x0803be24   0x0803be24   0x00000050   Data   RO        40383    .constdata          lv_font_misansnormal_16.o
+    0x0803be74   0x0803be74   0x000000b8   Data   RO        40384    .constdata          lv_font_misansnormal_16.o
+    0x0803bf2c   0x0803bf2c   0x000000b8   Data   RO        40385    .constdata          lv_font_misansnormal_16.o
+    0x0803bfe4   0x0803bfe4   0x00000820   Data   RO        40386    .constdata          lv_font_misansnormal_16.o
+    0x0803c804   0x0803c804   0x00000010   Data   RO        40387    .constdata          lv_font_misansnormal_16.o
+    0x0803c814   0x0803c814   0x00000018   Data   RO        40388    .constdata          lv_font_misansnormal_16.o
+    0x0803c82c   0x0803c82c   0x0000001c   Data   RO        40389    .constdata          lv_font_misansnormal_16.o
+    0x0803c848   0x0803c848   0x00003ade   Data   RO        40399    .constdata          lv_font_misansnormal_18.o
+    0x08040326   0x08040326   0x00000002   PAD
+    0x08040328   0x08040328   0x00000528   Data   RO        40400    .constdata          lv_font_misansnormal_18.o
+    0x08040850   0x08040850   0x0000008c   Data   RO        40401    .constdata          lv_font_misansnormal_18.o
+    0x080408dc   0x080408dc   0x0000003c   Data   RO        40402    .constdata          lv_font_misansnormal_18.o
+    0x08040918   0x08040918   0x000000a5   Data   RO        40403    .constdata          lv_font_misansnormal_18.o
+    0x080409bd   0x080409bd   0x000000a5   Data   RO        40404    .constdata          lv_font_misansnormal_18.o
+    0x08040a62   0x08040a62   0x00000820   Data   RO        40405    .constdata          lv_font_misansnormal_18.o
+    0x08041282   0x08041282   0x00000002   PAD
+    0x08041284   0x08041284   0x00000010   Data   RO        40406    .constdata          lv_font_misansnormal_18.o
+    0x08041294   0x08041294   0x00000018   Data   RO        40407    .constdata          lv_font_misansnormal_18.o
+    0x080412ac   0x080412ac   0x0000001c   Data   RO        40408    .constdata          lv_font_misansnormal_18.o
+    0x080412c8   0x080412c8   0x000019f7   Data   RO        40418    .constdata          lv_font_montserratmedium_12.o
+    0x08042cbf   0x08042cbf   0x00000001   PAD
+    0x08042cc0   0x08042cc0   0x000004d8   Data   RO        40419    .constdata          lv_font_montserratmedium_12.o
+    0x08043198   0x08043198   0x00000078   Data   RO        40420    .constdata          lv_font_montserratmedium_12.o
+    0x08043210   0x08043210   0x0000003c   Data   RO        40421    .constdata          lv_font_montserratmedium_12.o
+    0x0804324c   0x0804324c   0x0000009b   Data   RO        40422    .constdata          lv_font_montserratmedium_12.o
+    0x080432e7   0x080432e7   0x0000009b   Data   RO        40423    .constdata          lv_font_montserratmedium_12.o
+    0x08043382   0x08043382   0x00000b40   Data   RO        40424    .constdata          lv_font_montserratmedium_12.o
+    0x08043ec2   0x08043ec2   0x00000002   PAD
+    0x08043ec4   0x08043ec4   0x00000010   Data   RO        40425    .constdata          lv_font_montserratmedium_12.o
+    0x08043ed4   0x08043ed4   0x00000018   Data   RO        40426    .constdata          lv_font_montserratmedium_12.o
+    0x08043eec   0x08043eec   0x0000001c   Data   RO        40427    .constdata          lv_font_montserratmedium_12.o
+    0x08043f08   0x08043f08   0x00002263   Data   RO        40456    .constdata          lv_font_montserratmedium_14.o
+    0x0804616b   0x0804616b   0x00000001   PAD
+    0x0804616c   0x0804616c   0x000004d8   Data   RO        40457    .constdata          lv_font_montserratmedium_14.o
+    0x08046644   0x08046644   0x00000078   Data   RO        40458    .constdata          lv_font_montserratmedium_14.o
+    0x080466bc   0x080466bc   0x0000003c   Data   RO        40459    .constdata          lv_font_montserratmedium_14.o
+    0x080466f8   0x080466f8   0x0000009b   Data   RO        40460    .constdata          lv_font_montserratmedium_14.o
+    0x08046793   0x08046793   0x0000009b   Data   RO        40461    .constdata          lv_font_montserratmedium_14.o
+    0x0804682e   0x0804682e   0x00000b40   Data   RO        40462    .constdata          lv_font_montserratmedium_14.o
+    0x0804736e   0x0804736e   0x00000002   PAD
+    0x08047370   0x08047370   0x00000010   Data   RO        40463    .constdata          lv_font_montserratmedium_14.o
+    0x08047380   0x08047380   0x00000018   Data   RO        40464    .constdata          lv_font_montserratmedium_14.o
+    0x08047398   0x08047398   0x0000001c   Data   RO        40465    .constdata          lv_font_montserratmedium_14.o
+    0x080473b4   0x080473b4   0x00002b32   Data   RO        40475    .constdata          lv_font_montserratmedium_16.o
+    0x08049ee6   0x08049ee6   0x00000002   PAD
+    0x08049ee8   0x08049ee8   0x000004d8   Data   RO        40476    .constdata          lv_font_montserratmedium_16.o
+    0x0804a3c0   0x0804a3c0   0x00000078   Data   RO        40477    .constdata          lv_font_montserratmedium_16.o
+    0x0804a438   0x0804a438   0x0000003c   Data   RO        40478    .constdata          lv_font_montserratmedium_16.o
+    0x0804a474   0x0804a474   0x0000009b   Data   RO        40479    .constdata          lv_font_montserratmedium_16.o
+    0x0804a50f   0x0804a50f   0x0000009b   Data   RO        40480    .constdata          lv_font_montserratmedium_16.o
+    0x0804a5aa   0x0804a5aa   0x00000b40   Data   RO        40481    .constdata          lv_font_montserratmedium_16.o
+    0x0804b0ea   0x0804b0ea   0x00000002   PAD
+    0x0804b0ec   0x0804b0ec   0x00000010   Data   RO        40482    .constdata          lv_font_montserratmedium_16.o
+    0x0804b0fc   0x0804b0fc   0x00000018   Data   RO        40483    .constdata          lv_font_montserratmedium_16.o
+    0x0804b114   0x0804b114   0x0000001c   Data   RO        40484    .constdata          lv_font_montserratmedium_16.o
+    0x0804b130   0x0804b130   0x00004226   Data   RO        40494    .constdata          lv_font_montserratmedium_20.o
+    0x0804f356   0x0804f356   0x00000002   PAD
+    0x0804f358   0x0804f358   0x000004d8   Data   RO        40495    .constdata          lv_font_montserratmedium_20.o
+    0x0804f830   0x0804f830   0x00000078   Data   RO        40496    .constdata          lv_font_montserratmedium_20.o
+    0x0804f8a8   0x0804f8a8   0x0000003c   Data   RO        40497    .constdata          lv_font_montserratmedium_20.o
+    0x0804f8e4   0x0804f8e4   0x0000009b   Data   RO        40498    .constdata          lv_font_montserratmedium_20.o
+    0x0804f97f   0x0804f97f   0x0000009b   Data   RO        40499    .constdata          lv_font_montserratmedium_20.o
+    0x0804fa1a   0x0804fa1a   0x00000b40   Data   RO        40500    .constdata          lv_font_montserratmedium_20.o
+    0x0805055a   0x0805055a   0x00000002   PAD
+    0x0805055c   0x0805055c   0x00000010   Data   RO        40501    .constdata          lv_font_montserratmedium_20.o
+    0x0805056c   0x0805056c   0x00000018   Data   RO        40502    .constdata          lv_font_montserratmedium_20.o
+    0x08050584   0x08050584   0x0000001c   Data   RO        40503    .constdata          lv_font_montserratmedium_20.o
+    0x080505a0   0x080505a0   0x000000ab   Data   RO          757    .conststring        freertos.o
+    0x0805064b   0x0805064b   0x00000001   PAD
+    0x0805064c   0x0805064c   0x00000007   Data   RO         5867    .conststring        esp01s.o
+    0x08050653   0x08050653   0x00000001   PAD
+    0x08050654   0x08050654   0x000001cd   Data   RO         5993    .conststring        mqtt.o
+    0x08050821   0x08050821   0x00000003   PAD
+    0x08050824   0x08050824   0x0000001b   Data   RO        23281    .conststring        lv_calendar.o
+    0x0805083f   0x0805083f   0x00000001   PAD
+    0x08050840   0x08050840   0x00000069   Data   RO        23769    .conststring        lv_calendar_header_arrow.o
+    0x080508a9   0x080508a9   0x00000003   PAD
+    0x080508ac   0x080508ac   0x0000028c   Data   RO        23974    .conststring        lv_calendar_header_dropdown.o
+    0x08050b38   0x08050b38   0x00000099   Data   RO        25469    .conststring        lv_keyboard.o
+    0x08050bd1   0x08050bd1   0x00000003   PAD
+    0x08050bd4   0x08050bd4   0x0000006c   Data   RO        25470    .conststring        lv_keyboard.o
+    0x08050c40   0x08050c40   0x0000007e   Data   RO        25471    .conststring        lv_keyboard.o
+    0x08050cbe   0x08050cbe   0x00000002   PAD
+    0x08050cc0   0x08050cc0   0x00000004   Data   RO        25472    .conststring        lv_keyboard.o
+    0x08050cc4   0x08050cc4   0x00000025   Data   RO        35607    .conststring        lv_btnmatrix.o
+    0x08050ce9   0x08050ce9   0x00000003   PAD
+    0x08050cec   0x08050cec   0x00000040   Data   RO        42626    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x10000000, Load base: 0x08050d34, Size: 0x00001114, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x00000090])
+    Execution Region RW_IRAM2 (Exec base: 0x10000000, Load base: 0x08050d84, Size: 0x00001114, Max: 0x00010000, ABSOLUTE, COMPRESSED[0x00000090])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -15739,7 +15742,7 @@ Memory Map of the image
     0x10000a5c        -       0x000006b8   Zero   RW        41681    .bss                cmsis_os2.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08050cdc, Size: 0x00011118, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x00000058])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08050d2c, Size: 0x00011118, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x00000058])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -15814,7 +15817,7 @@ Image component sizes
        820        390          7          4        518       4824   esp01s.o
          0          0          0          0          0      18080   event_groups.o
        990        128          0          0          0      13785   events_init.o
-       856        252        295         24         16      45641   freertos.o
+       936        260        295         24         16      45697   freertos.o
        240         14          0          0          0       1051   gpio.o
        126          0          0          0          0      37274   gui_guider.o
        756         38          0          0          0       6123   gy302.o
@@ -15934,7 +15937,7 @@ Image component sizes
        786         80          0         12          0      11749   port.o
       2460         26          0          0         64      26061   queue.o
        184         16          0          0         32       1739   rtc.o
-       946         46          0          0          0      22998   setup_scr_brightness_screen.o
+       946         46          0          0          0      23006   setup_scr_brightness_screen.o
       6060        360          0         24          0      23275   setup_scr_main_screen.o
       1352         96          0         24          0       2594   setup_scr_mqtt_param_screen.o
       3014         88          0          0          0       4081   setup_scr_threshold_screen.o
@@ -15963,7 +15966,7 @@ Image component sizes
        384         44          0          0        232       4478   usart.o
 
     ----------------------------------------------------------------------
-    181790       5978     144908        856      73416    5034813   Object Totals
+    181870       5986     144908        856      73416    5034877   Object Totals
          0          0         64          0          0          0   (incl. Generated)
        212          0         52         19          6          0   (incl. Padding)
 
@@ -16027,15 +16030,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-    186064       6114     144908        868      73416    4892861   Grand Totals
-    186064       6114     144908        232      73416    4892861   ELF Image Totals (compressed)
-    186064       6114     144908        232          0          0   ROM Totals
+    186144       6122     144908        868      73416    4892925   Grand Totals
+    186144       6122     144908        232      73416    4892925   ELF Image Totals (compressed)
+    186144       6122     144908        232          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)               330972 ( 323.21kB)
+    Total RO  Size (Code + RO Data)               331052 ( 323.29kB)
     Total RW  Size (RW Data + ZI Data)             74284 (  72.54kB)
-    Total ROM Size (Code + RO Data + RW Data)     331204 ( 323.44kB)
+    Total ROM Size (Code + RO Data + RW Data)     331284 ( 323.52kB)
 
 ==============================================================================
 

@@ -358,23 +358,42 @@ void sensorTask(void *argument)
         
       
          DHT11_ReadData((DHT11_Data_TypeDef*)&sensorData.dht11);
-          
-        
-        // 读取其他传感器数
-        
          Get_Mq2(&sensorData.mq2_adc_value, &sensorData.mq2_percent);
-        
          sensorData.light_value = GY302_ReadLight();
-       
-        
+				
         if(xQueueSend(sensorDataQueue, &sensorData, 0) != pdPASS)
         {
             printf("Queue send failed!\r\n");
         }else{
             // printf("Queue send success!\r\n");
         }
+				
+				
+				if(sensorData.mq2_percent > threshold_data.mq2)
+				{
+          BEEP_ON;
+          vTaskDelay(pdMS_TO_TICKS(30));
+          BEEP_OFF;
+        }else if(sensorData.light_value > threshold_data.light)
+        {
+          BEEP_ON;
+          vTaskDelay(pdMS_TO_TICKS(30));
+          BEEP_OFF;
+        }else if(sensorData.dht11.temp_int > threshold_data.temp)
+        {
+          BEEP_ON;
+          vTaskDelay(pdMS_TO_TICKS(30));
+          BEEP_OFF;
+        }else if(sensorData.dht11.humi_int > threshold_data.humi)
+        {
+          BEEP_ON;
+          vTaskDelay(pdMS_TO_TICKS(30));
+          BEEP_OFF;
+        }else{
+          BEEP_OFF;
+        }
         
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(3500));
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(2500));
 
     }
 }

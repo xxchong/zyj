@@ -27,15 +27,34 @@ Project File Date:  03/10/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil_v5\ARM\ARMCC\Bin'
 Build target 'lcd'
-compiling events_init.c...
-compiling setup_scr_threshold_screen.c...
-..\lvgl\generated\setup_scr_threshold_screen.c(166): warning:  #870-D: invalid multibyte character sequence
-      lv_label_set_text(ui->threshold_screen_label_1, "阈值设�? ");
-..\lvgl\generated\setup_scr_threshold_screen.c: 1 warning, 0 errors
+compiling freertos.c...
+../bsp/gy302.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/esp01s.h(57): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/mqtt.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/mqtt_config.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif // MQTT_CONFIG_H
+../Core/Src/freertos.c(321): warning:  #177-D: variable "xLastWakeTime"  was declared but never referenced
+      TickType_t xLastWakeTime;
+../Core/Src/freertos.c(352): warning:  #177-D: variable "retry_count"  was declared but never referenced
+      uint8_t retry_count;
+../Core/Src/freertos.c: 6 warnings, 0 errors
+compiling main.c...
+../bsp/gy302.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/esp01s.h(57): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/mqtt.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+../bsp/mqtt_config.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif // MQTT_CONFIG_H
+../Core/Src/main.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=186064 RO-data=144908 RW-data=868 ZI-data=73416  
+Program Size: Code=186144 RO-data=144908 RW-data=868 ZI-data=73416  
 FromELF: creating hex file...
-"lcd\lcd.axf" - 0 Error(s), 1 Warning(s).
+"lcd\lcd.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Software Packages used:</h2>
 
