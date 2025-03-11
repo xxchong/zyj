@@ -100,7 +100,7 @@ void setup_scr_brightness_screen(lv_ui *ui)
 
     //Write codes brightness_screen_label_percentage
     ui->brightness_screen_label_percentage = lv_label_create(ui->brightness_screen);
-    lv_label_set_text(ui->brightness_screen_label_percentage, "100%");
+    lv_label_set_text_fmt(ui->brightness_screen_label_percentage, "%d%%",brightness_percentage);
     lv_label_set_long_mode(ui->brightness_screen_label_percentage, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->brightness_screen_label_percentage, 138, 90);
     lv_obj_set_size(ui->brightness_screen_label_percentage, 50, 15);

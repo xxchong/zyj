@@ -174,12 +174,12 @@ void ledTask(void *argument)
     }
 }
 
-/* 修改LVGL定时器回调函�?? */
+/* 修改LVGL定时器回调函�??? */
 void sensor_timer_callback(lv_timer_t *timer)
 {
     static SensorData_t receivedData;
     
-    // 从队列接收数据，设置超时时间�??10ms
+    // 从队列接收数据，设置超时时间�???10ms
     if(xQueueReceive(sensorDataQueue, &receivedData, 0) == pdPASS)
     {
         char light_str[10];  
@@ -248,7 +248,7 @@ void MX_FREERTOS_Init(void) {
         printf("Queue creation failed!\r\n");
         Error_Handler();
     }
-    // 创建火焰定时器,单次触发
+    // 创建火焰定时�?,单次触发
     flame_timer = xTimerCreate("flame_timer", pdMS_TO_TICKS(10000), pdFALSE, NULL, flame_timer_callback);
     if(flame_timer == NULL)
     {
@@ -277,7 +277,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* creation of defaultTask */
-  // defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   displayTaskHandle = osThreadNew(displayTask, NULL, &displayTask_attributes);
@@ -344,7 +344,7 @@ void displayTask(void *argument)
 }
 
 
-/* 修改传感器任�?? */
+/* 修改传感器任�??? */
 void sensorTask(void *argument)
 {    
     TickType_t xLastWakeTime;
@@ -372,28 +372,28 @@ void sensorTask(void *argument)
 				if(sensorData.mq2_percent > threshold_data.mq2)
 				{
           BEEP_ON;
-          vTaskDelay(pdMS_TO_TICKS(30));
+          vTaskDelay(pdMS_TO_TICKS(60));
           BEEP_OFF;
-        }else if(sensorData.light_value > threshold_data.light)
+        }else if(sensorData.light_value > 1000)
         {
           BEEP_ON;
-          vTaskDelay(pdMS_TO_TICKS(30));
+          vTaskDelay(pdMS_TO_TICKS(60));
           BEEP_OFF;
         }else if(sensorData.dht11.temp_int > threshold_data.temp)
         {
           BEEP_ON;
-          vTaskDelay(pdMS_TO_TICKS(30));
+          vTaskDelay(pdMS_TO_TICKS(60));
           BEEP_OFF;
         }else if(sensorData.dht11.humi_int > threshold_data.humi)
         {
           BEEP_ON;
-          vTaskDelay(pdMS_TO_TICKS(30));
+          vTaskDelay(pdMS_TO_TICKS(60));
           BEEP_OFF;
         }else{
           BEEP_OFF;
         }
         
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(2500));
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(2000));
 
     }
 }
@@ -428,8 +428,4 @@ void mqttTask(void *argument)
 }
 
 /* USER CODE END Application */
-
-
-
-
 

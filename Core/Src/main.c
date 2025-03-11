@@ -76,6 +76,8 @@ void MX_FREERTOS_Init(void);
 
 
 
+bool relay_status = false;
+
 
 uint16_t brightness_pwm = 499;
 uint16_t brightness_percentage = 50;
@@ -84,7 +86,7 @@ SensorData_threshold_t threshold_data={
   .temp=30,
   .mq2=80,
   .light=100
-}; //传感器阈值
+}; //传感器阈�?
 
 /* USER CODE END PFP */
 
@@ -138,8 +140,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	
 
- // 初始化报警状�?????
+ // 初始化报警状�??????
   BEEP_OFF;
+	RELAY_OFF;
   /*传感器硬件初始化*/
   //DHT11通过cubemx配置引脚   GPIOE8
   //MQ2通过cubemx配置adc      GPIOA4

@@ -259,6 +259,7 @@
 "lcd\setup_scr_threshold_screen.o"
 "lcd\widgets_init.o"
 "lcd\lv_font_misansnormal_13.o"
+"lcd\lv_font_misansnormal_14.o"
 "lcd\lv_font_misansnormal_15.o"
 "lcd\lv_font_misansnormal_16.o"
 "lcd\lv_font_misansnormal_18.o"

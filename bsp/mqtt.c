@@ -135,11 +135,11 @@ uint8_t MQTT_Publish(const char* topic, const char* message)
     sprintf(cmd, "AT+MQTTPUB=0,\"%s\",\"%s\",1,0\r\n", topic, message);
     
     if(ESP01S_SendATCmd(cmd, "OK", 5000) != ESP_OK) {
-        printf("%s: Publish failed\r\n", TAG);
+//        printf("%s: Publish failed\r\n", TAG);
         return MQTT_ERROR_PUBLISH;
     }
     
-    printf("%s: Published to %s\r\n", TAG, topic);
+//    printf("%s: Published to %s\r\n", TAG, topic);
     return MQTT_OK;
 }
 

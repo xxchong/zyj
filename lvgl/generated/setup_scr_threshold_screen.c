@@ -37,8 +37,8 @@ void setup_scr_threshold_screen(lv_ui *ui)
     lv_obj_set_size(ui->threshold_screen_slider_humi, 160, 8);
 
     //Write style for threshold_screen_slider_humi, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_humi, 60, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui->threshold_screen_slider_humi, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_humi, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->threshold_screen_slider_humi, lv_color_hex(0xe6e6e6), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_dir(ui->threshold_screen_slider_humi, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->threshold_screen_slider_humi, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_outline_width(ui->threshold_screen_slider_humi, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -65,8 +65,8 @@ void setup_scr_threshold_screen(lv_ui *ui)
     lv_obj_set_size(ui->threshold_screen_slider_temp, 160, 8);
 
     //Write style for threshold_screen_slider_temp, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_temp, 60, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui->threshold_screen_slider_temp, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_temp, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->threshold_screen_slider_temp, lv_color_hex(0xe6e6e6), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_dir(ui->threshold_screen_slider_temp, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->threshold_screen_slider_temp, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_outline_width(ui->threshold_screen_slider_temp, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -93,8 +93,8 @@ void setup_scr_threshold_screen(lv_ui *ui)
     lv_obj_set_size(ui->threshold_screen_slider_mq2, 160, 8);
 
     //Write style for threshold_screen_slider_mq2, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_mq2, 60, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui->threshold_screen_slider_mq2, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_mq2, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->threshold_screen_slider_mq2, lv_color_hex(0xe6e6e6), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_dir(ui->threshold_screen_slider_mq2, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->threshold_screen_slider_mq2, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_outline_width(ui->threshold_screen_slider_mq2, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -121,8 +121,8 @@ void setup_scr_threshold_screen(lv_ui *ui)
     lv_obj_set_size(ui->threshold_screen_slider_light, 160, 8);
 
     //Write style for threshold_screen_slider_light, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_light, 60, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui->threshold_screen_slider_light, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->threshold_screen_slider_light, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->threshold_screen_slider_light, lv_color_hex(0xe6e6e6), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_dir(ui->threshold_screen_slider_light, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_radius(ui->threshold_screen_slider_light, 50, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_outline_width(ui->threshold_screen_slider_light, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -163,7 +163,7 @@ void setup_scr_threshold_screen(lv_ui *ui)
 
     //Write codes threshold_screen_label_1
     ui->threshold_screen_label_1 = lv_label_create(ui->threshold_screen);
-    lv_label_set_text(ui->threshold_screen_label_1, "阈值设置 ");
+    lv_label_set_text(ui->threshold_screen_label_1, "阈值设置\n");
     lv_label_set_long_mode(ui->threshold_screen_label_1, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->threshold_screen_label_1, 92, 17);
     lv_obj_set_size(ui->threshold_screen_label_1, 95, 16);
@@ -186,7 +186,7 @@ void setup_scr_threshold_screen(lv_ui *ui)
 
     //Write codes threshold_screen_label_2
     ui->threshold_screen_label_2 = lv_label_create(ui->threshold_screen);
-    lv_label_set_text(ui->threshold_screen_label_2, "湿度");
+    lv_label_set_text(ui->threshold_screen_label_2, "温度");
     lv_label_set_long_mode(ui->threshold_screen_label_2, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->threshold_screen_label_2, 9, 57);
     lv_obj_set_size(ui->threshold_screen_label_2, 46, 16);
@@ -232,7 +232,7 @@ void setup_scr_threshold_screen(lv_ui *ui)
 
     //Write codes threshold_screen_label_4
     ui->threshold_screen_label_4 = lv_label_create(ui->threshold_screen);
-    lv_label_set_text(ui->threshold_screen_label_4, "温度");
+    lv_label_set_text(ui->threshold_screen_label_4, "湿度");
     lv_label_set_long_mode(ui->threshold_screen_label_4, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->threshold_screen_label_4, 9, 104);
     lv_obj_set_size(ui->threshold_screen_label_4, 46, 16);

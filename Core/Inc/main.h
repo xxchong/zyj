@@ -68,7 +68,7 @@ typedef struct {
 } SensorData_threshold_t;
 
 
-extern SensorData_threshold_t threshold_data; //传感器阈值
+extern SensorData_threshold_t threshold_data; //传感器阈�?
 
 extern uint16_t brightness_pwm;
 extern uint16_t brightness_percentage;

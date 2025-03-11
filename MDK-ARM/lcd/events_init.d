@@ -171,3 +171,4 @@ lcd\events_init.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 lcd\events_init.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lcd\events_init.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lcd\events_init.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+lcd\events_init.o: ../bsp/relay.h

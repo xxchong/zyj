@@ -206,7 +206,7 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 /* USER CODE BEGIN 1 */
 void my_delay_us(uint32_t us)
 {
-    // 启动定时器
+    // 启动定时�?
     HAL_TIM_Base_Start(&htim5);
     
     uint32_t start = __HAL_TIM_GET_COUNTER(&htim5);
@@ -214,14 +214,14 @@ void my_delay_us(uint32_t us)
     while(__HAL_TIM_GET_COUNTER(&htim5) - start < us)
     {
         // 添加超时保护
-        if(__HAL_TIM_GET_COUNTER(&htim5) < start)  // 计数器溢出
+        if(__HAL_TIM_GET_COUNTER(&htim5) < start)  // 计数器溢�?
         {
-            HAL_TIM_Base_Stop(&htim5);  // 停止定时器
+            HAL_TIM_Base_Stop(&htim5);  // 停止定时�?
             return;
         }
     }
     
-    // 停止定时器
+    // 停止定时�?
     HAL_TIM_Base_Stop(&htim5);
 }
 
@@ -229,7 +229,7 @@ void my_delay_us(uint32_t us)
 
 void my_delay_ms(uint32_t ms)
 {
-    my_delay_us(ms * 1000);  // TIM5�??32位定时器，可以直接计数到很大的�??
+    my_delay_us(ms * 1000);  // TIM5�???32位定时器，可以直接计数到很大的�??
 }
 
 void LCD_SetBrightness(uint16_t brightness)

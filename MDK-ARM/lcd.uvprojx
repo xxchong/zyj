@@ -2636,6 +2636,11 @@
               <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_13.c</FilePath>
             </File>
             <File>
+              <FileName>lv_font_MiSansNormal_14.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_14.c</FilePath>
+            </File>
+            <File>
               <FileName>lv_font_MiSansNormal_15.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\generated\guider_fonts\lv_font_MiSansNormal_15.c</FilePath>

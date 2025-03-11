@@ -134,7 +134,7 @@ ESP_Status ESP01S_SendATCmd(const char* cmd, const char* response, uint32_t time
             {
                 esp01s.dataReady = 0;
                 esp01s.rxLen = 0;
-                printf("Receive: %s\r\n", esp01s.rxBuffer);
+//                printf("Receive: %s\r\n", esp01s.rxBuffer);
                 return ESP_OK;
             }
             esp01s.dataReady = 0;

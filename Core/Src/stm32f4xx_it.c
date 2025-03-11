@@ -185,6 +185,21 @@ void DMA1_Stream5_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles EXTI line[9:5] interrupts.
+  */
+void EXTI9_5_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+
+  /* USER CODE END EXTI9_5_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
+  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
+
+  /* USER CODE END EXTI9_5_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM3 global interrupt.
   */
 void TIM3_IRQHandler(void)
@@ -283,24 +298,55 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
 volatile bool flame_status = false;
 extern TimerHandle_t flame_timer;
 
+volatile uint32_t ir_counter_pa6 = 0;  // PA6计数器
+volatile uint32_t ir_counter_pb8 = 0;  // PB8计数器
+static uint32_t last_pa6_tick = 0;     // PA6上次触发时间
+static uint32_t last_pb8_tick = 0;     // PB8上次触发时间
+const uint32_t DEBOUNCE_TIME = 500;    // 防抖时间设置为500ms
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     
-    if(GPIO_Pin==GPIO_PIN_14)
+    if(GPIO_Pin == GPIO_PIN_14)
     {
         if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_14) == GPIO_PIN_SET)
         {
-            flame_status = true;  // 设置火焰状态
-            
-            // 从中断中重启定时器
+            flame_status = true;
             if(flame_timer != NULL)
             {
                 xTimerResetFromISR(flame_timer, &xHigherPriorityTaskWoken);
             }
         }
-        __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_14);
+    }
+    // PA6红外避障传感器
+    else if(GPIO_Pin == GPIO_PIN_6)
+    {
+        uint32_t current_tick = HAL_GetTick();
+        if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6) == GPIO_PIN_RESET && 
+           (current_tick - last_pa6_tick) > DEBOUNCE_TIME)
+        {
+            ir_counter_pa6++;
+            printf("PA6 count: %ld\r\n", ir_counter_pa6);
+            last_pa6_tick = current_tick;
+        }
+    }
+    // PB8红外避障传感器
+    else if(GPIO_Pin == GPIO_PIN_8)
+    {
+        uint32_t current_tick = HAL_GetTick();
+        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8) == GPIO_PIN_RESET && 
+           (current_tick - last_pb8_tick) > DEBOUNCE_TIME)
+        {
+            ir_counter_pb8++;
+            printf("PB8 count: %ld\r\n", ir_counter_pb8);
+            last_pb8_tick = current_tick;
+        }
     }
     
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
 }
+
+
+
 /* USER CODE END 1 */

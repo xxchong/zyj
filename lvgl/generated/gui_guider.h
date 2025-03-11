@@ -16,6 +16,7 @@ extern "C" {
 #include "lvgl.h"
 #include "tim.h"  //亮度调节头文件
 #include "main.h"
+extern bool relay_status;
 typedef struct
 {
   
@@ -35,19 +36,21 @@ typedef struct
 	lv_obj_t *main_screen_arc_light;
 	lv_obj_t *main_screen_label_light_percentage;
 	lv_obj_t *main_screen_label_temp_percentage;
-	lv_obj_t *main_screen_label_vibration_percentage;
 	lv_obj_t *main_screen_bar_temp;
-	lv_obj_t *main_screen_arc_vibration;
 	lv_obj_t *main_screen_label_light;
 	lv_obj_t *main_screen_label_fumes_percentage;
 	lv_obj_t *main_screen_label_fumes;
-	lv_obj_t *main_screen_label_vibration;
 	lv_obj_t *main_screen_label_temp;
 	lv_obj_t *main_screen_label_humi;
 	lv_obj_t *main_screen_sw_1;
 	lv_obj_t *main_screen_label_2;
 	lv_obj_t *main_screen_label_3;
 	lv_obj_t *main_screen_led_1;
+	lv_obj_t *main_screen_cont_1;
+	lv_obj_t *main_screen_label_13;
+	lv_obj_t *main_screen_label_14;
+	lv_obj_t *main_screen_label_15;
+	lv_obj_t *main_screen_label_12;
 	lv_obj_t *main_screen_btn_main_brightness;
 	lv_obj_t *main_screen_btn_main_brightness_label;
 	lv_obj_t *main_screen_btn_main_net;
@@ -110,8 +113,8 @@ void setup_ui(lv_ui *ui);
 
 
 extern lv_ui guider_ui;
-
 void sensor_timer_callback(lv_timer_t *timer);
+
 
 void setup_scr_main_screen(lv_ui *ui);
 void setup_scr_brightness_screen(lv_ui *ui);

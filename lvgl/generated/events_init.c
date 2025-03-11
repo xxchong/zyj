@@ -10,12 +10,11 @@
 #include "events_init.h"
 #include <stdio.h>
 #include "lvgl.h"
+#include "relay.h"
 
 #if LV_USE_GUIDER_SIMULATOR && LV_USE_FREEMASTER
 #include "freemaster_client.h"
 #endif
-
-extern lv_timer_t *sensor_timer;
 
 
 static void main_screen_btn_main_brightness_event_handler (lv_event_t *e)
@@ -40,6 +39,7 @@ static void main_screen_btn_main_net_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_CLICKED:
     {
+			
 				lv_timer_pause(guider_ui.sensor_timer);
         lv_timer_del(guider_ui.sensor_timer);
         ui_load_scr_animation(&guider_ui, &guider_ui.threshold_screen, guider_ui.threshold_screen_del, &guider_ui.main_screen_del, setup_scr_threshold_screen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 50, 20, true, true);
@@ -56,6 +56,7 @@ static void main_screen_btn_main_mqtt_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_CLICKED:
     {
+			
 				lv_timer_pause(guider_ui.sensor_timer);
         lv_timer_del(guider_ui.sensor_timer);
         ui_load_scr_animation(&guider_ui, &guider_ui.mqtt_param_screen, guider_ui.mqtt_param_screen_del, &guider_ui.main_screen_del, setup_scr_mqtt_param_screen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 50, 20, true, true);
@@ -65,21 +66,44 @@ static void main_screen_btn_main_mqtt_event_handler (lv_event_t *e)
         break;
     }
 }
+static void main_screen_sw_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+    switch (code) {
+    case LV_EVENT_VALUE_CHANGED:
+    {
+        relay_status = !relay_status;
+        if(relay_status)
+        {
+            lv_obj_add_state(ui->main_screen_sw_1, LV_STATE_CHECKED);
+            RELAY_ON;
+            
+        }else{
+            lv_obj_clear_state(ui->main_screen_sw_1, LV_STATE_CHECKED);
+            RELAY_OFF;
+        }
 
+    }
+    default:
+        break;
+    }
+}
 void events_init_main_screen (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->main_screen_btn_main_brightness, main_screen_btn_main_brightness_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->main_screen_btn_main_net, main_screen_btn_main_net_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->main_screen_btn_main_mqtt, main_screen_btn_main_mqtt_event_handler, LV_EVENT_ALL, ui);
-	  ui->sensor_timer = lv_timer_create(sensor_timer_callback, 2000, NULL);
-
+    lv_obj_add_event_cb(ui->main_screen_sw_1, main_screen_sw_1_event_handler, LV_EVENT_VALUE_CHANGED, ui);
+		ui->sensor_timer = lv_timer_create(sensor_timer_callback, 2000, NULL);
 }
 
 static void brightness_screen_slider_brightness_event_handler (lv_event_t *e)
 {
 		char percentage[10];
     lv_event_code_t code = lv_event_get_code(e);
-    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);    switch (code) {
+    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);    
+		switch (code) {
     case LV_EVENT_VALUE_CHANGED:
     {
         int32_t brightness = lv_slider_get_value(ui->brightness_screen_slider_brightness);
@@ -137,21 +161,6 @@ void events_init_mqtt_param_screen (lv_ui *ui)
     lv_obj_add_event_cb(ui->mqtt_param_screen_btn_mqtt_return, mqtt_param_screen_btn_mqtt_return_event_handler, LV_EVENT_ALL, ui);
 }
 
-static void threshold_screen_btn_1_event_handler (lv_event_t *e)
-{
-    lv_event_code_t code = lv_event_get_code(e);
-    switch (code) {
-    case LV_EVENT_CLICKED:
-    {
-        ui_load_scr_animation(&guider_ui, &guider_ui.main_screen, guider_ui.main_screen_del, &guider_ui.threshold_screen_del, setup_scr_main_screen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 50, 20, true, true);
-        lv_tabview_set_act(guider_ui.main_screen_tabview_main, 2, LV_ANIM_OFF);
-				break;
-    }
-    default:
-        break;
-    }
-}
-
 static void threshold_screen_slider_humi_event_handler (lv_event_t *e)
 {
     char buffer[10];
@@ -195,16 +204,30 @@ static void threshold_screen_slider_humi_event_handler (lv_event_t *e)
 }
 
 
-
-
+static void threshold_screen_btn_1_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    switch (code) {
+    case LV_EVENT_CLICKED:
+    {
+        ui_load_scr_animation(&guider_ui, &guider_ui.main_screen, guider_ui.main_screen_del, &guider_ui.threshold_screen_del, setup_scr_main_screen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 50, 20, true, true);
+        lv_tabview_set_act(guider_ui.main_screen_tabview_main, 2, LV_ANIM_OFF);
+				break;
+    }
+    default:
+        break;
+    }
+}
 
 void events_init_threshold_screen (lv_ui *ui)
 {
-    lv_obj_add_event_cb(ui->threshold_screen_btn_1, threshold_screen_btn_1_event_handler, LV_EVENT_ALL, ui);
+    
+		lv_obj_add_event_cb(ui->threshold_screen_btn_1, threshold_screen_btn_1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_humi, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_temp, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_mq2, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_light, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);
+
 }
 
 
