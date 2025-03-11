@@ -16,7 +16,7 @@ extern "C" {
 #include "lvgl.h"
 #include "tim.h"  //亮度调节头文件
 #include "main.h"
-extern bool relay_status;
+
 typedef struct
 {
   

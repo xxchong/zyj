@@ -156,9 +156,47 @@ static void mqtt_param_screen_btn_mqtt_return_event_handler (lv_event_t *e)
     }
 }
 
+
+static void mqtt_param_screen_ddlist_mqtt_event_handler (lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_ui *ui = (lv_ui *)lv_event_get_user_data(e);
+    switch (code) {
+    case LV_EVENT_VALUE_CHANGED:
+    {
+        int32_t value = lv_dropdown_get_selected(ui->mqtt_param_screen_ddlist_mqtt);
+
+        uint16_t interval[5] = {5000, 10000, 20000, 30000, 60000};
+
+        switch(value)
+        {   
+            case 0:
+                mqtt_send_interval = interval[0];
+                break;
+            case 1:
+                mqtt_send_interval = interval[1];
+                break;
+            case 2:
+                mqtt_send_interval = interval[2];
+                break;
+            case 3:
+                mqtt_send_interval = interval[3];
+                break;
+            case 4:
+                mqtt_send_interval = interval[4];
+                break;
+        }
+        break;
+    }
+    default:
+        break;  
+    }
+}
+
 void events_init_mqtt_param_screen (lv_ui *ui)
 {
     lv_obj_add_event_cb(ui->mqtt_param_screen_btn_mqtt_return, mqtt_param_screen_btn_mqtt_return_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->mqtt_param_screen_ddlist_mqtt, mqtt_param_screen_ddlist_mqtt_event_handler, LV_EVENT_ALL, ui);
 }
 
 static void threshold_screen_slider_humi_event_handler (lv_event_t *e)
@@ -222,7 +260,7 @@ static void threshold_screen_btn_1_event_handler (lv_event_t *e)
 void events_init_threshold_screen (lv_ui *ui)
 {
     
-		lv_obj_add_event_cb(ui->threshold_screen_btn_1, threshold_screen_btn_1_event_handler, LV_EVENT_ALL, ui);
+	lv_obj_add_event_cb(ui->threshold_screen_btn_1, threshold_screen_btn_1_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_humi, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_temp, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);
     lv_obj_add_event_cb(ui->threshold_screen_slider_mq2, threshold_screen_slider_humi_event_handler, LV_EVENT_VALUE_CHANGED, ui);

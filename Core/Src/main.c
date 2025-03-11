@@ -78,6 +78,7 @@ void MX_FREERTOS_Init(void);
 
 bool relay_status = false;
 
+uint16_t mqtt_send_interval = 5000;
 
 uint16_t brightness_pwm = 499;
 uint16_t brightness_percentage = 50;

@@ -174,12 +174,12 @@ void ledTask(void *argument)
     }
 }
 
-/* 修改LVGL定时器回调函�??? */
+/* 修改LVGL定时器回调函�??? */
 void sensor_timer_callback(lv_timer_t *timer)
 {
     static SensorData_t receivedData;
     
-    // 从队列接收数据，设置超时时间�???10ms
+    // 从队列接收数据，设置超时时间�???10ms
     if(xQueueReceive(sensorDataQueue, &receivedData, 0) == pdPASS)
     {
         char light_str[10];  
@@ -248,7 +248,7 @@ void MX_FREERTOS_Init(void) {
         printf("Queue creation failed!\r\n");
         Error_Handler();
     }
-    // 创建火焰定时�?,单次触发
+    // 创建火焰定时�?,单次触发
     flame_timer = xTimerCreate("flame_timer", pdMS_TO_TICKS(10000), pdFALSE, NULL, flame_timer_callback);
     if(flame_timer == NULL)
     {
@@ -344,7 +344,7 @@ void displayTask(void *argument)
 }
 
 
-/* 修改传感器任�??? */
+/* 修改传感器任�??? */
 void sensorTask(void *argument)
 {    
     TickType_t xLastWakeTime;
@@ -423,7 +423,7 @@ void mqttTask(void *argument)
             MQTT_Publish(MQTT_PARAM_TOPIC, mqtt_msg);
         }
         
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(5000));
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(mqtt_send_interval));
     }
 }
 

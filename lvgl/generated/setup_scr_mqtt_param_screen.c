@@ -57,6 +57,31 @@ void setup_scr_mqtt_param_screen(lv_ui *ui)
     lv_obj_set_pos(ui->mqtt_param_screen_ddlist_mqtt, 83, 80);
     lv_obj_set_size(ui->mqtt_param_screen_ddlist_mqtt, 170, 31);
 
+
+    switch(mqtt_send_interval)
+    {
+        case 5000:
+            lv_dropdown_set_selected(ui->mqtt_param_screen_ddlist_mqtt, 0);
+            break;
+        case 10000:
+            lv_dropdown_set_selected(ui->mqtt_param_screen_ddlist_mqtt, 1);
+            break;
+        case 20000:
+            lv_dropdown_set_selected(ui->mqtt_param_screen_ddlist_mqtt, 2);
+            break;      
+        case 30000:
+            lv_dropdown_set_selected(ui->mqtt_param_screen_ddlist_mqtt, 3);
+            break;
+        case 60000:
+            lv_dropdown_set_selected(ui->mqtt_param_screen_ddlist_mqtt, 4);
+            break;
+        default:
+            lv_dropdown_set_selected(ui->mqtt_param_screen_ddlist_mqtt, 0);
+            break;
+    }
+
+
+
     //Write style for mqtt_param_screen_ddlist_mqtt, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_text_color(ui->mqtt_param_screen_ddlist_mqtt, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui->mqtt_param_screen_ddlist_mqtt, &lv_font_montserratMedium_12, LV_PART_MAIN|LV_STATE_DEFAULT);
