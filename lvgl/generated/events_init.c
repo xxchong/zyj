@@ -23,7 +23,7 @@ static void main_screen_btn_main_brightness_event_handler (lv_event_t *e)
     switch (code) {
     case LV_EVENT_CLICKED:
     {
-				lv_timer_pause(guider_ui.sensor_timer);
+		lv_timer_pause(guider_ui.sensor_timer);
         lv_timer_del(guider_ui.sensor_timer);
         ui_load_scr_animation(&guider_ui, &guider_ui.brightness_screen, guider_ui.brightness_screen_del, &guider_ui.main_screen_del, setup_scr_brightness_screen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 50, 20, true, true);
         break;
@@ -40,7 +40,7 @@ static void main_screen_btn_main_net_event_handler (lv_event_t *e)
     case LV_EVENT_CLICKED:
     {
 			
-				lv_timer_pause(guider_ui.sensor_timer);
+		lv_timer_pause(guider_ui.sensor_timer);
         lv_timer_del(guider_ui.sensor_timer);
         ui_load_scr_animation(&guider_ui, &guider_ui.threshold_screen, guider_ui.threshold_screen_del, &guider_ui.main_screen_del, setup_scr_threshold_screen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 50, 20, true, true);
         break;
@@ -57,7 +57,7 @@ static void main_screen_btn_main_mqtt_event_handler (lv_event_t *e)
     case LV_EVENT_CLICKED:
     {
 			
-				lv_timer_pause(guider_ui.sensor_timer);
+		lv_timer_pause(guider_ui.sensor_timer);
         lv_timer_del(guider_ui.sensor_timer);
         ui_load_scr_animation(&guider_ui, &guider_ui.mqtt_param_screen, guider_ui.mqtt_param_screen_del, &guider_ui.main_screen_del, setup_scr_mqtt_param_screen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 50, 20, true, true);
         break;
@@ -95,7 +95,8 @@ void events_init_main_screen (lv_ui *ui)
     lv_obj_add_event_cb(ui->main_screen_btn_main_net, main_screen_btn_main_net_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->main_screen_btn_main_mqtt, main_screen_btn_main_mqtt_event_handler, LV_EVENT_ALL, ui);
     lv_obj_add_event_cb(ui->main_screen_sw_1, main_screen_sw_1_event_handler, LV_EVENT_VALUE_CHANGED, ui);
-		ui->sensor_timer = lv_timer_create(sensor_timer_callback, 2000, NULL);
+
+    ui->sensor_timer = lv_timer_create(sensor_timer_callback, 1500, NULL);
 }
 
 static void brightness_screen_slider_brightness_event_handler (lv_event_t *e)

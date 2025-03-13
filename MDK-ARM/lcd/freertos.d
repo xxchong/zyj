@@ -192,9 +192,11 @@ lcd\freertos.o: ../bsp/gy302.h
 lcd\freertos.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 lcd\freertos.o: ../bsp/esp01s.h
 lcd\freertos.o: ../Core/Inc/usart.h
+lcd\freertos.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 lcd\freertos.o: ../bsp/mq2.h
 lcd\freertos.o: ../Core/Inc/adc.h
 lcd\freertos.o: ../bsp/mqtt.h
 lcd\freertos.o: ../bsp/mqtt_config.h
 lcd\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 lcd\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+lcd\freertos.o: ../Core/Inc/rtc.h

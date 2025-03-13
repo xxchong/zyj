@@ -163,7 +163,7 @@ void setup_scr_threshold_screen(lv_ui *ui)
 
     //Write codes threshold_screen_label_1
     ui->threshold_screen_label_1 = lv_label_create(ui->threshold_screen);
-    lv_label_set_text(ui->threshold_screen_label_1, "阈值设置\n");
+    lv_label_set_text(ui->threshold_screen_label_1, "阈值设置 ");
     lv_label_set_long_mode(ui->threshold_screen_label_1, LV_LABEL_LONG_WRAP);
     lv_obj_set_pos(ui->threshold_screen_label_1, 92, 17);
     lv_obj_set_size(ui->threshold_screen_label_1, 95, 16);

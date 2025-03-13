@@ -42,6 +42,14 @@ void MX_RTC_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
+
+void RTC_SetTime_FromStamp(uint32_t timestamp);
+void RTC_GetTime(uint8_t *hour, uint8_t *min, uint8_t *sec);
+void RTC_GetDate(uint16_t *year, uint8_t *month, uint8_t *date, uint8_t *week);
+
+
+
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

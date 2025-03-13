@@ -21,7 +21,7 @@
 #include "rtc.h"
 
 /* USER CODE BEGIN 0 */
-
+#include <time.h>
 /* USER CODE END 0 */
 
 RTC_HandleTypeDef hrtc;
@@ -61,21 +61,21 @@ void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0x0;
-  sTime.Minutes = 0x0;
-  sTime.Seconds = 0x0;
+  sTime.Hours = 0;
+  sTime.Minutes = 0;
+  sTime.Seconds = 0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
   {
     Error_Handler();
   }
   sDate.WeekDay = RTC_WEEKDAY_MONDAY;
   sDate.Month = RTC_MONTH_JANUARY;
-  sDate.Date = 0x1;
-  sDate.Year = 0x0;
+  sDate.Date = 1;
+  sDate.Year = 0;
 
-  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN) != HAL_OK)
   {
     Error_Handler();
   }
@@ -129,5 +129,63 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* rtcHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+
+// 通过时间戳设置RTC时间
+void RTC_SetTime_FromStamp(uint32_t timestamp)
+{
+    RTC_TimeTypeDef sTime = {0};
+    RTC_DateTypeDef sDate = {0};
+    
+    // 加上8小时的时区偏移（8*3600秒）
+    timestamp += 8 * 3600;
+    
+    struct tm *time_info;
+    time_t raw_time = (time_t)timestamp;
+    time_info = localtime(&raw_time);
+    
+    // 设置时间
+    sTime.Hours = time_info->tm_hour;
+    sTime.Minutes = time_info->tm_min;
+    sTime.Seconds = time_info->tm_sec;
+    sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+    sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+    
+    // 设置日期
+    sDate.Year = time_info->tm_year - 100;  // 得到20xx年的后两位
+    sDate.Month = time_info->tm_mon + 1;    // 月份从0开始，需要+1
+    sDate.Date = time_info->tm_mday;
+    sDate.WeekDay = time_info->tm_wday + 1; // 周日是0，转换为RTC的1-7格式
+    
+    HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);  // 使用二进制格式
+    HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+}
+
+// 获取RTC时间
+void RTC_GetTime(uint8_t *hour, uint8_t *min, uint8_t *sec)
+{
+    RTC_TimeTypeDef sTime = {0};
+    RTC_DateTypeDef sDate = {0};
+    
+    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);  // 先读日期
+    HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);  // 再读时间
+    
+    *hour = sTime.Hours;
+    *min = sTime.Minutes;
+    *sec = sTime.Seconds;
+}
+
+// 获取RTC日期
+void RTC_GetDate(uint16_t *year, uint8_t *month, uint8_t *date, uint8_t *week)
+{
+    RTC_DateTypeDef sDate = {0};
+    
+    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+    
+    *year = 2000 + sDate.Year;  // 直接加2000得到完整年份
+    *month = sDate.Month;
+    *date = sDate.Date;
+    // *week = sDate.WeekDay;
+}
 
 /* USER CODE END 1 */

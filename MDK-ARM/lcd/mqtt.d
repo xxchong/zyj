@@ -45,4 +45,5 @@ lcd\mqtt.o: ..\bsp\esp01s.h
 lcd\mqtt.o: ../Core/Inc/usart.h
 lcd\mqtt.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
 lcd\mqtt.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+lcd\mqtt.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 lcd\mqtt.o: ..\bsp\mqtt_config.h

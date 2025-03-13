@@ -43,6 +43,7 @@
 #include "queue.h"
 #include "timers.h"
 #include "tim.h"
+#include "rtc.h"
 
 /* USER CODE END Includes */
 
@@ -165,8 +166,22 @@ void vApplicationTickHook( void )
 
 
 
+typedef struct {
+  uint8_t hour;
+  uint8_t min;
+  uint8_t sec;
+  uint16_t year;
+  uint8_t month;
+  uint8_t date;
+} TimeData_t;
+
+static TimeData_t timeData;
+
+
 void ledTask(void *argument)
 {
+  // 设置时间（假设从网络获取的时间戳为network_timestamp�?
+    RTC_SetTime_FromStamp(1741881560);
     for(;;)
     {
         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_2);
@@ -174,12 +189,35 @@ void ledTask(void *argument)
     }
 }
 
-/* 修改LVGL定时器回调函�??? */
+/* 修改LVGL定时器回调函�????? */
 void sensor_timer_callback(lv_timer_t *timer)
 {
-    static SensorData_t receivedData;
-    
-    // 从队列接收数据，设置超时时间�???10ms
+      static SensorData_t receivedData;
+      static char time_str[20];
+      static char date_str[20];
+      char total_people_str[10];
+      char current_people_str[10];
+
+      sprintf(total_people_str, "%d", total_people);
+      sprintf(current_people_str, "%d", current_people);
+
+      lv_label_set_text(guider_ui.main_screen_label_15, total_people_str);
+      lv_label_set_text(guider_ui.main_screen_label_13, current_people_str);
+
+
+
+      RTC_GetTime(&timeData.hour, &timeData.min, &timeData.sec);
+      RTC_GetDate(&timeData.year, &timeData.month, &timeData.date, NULL);
+
+
+      sprintf(time_str, "%02d:%02d:%02d", timeData.hour, timeData.min, timeData.sec);
+      sprintf(date_str, "%d-%02d-%02d", timeData.year, timeData.month, timeData.date);
+      
+      lv_label_set_text(guider_ui.main_screen_label_5, time_str);
+      lv_label_set_text(guider_ui.main_screen_label_6, date_str);
+
+
+    // 从队列接收数据，设置超时时间
     if(xQueueReceive(sensorDataQueue, &receivedData, 0) == pdPASS)
     {
         char light_str[10];  
@@ -248,7 +286,7 @@ void MX_FREERTOS_Init(void) {
         printf("Queue creation failed!\r\n");
         Error_Handler();
     }
-    // 创建火焰定时�?,单次触发
+    // 创建火焰定时
     flame_timer = xTimerCreate("flame_timer", pdMS_TO_TICKS(10000), pdFALSE, NULL, flame_timer_callback);
     if(flame_timer == NULL)
     {
@@ -344,7 +382,7 @@ void displayTask(void *argument)
 }
 
 
-/* 修改传感器任�??? */
+/* 修改传感器任�????? */
 void sensorTask(void *argument)
 {    
     TickType_t xLastWakeTime;
@@ -364,10 +402,15 @@ void sensorTask(void *argument)
         if(xQueueSend(sensorDataQueue, &sensorData, 0) != pdPASS)
         {
             printf("Queue send failed!\r\n");
-        }else{
-            // printf("Queue send success!\r\n");
         }
-				
+
+
+				if(flame_status)
+        {
+          BEEP_ON;
+          vTaskDelay(pdMS_TO_TICKS(60));
+          BEEP_OFF;
+        }
 				
 				if(sensorData.mq2_percent > threshold_data.mq2)
 				{

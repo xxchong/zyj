@@ -5,12 +5,19 @@
 #include "usart.h"
 #include "string.h"
 #include "stdio.h"
-
+#include <stdlib.h>
 // 接收缓冲区大小
 #define ESP_RXBUFFER_SIZE 512
 
 // AT命令响应超时时间（毫秒）
 #define AT_TIMEOUT 3000
+
+
+
+#define Time_TCP 	"AT+CIPSTART=\"TCP\",\"api.k780.com\",80\r\n"
+#define Time_GET	"GET http://api.k780.com/?app=life.time&appkey=70408&sign=8682a146af30c35ae92d249e23e0984b&format=json\r\n"
+
+
 
 // ESP01S工作模式
 typedef enum {
@@ -44,6 +51,8 @@ typedef struct {
 // 外部变量声明
 extern ESP01S_HandleTypeDef esp01s;
 
+
+
 // 函数声明
 ESP_Status ESP01S_Init(void);
 ESP_Status ESP01S_Test(void);
@@ -51,6 +60,7 @@ ESP_Status ESP01S_SetMode(ESP_Mode mode);
 ESP_Status ESP01S_ConnectWiFi(const char* ssid, const char* password);
 ESP_Status ESP01S_DisconnectWiFi(void);
 ESP_Status ESP01S_SendATCmd(const char* cmd, const char* response, uint32_t timeout);
+uint32_t ESP01S_GetNetworkTime(void);
 
 ESP_Status ESP01S_UartSend(const char* data);
 

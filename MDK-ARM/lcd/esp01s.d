@@ -44,3 +44,4 @@ lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 lcd\esp01s.o: ../Core/Inc/usart.h
 lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\string.h
 lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+lcd\esp01s.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

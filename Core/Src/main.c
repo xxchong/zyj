@@ -87,7 +87,7 @@ SensorData_threshold_t threshold_data={
   .temp=30,
   .mq2=80,
   .light=100
-}; //传感器阈�?
+}; //传感器阈�???
 
 /* USER CODE END PFP */
 
@@ -141,7 +141,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	
 
- // 初始化报警状�??????
+ // 初始化报警状�????????
   BEEP_OFF;
 	RELAY_OFF;
   /*传感器硬件初始化*/
@@ -155,15 +155,22 @@ int main(void)
 
 //  //WIFI初始
   ESP01S_Init();
-  //MQTT初始
+  HAL_Delay(2000);
+// 获取网络时间并设置RTC
+  uint32_t timestamp = ESP01S_GetNetworkTime();
+  if(timestamp > 0) {
+      RTC_SetTime_FromStamp(timestamp);
+  }
+  HAL_Delay(2000);
+  // MQTT初始
   MQTT_Init();
-  //订阅消息
+  // 订阅消息
   MQTT_Subscribe(MQTT_USER_TOPIC);
   MQTT_Subscribe(MQTT_SUBSCRIBE_TOPIC);
 
-  //发布测试消息
+  // 发布测试消息
   MQTT_Publish(MQTT_PUBLIC_TOPIC, "Hello World");
-//    
+   
 
   printf("初始化成功\r\n");
 

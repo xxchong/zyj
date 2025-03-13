@@ -200,6 +200,7 @@ lcd\main.o: ../bsp/relay.h
 lcd\main.o: ../bsp/gy302.h
 lcd\main.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 lcd\main.o: ../bsp/esp01s.h
+lcd\main.o: D:\keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 lcd\main.o: ../bsp/mq2.h
 lcd\main.o: ../bsp/mqtt.h
 lcd\main.o: ../bsp/mqtt_config.h

@@ -1,35 +1,3 @@
-*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil_v5\ARM\ARMCC\Bin'
-Build target 'lcd'
-compiling lv_port_indev.c...
-..\lvgl\examples\porting\lv_port_indev.c(207): warning:  #177-D: function "touchpad_init"  was declared but never referenced
-  static void touchpad_init(void)
-..\lvgl\examples\porting\lv_port_indev.c(240): warning:  #177-D: function "touchpad_is_pressed"  was declared but never referenced
-  static bool touchpad_is_pressed(void)
-..\lvgl\examples\porting\lv_port_indev.c(248): warning:  #177-D: function "touchpad_get_xy"  was declared but never referenced
-  static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
-..\lvgl\examples\porting\lv_port_indev.c(261): warning:  #177-D: function "mouse_init"  was declared but never referenced
-  static void mouse_init(void)
-..\lvgl\examples\porting\lv_port_indev.c(267): warning:  #177-D: function "mouse_read"  was declared but never referenced
-  static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
-..\lvgl\examples\porting\lv_port_indev.c(303): warning:  #177-D: function "keypad_init"  was declared but never referenced
-  static void keypad_init(void)
-..\lvgl\examples\porting\lv_port_indev.c(309): warning:  #177-D: function "keypad_read"  was declared but never referenced
-  static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
-..\lvgl\examples\porting\lv_port_indev.c(362): warning:  #177-D: function "encoder_init"  was declared but never referenced
-  static void encoder_init(void)
-..\lvgl\examples\porting\lv_port_indev.c(368): warning:  #177-D: function "encoder_read"  was declared but never referenced
-  static void encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
-..\lvgl\examples\porting\lv_port_indev.c(402): warning:  #177-D: function "encoder_handler"  was declared but never referenced
-  static void encoder_handler(void)
-..\lvgl\examples\porting\lv_port_indev.c(415): warning:  #177-D: function "button_init"  was declared but never referenced
-  static void button_init(void)
-..\lvgl\examples\porting\lv_port_indev.c(421): warning:  #177-D: function "button_read"  was declared but never referenced
-  static void button_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
-..\lvgl\examples\porting\lv_port_indev.c(64): warning:  #550-D: variable "encoder_state"  was set but never used
-  static lv_indev_state_t encoder_state;
-..\lvgl\examples\porting\lv_port_indev.c: 13 warnings, 0 errors
-linking...
-Program Size: Code=162506 RO-data=18542 RW-data=600 ZI-data=52280  
-FromELF: creating hex file...
-"lcd\lcd.axf" - 0 Error(s), 13 Warning(s).
-Build Time Elapsed:  00:00:08
+Load "lcd\\lcd.axf" 
+Error: Flash Download failed  -  Target DLL has been cancelled
+Flash Load finished at 23:44:41

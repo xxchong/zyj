@@ -114,7 +114,7 @@ void setup_scr_main_screen(lv_ui *ui)
     ui->main_screen_label_6 = lv_label_create(ui->main_screen_tabview_main_tab_1);
     lv_label_set_text(ui->main_screen_label_6, "2025-02-24");
     lv_label_set_long_mode(ui->main_screen_label_6, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->main_screen_label_6, 58, 78);
+    lv_obj_set_pos(ui->main_screen_label_6, 65, 78);
     lv_obj_set_size(ui->main_screen_label_6, 119, 23);
 
     //Write style for main_screen_label_6, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -137,8 +137,8 @@ void setup_scr_main_screen(lv_ui *ui)
     ui->main_screen_label_5 = lv_label_create(ui->main_screen_tabview_main_tab_1);
     lv_label_set_text(ui->main_screen_label_5, "17:02");
     lv_label_set_long_mode(ui->main_screen_label_5, LV_LABEL_LONG_WRAP);
-    lv_obj_set_pos(ui->main_screen_label_5, 66, 46);
-    lv_obj_set_size(ui->main_screen_label_5, 100, 32);
+    lv_obj_set_pos(ui->main_screen_label_5, 46, 46);
+    lv_obj_set_size(ui->main_screen_label_5, 160, 32);
 
     //Write style for main_screen_label_5, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
     lv_obj_set_style_border_width(ui->main_screen_label_5, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
