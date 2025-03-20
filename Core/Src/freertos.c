@@ -60,6 +60,12 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
+#define LED1_ON() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET)
+#define LED1_OFF() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET)
+#define LED2_ON() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_RESET)
+#define LED2_OFF() HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET)
+
+
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -82,8 +88,17 @@ typedef struct {
     uint8_t mq2_percent;
     uint32_t mq2_adc_value;
     uint16_t light_value;
+    uint16_t current_people;
+    uint16_t total_people;
 } SensorData_t;
 
+static SensorData_t sensorData;
+
+static uint8_t ir1_last = 1;    // 1号红外上一次状态
+static uint8_t ir2_last = 1;    // 2号红外上一次状态
+static uint8_t last_trigger = 0;  // 最后触发的传感器
+static uint16_t people_count = 0;   // 当前人数
+static uint32_t total_people = 0;   // 历史总人数
 
 
 #define SENSOR_TASK_STACK_SIZE 3 * 1024
@@ -96,7 +111,7 @@ typedef struct {
 
 /* 定义队列句柄 */
 static QueueHandle_t sensorDataQueue;
-#define QUEUE_LENGTH    5
+#define QUEUE_LENGTH    2
 #define QUEUE_ITEM_SIZE sizeof(SensorData_t)
 
 TimerHandle_t flame_timer = NULL;
@@ -180,7 +195,7 @@ static TimeData_t timeData;
 
 void ledTask(void *argument)
 {
-  // 设置时间（假设从网络获取的时间戳为network_timestamp�?
+  // 设置时间（假设从网络获取的时间戳为network_timestamp�???
     RTC_SetTime_FromStamp(1741881560);
     for(;;)
     {
@@ -189,7 +204,7 @@ void ledTask(void *argument)
     }
 }
 
-/* 修改LVGL定时器回调函�????? */
+/* 修改LVGL定时器回调函�??????? */
 void sensor_timer_callback(lv_timer_t *timer)
 {
       static SensorData_t receivedData;
@@ -198,11 +213,11 @@ void sensor_timer_callback(lv_timer_t *timer)
       char total_people_str[10];
       char current_people_str[10];
 
-      sprintf(total_people_str, "%d", total_people);
-      sprintf(current_people_str, "%d", current_people);
+     sprintf(total_people_str, "%d", sensorData.total_people);
+     sprintf(current_people_str, "%d", sensorData.current_people);
 
-      lv_label_set_text(guider_ui.main_screen_label_15, total_people_str);
-      lv_label_set_text(guider_ui.main_screen_label_13, current_people_str);
+     lv_label_set_text(guider_ui.main_screen_label_15, total_people_str);
+     lv_label_set_text(guider_ui.main_screen_label_13, current_people_str);
 
 
 
@@ -268,6 +283,58 @@ void sensor_timer_callback(lv_timer_t *timer)
 
 
 
+void UpdatePeopleCount(void)
+{
+    uint8_t ir1 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
+    uint8_t ir2 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
+    
+ 
+    // 1号红外检测（低电平触发）
+    if(ir1 == 0)  // 当前是低电平
+    {
+        if(ir1_last == 1)  // 上次是高电平，说明刚被触发
+        {
+            LED1_ON();
+            if(last_trigger == 2)  
+            {
+                if(people_count > 0)
+                {
+                    people_count--;
+                }
+                last_trigger = 0;
+            }
+            else
+            {
+                last_trigger = 1;
+            }
+        }
+    }
+    
+    // 2号红外检测（低电平触发）
+    if(ir2 == 0)  // 当前是低电平
+    {
+        if(ir2_last == 1)  // 上次是高电平，说明刚被触发
+        {
+            LED2_ON();
+            if(last_trigger == 1)  //之前是1号触发
+            {
+                people_count++;
+                total_people++;
+                last_trigger = 0;
+            }
+            else
+            {
+                last_trigger = 2;
+            }
+        }
+    }
+  
+    ir1_last = ir1;
+    ir2_last = ir2;
+    
+    sensorData.current_people = people_count;
+    sensorData.total_people = total_people;
+}
 
 /* USER CODE END 3 */
 
@@ -382,23 +449,23 @@ void displayTask(void *argument)
 }
 
 
-/* 修改传感器任�????? */
+/* 传感器任�?*/
 void sensorTask(void *argument)
 {    
     TickType_t xLastWakeTime;
-    SensorData_t sensorData;
     uint8_t retry_count;
     
     xLastWakeTime = xTaskGetTickCount();
     
     for(;;)
     {
-        
+        LED1_OFF();
+        LED2_OFF();
       
          DHT11_ReadData((DHT11_Data_TypeDef*)&sensorData.dht11);
          Get_Mq2(&sensorData.mq2_adc_value, &sensorData.mq2_percent);
          sensorData.light_value = GY302_ReadLight();
-				
+				UpdatePeopleCount();
         if(xQueueSend(sensorDataQueue, &sensorData, 0) != pdPASS)
         {
             printf("Queue send failed!\r\n");
@@ -436,11 +503,12 @@ void sensorTask(void *argument)
           BEEP_OFF;
         }
         
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(2000));
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(1000));
 
     }
 }
 
+/* mqtt任务*/
 void mqttTask(void *argument)
 {
     TickType_t xLastWakeTime;

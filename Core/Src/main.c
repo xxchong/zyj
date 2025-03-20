@@ -87,7 +87,7 @@ SensorData_threshold_t threshold_data={
   .temp=30,
   .mq2=80,
   .light=100
-}; //传感器阈�???
+}; //传感器阈�?????
 
 /* USER CODE END PFP */
 
@@ -141,7 +141,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	
 
- // 初始化报警状�????????
+ // 初始化报�?
   BEEP_OFF;
 	RELAY_OFF;
   /*传感器硬件初始化*/
@@ -150,13 +150,14 @@ int main(void)
   //蜂鸣器过cubemx配置引脚   GPIOE7
   //火焰传感器过外部中断配置  GPIOB14
   //继电器过cubemx配置引脚   GPIOB8
+  //GY302过cubemx配置引脚    原继电器 现第�?个红�? PB8    原振动传感器 现第二个红外 PA6
   GY302_Init(); //使用软件i2c
 
 
-//  //WIFI初始
+  //WIFI初始�?
   ESP01S_Init();
   HAL_Delay(2000);
-// 获取网络时间并设置RTC
+  // 获取网络时间并设置RTC
   uint32_t timestamp = ESP01S_GetNetworkTime();
   if(timestamp > 0) {
       RTC_SetTime_FromStamp(timestamp);

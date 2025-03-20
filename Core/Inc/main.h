@@ -68,8 +68,6 @@ typedef struct {
 } SensorData_threshold_t;
 
 
-extern volatile int16_t current_people;    // 当前人数
-extern volatile uint32_t total_people;     // 历史总人�?
 
 extern SensorData_threshold_t threshold_data; //传感器阈�?
 extern bool relay_status;

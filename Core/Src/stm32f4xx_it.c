@@ -185,21 +185,6 @@ void DMA1_Stream5_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles EXTI line[9:5] interrupts.
-  */
-void EXTI9_5_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-
-  /* USER CODE END EXTI9_5_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
-  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
-
-  /* USER CODE END EXTI9_5_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM3 global interrupt.
   */
 void TIM3_IRQHandler(void)
@@ -296,23 +281,6 @@ void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
 }
 
 
-volatile int16_t current_people = 0;    // 当前人数
-volatile uint32_t total_people = 0;     // 历史总人�?
-
-// 定义状�?�枚�?
-typedef enum {
-    STATE_IDLE,      // 空闲状�??
-    STATE_S1_ENTER,  // 1号传感器触发，可能是进入
-    STATE_S2_EXIT    // 2号传感器触发，可能是离开
-} PassageState;
-
-volatile PassageState current_state = STATE_IDLE;  // 当前状�??
-static uint32_t last_pa6_tick = 0;     // PA6上次触发时间
-static uint32_t last_pb8_tick = 0;     // PB8上次触发时间
-static uint32_t state_change_time = 0;  // 状�?�改变时�?
-
-const uint32_t DEBOUNCE_TIME = 500;    // 防抖时间500ms
-const uint32_t PASSAGE_TIMEOUT = 2000;  // 通过超时时间2�?
 
 volatile bool flame_status = false;
 extern TimerHandle_t flame_timer;
@@ -335,82 +303,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
             }
         }
     }
-    // PB8�?1号传感器（入口外侧）
-    else if(GPIO_Pin == GPIO_PIN_8)
-    {
-        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8) == GPIO_PIN_RESET && 
-           (current_tick - last_pb8_tick) > DEBOUNCE_TIME)
-        {
-            last_pb8_tick = current_tick;
-            
-            switch(current_state)
-            {
-                case STATE_IDLE:
-                    current_state = STATE_S1_ENTER;
-                    state_change_time = current_tick;
-                    printf("1号传感器触发，等�?2号传感器确认进入\r\n");
-                    break;
-                    
-                case STATE_S2_EXIT:
-                    if((current_tick - state_change_time) < PASSAGE_TIMEOUT)
-                    {
-                        // 确认为离�?
-                        if(current_people > 0) current_people--;
-                        printf("人员离开，当前人�?: %d\r\n", current_people);
-                    }
-                    current_state = STATE_IDLE;
-                    break;
-                    
-                default:
-                    // 重置状�??
-                    current_state = STATE_IDLE;
-                    break;
-            }
-        }
-    }
-    // PA6�?2号传感器（入口内侧）
-    else if(GPIO_Pin == GPIO_PIN_6)
-    {
-        if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6) == GPIO_PIN_RESET && 
-           (current_tick - last_pa6_tick) > DEBOUNCE_TIME)
-        {
-            last_pa6_tick = current_tick;
-            
-            switch(current_state)
-            {
-                case STATE_IDLE:
-                    current_state = STATE_S2_EXIT;
-                    state_change_time = current_tick;
-                    printf("2号传感器触发，等�?1号传感器确认离开\r\n");
-                    break;
-                    
-                case STATE_S1_ENTER:
-                    if((current_tick - state_change_time) < PASSAGE_TIMEOUT)
-                    {
-                        // 确认为进�?
-                        current_people++;
-                        total_people++;
-                        printf("人员进入，当前人�?: %d，历史�?�人�?: %ld\r\n", 
-                               current_people, total_people);
-                    }
-                    current_state = STATE_IDLE;
-                    break;
-                    
-                default:
-                    // 重置状�??
-                    current_state = STATE_IDLE;
-                    break;
-            }
-        }
-    }
-    
-    // 超时�?�?
-    if(current_state != STATE_IDLE && 
-       (current_tick - state_change_time) >= PASSAGE_TIMEOUT)
-    {
-        current_state = STATE_IDLE;
-        printf("超时，重置状态\r\n");
-    }
+ 
     
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
 }

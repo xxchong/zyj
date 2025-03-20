@@ -152,12 +152,12 @@ void RTC_SetTime_FromStamp(uint32_t timestamp)
     sTime.StoreOperation = RTC_STOREOPERATION_RESET;
     
     // 设置日期
-    sDate.Year = time_info->tm_year - 100;  // 得到20xx年的后两位
-    sDate.Month = time_info->tm_mon + 1;    // 月份从0开始，需要+1
+    sDate.Year = time_info->tm_year - 100;  // 得到20xx年的后两�?
+    sDate.Month = time_info->tm_mon + 1;    // 月份�?0�?始，�?�?+1
     sDate.Date = time_info->tm_mday;
-    sDate.WeekDay = time_info->tm_wday + 1; // 周日是0，转换为RTC的1-7格式
+    sDate.WeekDay = time_info->tm_wday + 1; // 周日�?0，转换为RTC�?1-7格式
     
-    HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);  // 使用二进制格式
+    HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);  // 使用二进制格�?
     HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
 }
 
@@ -182,7 +182,7 @@ void RTC_GetDate(uint16_t *year, uint8_t *month, uint8_t *date, uint8_t *week)
     
     HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
     
-    *year = 2000 + sDate.Year;  // 直接加2000得到完整年份
+    *year = 2000 + sDate.Year;  // 直接�?2000得到完整年份
     *month = sDate.Month;
     *date = sDate.Date;
     // *week = sDate.WeekDay;

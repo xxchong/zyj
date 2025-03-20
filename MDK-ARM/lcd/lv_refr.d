@@ -61,3 +61,4 @@ lcd\lv_refr.o: ..\lvgl\src\core\lv_theme.h
 lcd\lv_refr.o: ..\lvgl\src\core\../misc/lv_gc.h
 lcd\lv_refr.o: ..\lvgl\src\core\../font/lv_font_fmt_txt.h
 lcd\lv_refr.o: ..\lvgl\src\core\../extra/others/snapshot/lv_snapshot.h
+lcd\lv_refr.o: ..\lvgl\src\core\../widgets/lv_label.h

@@ -169,21 +169,28 @@ void GY302_Init(void)
     while(HAL_GetTick() - startTime < 180);  // 等待180ms
 }
 
-// 读取光照强度值
+// 读取光照强度值// 读取光照强度值（0-100）// 读取光照强度值（0-100%）
 uint16_t GY302_ReadLight(void)
 {
     uint16_t value;
     uint8_t msb, lsb;
     
     GY302_Start();
-    GY302_SendByte((BH1750_ADDR_GND << 1) | 0x01);  // 读地址
+    GY302_SendByte((BH1750_ADDR_GND << 1) | 0x01);
     GY302_WaitAck();
     
-    msb = GY302_ReadByte(1);  // 读取高字节，发送ACK
-    lsb = GY302_ReadByte(0);  // 读取低字节，发送NACK
+    msb = GY302_ReadByte(1);
+    lsb = GY302_ReadByte(0);
     
     GY302_Stop();
     
     value = (msb << 8) | lsb;
-    return value;  // 转换为实际光照值(lx)
+    
+    // 假设1000lx为100%
+    uint16_t percent = (value * 100) / 5000;
+    
+    // 限制在0-100范围内
+    if(percent > 100) percent = 100;
+    
+    return percent;
 }

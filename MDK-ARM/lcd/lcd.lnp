@@ -278,6 +278,8 @@
 "lcd\cmsis_os2.o"
 "lcd\heap_4.o"
 "lcd\port.o"
+"lcd\malloc.o"
+"lcd\cjson.o"
 --library_type=microlib --strict --scatter "lcd\lcd.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
